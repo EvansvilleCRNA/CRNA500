@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRNA 500 · Week 15 · Workplace Incivility Preparedness</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<style>
+  :root{
+    --ink:#1f2937;
+    --muted:#6b7280;
+    --border:#e2e2df;
+    --surface-page:#ffffff;
+    --surface-card:#f7f6f2;
+    --accent:#1f3a52;
+    --accent-light:#e6eef5;
+    --danger:#a32d2d;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--surface-page);
+    color:var(--ink);
+    padding:32px 20px 60px;
+    max-width:720px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.6;
+  }
+  .course-tag{
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  h1{
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 24px;
+    color:var(--ink);
+  }
+  .progress-label{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  .progress-track{
+    height:4px;
+    background:var(--border);
+    border-radius:3px;
+    margin-bottom:28px;
+    overflow:hidden;
+  }
+  .progress-bar{
+    height:100%;
+    width:0%;
+    background:var(--accent);
+    transition:width 0.3s ease;
+  }
+  .step{
+    margin-bottom:8px;
+  }
+  .scene-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .scene-header i{
+    font-size:24px;
+    color:var(--danger);
+  }
+  .scene-header p{
+    font-weight:600;
+    font-size:17px;
+    margin:0;
+  }
+  .step p.body-text{
+    margin:0 0 20px;
+  }
+  .step p.q-lead{
+    color:var(--muted);
+    margin:0 0 16px;
+  }
+  .step p.q-title{
+    font-weight:600;
+    font-size:17px;
+    margin:0 0 14px;
+  }
+  button{
+    font-family:inherit;
+    font-size:15px;
+    cursor:pointer;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:#ffffff;
+    color:var(--ink);
+    padding:12px 16px;
+    text-align:left;
+    transition: border-color 0.15s ease, opacity 0.15s ease;
+  }
+  button:hover:not(:disabled){
+    border-color:var(--accent);
+  }
+  button:disabled{
+    cursor:default;
+  }
+  .choices{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .primary-btn{
+    background:var(--accent);
+    color:#ffffff;
+    border-color:var(--accent);
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .primary-btn:hover{
+    opacity:0.92;
+    border-color:var(--accent);
+  }
+  .primary-btn:disabled{
+    opacity:0.5;
+  }
+  .secondary-btn{
+    font-weight:500;
+  }
+  .feedback{
+    display:none;
+    margin-top:14px;
+    padding:14px 16px;
+    background:var(--surface-card);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    font-size:14px;
+    color:#374151;
+  }
+  .locked-note{
+    display:none;
+    margin-top:10px;
+    font-size:12px;
+    color:var(--muted);
+    align-items:center;
+    gap:5px;
+  }
+  .rationale-box{
+    display:none;
+    margin-top:18px;
+  }
+  .rationale-box label{
+    font-weight:600;
+    font-size:14px;
+    display:block;
+    margin-bottom:6px;
+  }
+  .rationale-box p.hint{
+    font-size:13px;
+    color:var(--muted);
+    margin:0 0 10px;
+  }
+  textarea{
+    width:100%;
+    font-family:inherit;
+    font-size:14px;
+    color:var(--ink);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:10px 12px;
+    resize:vertical;
+    min-height:80px;
+    background:#ffffff;
+  }
+  textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+  }
+  .continue-btn{
+    display:none;
+    margin-top:16px;
+  }
+  .button-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+  }
+  .reflect-box{
+    background:var(--accent-light);
+    border-radius:10px;
+    padding:18px 20px;
+    margin:16px 0 20px;
+  }
+  .reflect-box p{
+    margin:0 0 10px;
+  }
+  .reflect-box p:last-child{
+    margin-bottom:0;
+  }
+  #summary-panel{
+    display:none;
+    margin-top:8px;
+  }
+  #summary-panel p.label{
+    font-weight:600;
+    font-size:15px;
+    margin:0 0 10px;
+  }
+  #summary-panel textarea{
+    min-height:360px;
+    font-size:13px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  #copy-status{
+    font-size:13px;
+    color:var(--accent);
+    margin-left:4px;
+    display:none;
+    align-self:center;
+  }
+  footer{
+    margin-top:40px;
+    font-size:12px;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    padding-top:16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="course-tag">CRNA 500 &middot; Week 15</div>
+<h1>Workplace Incivility Preparedness: A Preceptor Scenario</h1>
+
+<div class="progress-label" id="progress-label">Scenario</div>
+<div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+
+<div class="step" data-step="0">
+  <div class="scene-header">
+    <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+    <p>The scene</p>
+  </div>
+  <p class="body-text">You are three weeks into a demanding clinical rotation. Your preceptor, an experienced CRNA, has a reputation in the program for being "tough but fair" &mdash; the kind of preceptor who pushes students hard and expects a lot, but who most SRNAs say made them better. You were glad to be assigned to this rotation.</p>
+  <p class="body-text">The first two weeks were intense but manageable. This week, something has shifted. The corrections have started to feel less like teaching and more personal.</p>
+  <p class="body-text">At each decision point below, choose the option closest to what you would actually do, then explain your reasoning in your own words. Once you choose, that choice is locked in &mdash; just as it would be in the moment, in a real OR.</p>
+  <button class="primary-btn" onclick="goStep(1)">Begin <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="1" style="display:none;">
+  <p class="q-title">Decision 1: the first sharp comment</p>
+  <p class="q-lead">Mid-case, you're slow to draw up a drug. Your preceptor says, loudly enough for the surgeon and scrub tech to hear, "Are you even paying attention, or do I need to do everything myself today?" The room goes quiet for a second. What do you do right now?</p>
+  <div class="choices" data-q="1">
+    <button class="choice-btn" data-fb="A sharp reply in the moment, even a justified one, risks patient safety by pulling focus away from the case and can escalate a tense room further. It's an understandable instinct, but not the safest one mid-case.">Reply sharply back, since the comment was unfair and out of line</button>
+    <button class="choice-btn" data-fb="This is the pattern crisis and civility research both point to: stay task-focused, finish the immediate clinical work safely, and address the comment itself later when the stakes of an active case aren't in the room. It doesn't mean letting it go &mdash; it means sequencing it correctly.">Stay focused, finish the task safely, and address the comment privately later</button>
+    <button class="choice-btn" data-fb="Absorbing it silently in the moment is common and understandable, especially early in a rotation when the power differential feels steep. But if this becomes your only response over time, it can allow a pattern to continue unnamed and unaddressed.">Say nothing at all, then or later, and just keep working</button>
+    <button class="choice-btn" data-fb="Freezing or visibly reacting mid-case, even understandably, can compound the safety risk the comment already introduced. The room needs steadiness from you right now, even though what was said wasn't okay.">Visibly react &mdash; go quiet, hands shake, lose your place in the task</button>
+  </div>
+  <div class="feedback"></div>
+  <div class="locked-note"><i class="ti ti-lock" aria-hidden="true"></i> Your choice is locked in.</div>
+  <div class="rationale-box">
+    <label>In your own words: why did you choose this?</label>
+    <p class="hint">Briefly explain your reasoning &mdash; there's no wrong answer here, this is about your thinking.</p>
+    <textarea placeholder="Explain your reasoning..."></textarea>
+  </div>
+  <button class="continue-btn primary-btn" onclick="goStep(2)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="2" style="display:none;">
+  <p class="q-title">Decision 2: processing it privately</p>
+  <p class="q-lead">The case ends. You have a few minutes alone before the next one starts. What do you do with that time?</p>
+  <div class="choices" data-q="2">
+    <button class="choice-btn" data-fb="Briefly naming what happened and how it landed, even just to yourself, is a well-supported way to process an incident without letting it fester silently or spiral unchecked. It doesn't have to be long &mdash; a few honest sentences is enough.">Take a moment to privately name what happened and how it made you feel</button>
+    <button class="choice-btn" data-fb="Venting to a co-resident can feel like relief in the moment, but texting mid-rotation, before you've had a chance to think it through yourself, can shape how you interpret the situation before you've had a clear-headed moment with it.">Immediately text a co-resident venting about what just happened</button>
+    <button class="choice-btn" data-fb="Apologizing when you weren't in the wrong is a common response to sharp criticism, especially across a power gap, but it reinforces a dynamic where you absorb blame that isn't yours to carry.">Message your preceptor to apologize, even though you don't think you did anything wrong</button>
+    <button class="choice-btn" data-fb="Pushing it away entirely is tempting and sometimes necessary to get through a shift, but a single moment of private acknowledgment costs very little and helps you track whether this is a pattern later.">Brush it off completely and move straight into the next case</button>
+  </div>
+  <div class="feedback"></div>
+  <div class="locked-note"><i class="ti ti-lock" aria-hidden="true"></i> Your choice is locked in.</div>
+  <div class="rationale-box">
+    <label>In your own words: why did you choose this?</label>
+    <p class="hint">Briefly explain your reasoning &mdash; there's no wrong answer here, this is about your thinking.</p>
+    <textarea placeholder="Explain your reasoning..."></textarea>
+  </div>
+  <button class="continue-btn primary-btn" onclick="goStep(3)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="3" style="display:none;">
+  <p class="q-title">Decision 3: the pattern becomes clear</p>
+  <p class="q-lead">A few more shifts pass. The comments haven't stopped &mdash; they've grown more frequent, and some now have nothing to do with your clinical performance at all. You start to wonder whether you're overreacting. How do you think about what's happening?</p>
+  <div class="choices" data-q="3">
+    <button class="choice-btn" data-fb="This is one of the most common and most dangerous rationalizations in preceptor incivility &mdash; the idea that harsh, personal treatment is simply how the profession toughens people up. Research on preceptor incivility, including work specific to nurse anesthesia residents, consistently finds that this framing normalizes behavior that has real costs to learning and wellbeing.">Tell yourself this is just how CRNAs toughen up students, and it will pay off later</button>
+    <button class="choice-btn" data-fb="This is the recognition point the framework is built around: noticing that comments aimed at you personally, rather than at your clinical performance, is a meaningful distinction. Naming that difference clearly, to yourself first, is what allows any next step to be well-targeted rather than vague.">Recognize that personal comments are a different category from clinical correction, and name that distinction to yourself</button>
+    <button class="choice-btn" data-fb="Assuming this is happening because of something uniquely wrong with you, rather than recognizing a behavior pattern that exists independent of who's on the receiving end, tends to deepen self-doubt rather than clarify the situation.">Assume you must be doing something to deserve it</button>
+    <button class="choice-btn" data-fb="Deciding to just wait it out until the rotation ends is a common coping strategy, but it treats a pattern that may be affecting your learning and wellbeing as something to simply survive rather than something worth addressing.">Decide to just wait it out silently until the rotation is over</button>
+  </div>
+  <div class="feedback"></div>
+  <div class="locked-note"><i class="ti ti-lock" aria-hidden="true"></i> Your choice is locked in.</div>
+  <div class="rationale-box">
+    <label>In your own words: why did you choose this?</label>
+    <p class="hint">Briefly explain your reasoning &mdash; there's no wrong answer here, this is about your thinking.</p>
+    <textarea placeholder="Explain your reasoning..."></textarea>
+  </div>
+  <button class="continue-btn primary-btn" onclick="goStep(4)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="4" style="display:none;">
+  <p class="q-title">Decision 4: the direct conversation</p>
+  <p class="q-lead">You decide the pattern is real and worth addressing directly with your preceptor. How do you approach the conversation?</p>
+  <div class="choices" data-q="4">
+    <button class="choice-btn" data-fb="Naming specific, observable incidents and their impact, in a private, calm setting away from the OR, is the approach most consistently supported by the incivility literature. It's factual rather than accusatory, which makes it harder to dismiss and easier for the other person to actually hear.">Request a private conversation, describe specific incidents factually, and explain their impact on your learning</button>
+    <button class="choice-btn" data-fb="Raising it in the moment, mid-case, with the surgical team present, adds pressure and an audience to an already sensitive conversation, and risks the same safety trade-off as reacting mid-case earlier in this scenario.">Bring it up in the moment, during the next case, in front of the team</button>
+    <button class="choice-btn" data-fb="Leading with generalities like 'you're always so harsh with me' is understandable but harder for the other person to respond to constructively than specific, dated examples. Specificity is what turns a conversation into something actionable.">Say something general like "you're always so harsh with me," without specific examples</button>
+    <button class="choice-btn" data-fb="Sending a long written message instead of asking for a conversation avoids the discomfort of an in-person exchange, but it removes the chance for real-time clarification and can read as more confrontational than intended once it's in writing.">Send a long text or email instead of asking to talk in person</button>
+  </div>
+  <div class="feedback"></div>
+  <div class="locked-note"><i class="ti ti-lock" aria-hidden="true"></i> Your choice is locked in.</div>
+  <div class="rationale-box">
+    <label>In your own words: why did you choose this?</label>
+    <p class="hint">Briefly explain your reasoning &mdash; there's no wrong answer here, this is about your thinking.</p>
+    <textarea placeholder="Explain your reasoning..."></textarea>
+  </div>
+  <button class="continue-btn primary-btn" onclick="goStep(5)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="5" style="display:none;">
+  <p class="q-title">Decision 5: when the conversation doesn't land</p>
+  <p class="q-lead">You have the conversation. Your preceptor gets defensive, says you're being "too sensitive," and the behavior continues &mdash; if anything, the tone in the OR feels colder now. What's your next move?</p>
+  <div class="choices" data-q="5">
+    <button class="choice-btn" data-fb="A second direct attempt can be worth trying once, but repeating the same approach after a defensive, dismissive response rarely produces a different result and can delay getting support you may now need.">Try the same direct conversation again, hoping it lands better this time</button>
+    <button class="choice-btn" data-fb="Looping in your program's clinical coordinator at this stage is exactly the escalation the framework calls for: you tried the direct route in good faith, it didn't resolve the pattern, and a coordinator can offer both support and options you may not have access to on your own.">Loop in your program's clinical coordinator, explain what you tried, and ask for guidance</button>
+    <button class="choice-btn" data-fb="Quietly asking for a preceptor change without documenting or reporting what happened can solve your immediate situation but leaves the pattern unaddressed for the next student assigned to this preceptor.">Quietly request a preceptor change through informal channels, without documenting anything</button>
+    <button class="choice-btn" data-fb="Jumping straight to a formal complaint without any further internal step is a valid option if the situation is severe or safety-related, but for a pattern like this one, most programs expect you to loop in a coordinator first as part of the process.">Skip straight to a formal written complaint without talking to anyone first</button>
+  </div>
+  <div class="feedback"></div>
+  <div class="locked-note"><i class="ti ti-lock" aria-hidden="true"></i> Your choice is locked in.</div>
+  <div class="rationale-box">
+    <label>In your own words: why did you choose this?</label>
+    <p class="hint">Briefly explain your reasoning &mdash; there's no wrong answer here, this is about your thinking.</p>
+    <textarea placeholder="Explain your reasoning..."></textarea>
+  </div>
+  <button class="continue-btn primary-btn" onclick="goStep(6)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="6" style="display:none;">
+  <p class="q-title">Decision 6: choosing a resolution path</p>
+  <p class="q-lead">Your coordinator asks you to put together an account of what's happened so the program can act on it. How do you approach this?</p>
+  <div class="choices" data-q="6">
+    <button class="choice-btn" data-fb="This is the strongest and most protective option: specific dates, direct quotes where you can recall them, and the clinical context of each incident, submitted through your program's actual reporting process. Documentation like this protects you, gives the program something concrete to act on, and protects future students in that rotation too.">Write a factual, dated account of specific incidents and submit it through the proper program channel</button>
+    <button class="choice-btn" data-fb="Withdrawing from the program is an outsized response to a preceptor issue this early in the process, and it removes your own voice from a situation the program still has real ability to fix.">Decide the situation isn't worth it and consider leaving the program</button>
+    <button class="choice-btn" data-fb="Saying nothing further and pushing through silently for the rest of the rotation leaves both your own wellbeing and any future students in that rotation exposed to the same unaddressed pattern.">Say nothing further and just push through the rest of the rotation</button>
+    <button class="choice-btn" data-fb="Confronting your preceptor publicly, especially mid-case, reintroduces the same safety and escalation risk from earlier in this scenario, and undercuts the credibility of a complaint that's better made through your program's formal process.">Confront your preceptor publicly in front of the team during the next case</button>
+  </div>
+  <div class="feedback"></div>
+  <div class="locked-note"><i class="ti ti-lock" aria-hidden="true"></i> Your choice is locked in.</div>
+  <div class="rationale-box">
+    <label>In your own words: why did you choose this?</label>
+    <p class="hint">Briefly explain your reasoning &mdash; there's no wrong answer here, this is about your thinking.</p>
+    <textarea placeholder="Explain your reasoning..."></textarea>
+  </div>
+  <button class="continue-btn primary-btn" onclick="goStep(7)">See summary <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="7" style="display:none;">
+  <p class="q-title">Reflection</p>
+  <div class="reflect-box">
+    <p>There's no single right path through a situation like this, and every choice reflects a real, understandable instinct under a real power imbalance. But a few patterns show up consistently across the incivility literature, including research specific to nurse anesthesia preceptorship:</p>
+    <p>Patient safety comes first, even mid-conflict &mdash; address the interpersonal issue after the immediate clinical task is safely handled. Naming what's happening to yourself, early and honestly, matters more than it seems &mdash; the "toughening up" framing is one of the most common ways real incivility gets normalized and left unaddressed. Direct, specific, private communication is the recommended first step once a pattern is clear, not a last resort. And when direct communication doesn't resolve it, documentation and your program's proper channels exist precisely for this situation &mdash; using them protects you and the students who come after you.</p>
+  </div>
+  <div class="button-row">
+    <button class="primary-btn" onclick="buildSummary()"><i class="ti ti-file-text" aria-hidden="true"></i> Export my responses</button>
+    <button class="secondary-btn" onclick="restart()">Start over with different choices</button>
+  </div>
+  <div id="summary-panel">
+    <p class="label">Your responses</p>
+    <textarea id="summary-output" readonly></textarea>
+    <div class="button-row">
+      <button class="primary-btn" onclick="copySummary()"><i class="ti ti-copy" aria-hidden="true"></i> Copy to clipboard</button>
+      <span id="copy-status">Copied</span>
+    </div>
+  </div>
+</div>
+
+<footer>CRNA 500 &middot; Professional Role and Leadership Development &middot; Week 15 workplace incivility preparedness exercise</footer>
+
+<script>
+let currentStep = 0;
+const totalSteps = 7;
+const decisionTitles = {
+  1: "Decision 1: the first sharp comment",
+  2: "Decision 2: processing it privately",
+  3: "Decision 3: the pattern becomes clear",
+  4: "Decision 4: the direct conversation",
+  5: "Decision 5: when the conversation doesn't land",
+  6: "Decision 6: choosing a resolution path"
+};
+const responses = {};
+
+function updateProgress(step){
+  const bar = document.getElementById('progress-bar');
+  const label = document.getElementById('progress-label');
+  bar.style.width = (step / totalSteps * 100) + '%';
+  if(step === 0){ label.textContent = 'Scenario'; }
+  else if(step <= 6){ label.textContent = 'Decision ' + step + ' of 6'; }
+  else { label.textContent = 'Complete'; }
+}
+
+function goStep(n){
+  document.querySelectorAll('.step').forEach(function(s){
+    s.style.display = (parseInt(s.getAttribute('data-step')) === n) ? '' : 'none';
+  });
+  currentStep = n;
+  updateProgress(n);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+document.querySelectorAll('.choice-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    const group = btn.closest('.choices');
+    const stepDiv = group.closest('.step');
+    const qNum = group.getAttribute('data-q');
+    const feedback = stepDiv.querySelector('.feedback');
+    const lockedNote = stepDiv.querySelector('.locked-note');
+    const rationaleBox = stepDiv.querySelector('.rationale-box');
+    const continueBtn = stepDiv.querySelector('.continue-btn');
+
+    // Lock all choices in this step permanently
+    group.querySelectorAll('.choice-btn').forEach(function(b){
+      b.disabled = true;
+      b.style.opacity = (b === btn) ? '1' : '0.4';
+      b.style.pointerEvents = 'none';
+      if(b === btn){ b.style.borderColor = '#1f3a52'; b.style.borderWidth = '2px'; }
+    });
+
+    feedback.textContent = btn.getAttribute('data-fb');
+    feedback.style.display = 'block';
+    lockedNote.style.display = 'flex';
+    rationaleBox.style.display = 'block';
+    continueBtn.style.display = 'inline-flex';
+
+    responses[qNum] = {
+      choice: btn.textContent,
+      rationale: ''
+    };
+
+    const textarea = rationaleBox.querySelector('textarea');
+    textarea.addEventListener('input', function(){
+      responses[qNum].rationale = textarea.value.trim();
+    });
+  });
+});
+
+function buildSummary(){
+  var lines = [];
+  lines.push('WORKPLACE INCIVILITY PREPAREDNESS \u2014 SCENARIO RESPONSES');
+  lines.push('');
+  for(var i = 1; i <= 6; i++){
+    var r = responses[i] || { choice: '[not answered]', rationale: '[not answered]' };
+    lines.push(decisionTitles[i] + ':');
+    lines.push('  Choice: ' + r.choice);
+    lines.push('  Rationale: ' + (r.rationale.length ? r.rationale : '[not answered]'));
+    lines.push('');
+  }
+  document.getElementById('summary-output').value = lines.join('\n');
+  var panel = document.getElementById('summary-panel');
+  panel.style.display = 'block';
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function copySummary(){
+  var output = document.getElementById('summary-output');
+  output.select();
+  output.setSelectionRange(0, 999999);
+  navigator.clipboard.writeText(output.value).then(function(){
+    var status = document.getElementById('copy-status');
+    status.style.display = 'inline';
+    setTimeout(function(){ status.style.display = 'none'; }, 2000);
+  }).catch(function(){
+    document.execCommand('copy');
+  });
+}
+
+function restart(){
+  document.querySelectorAll('.choice-btn').forEach(function(b){
+    b.disabled = false;
+    b.style.opacity = '1';
+    b.style.pointerEvents = 'auto';
+    b.style.borderColor = '';
+    b.style.borderWidth = '';
+  });
+  document.querySelectorAll('.feedback').forEach(function(f){ f.style.display = 'none'; f.textContent = ''; });
+  document.querySelectorAll('.locked-note').forEach(function(n){ n.style.display = 'none'; });
+  document.querySelectorAll('.rationale-box textarea').forEach(function(t){ t.value = ''; });
+  document.querySelectorAll('.rationale-box').forEach(function(r){ r.style.display = 'none'; });
+  document.querySelectorAll('.continue-btn').forEach(function(b){ b.style.display = 'none'; });
+  document.getElementById('summary-panel').style.display = 'none';
+  for(var key in responses){ delete responses[key]; }
+  goStep(0);
+}
+
+updateProgress(0);
+</script>
+
+</body>
+</html>
