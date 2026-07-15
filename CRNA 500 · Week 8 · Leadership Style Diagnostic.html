@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRNA 500 · Week 8 · Leadership Style Diagnostic</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<style>
+  :root{
+    --ink:#1f2937;
+    --muted:#6b7280;
+    --border:#e2e2df;
+    --surface-page:#ffffff;
+    --surface-card:#f7f6f2;
+    --accent:#1f3a52;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--surface-page);
+    color:var(--ink);
+    padding:32px 20px 60px;
+    max-width:640px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.6;
+  }
+  .course-tag{
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  h1{
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 10px;
+  }
+  .intro{
+    font-size:14px;
+    color:var(--muted);
+    margin:0 0 24px;
+  }
+  #type-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:8px;
+    margin-bottom:24px;
+  }
+  #type-grid button{
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:#ffffff;
+    color:var(--ink);
+    padding:12px 4px;
+    transition:border-color 0.15s ease;
+  }
+  #type-grid button:hover{
+    border-color:var(--accent);
+  }
+  #type-grid button.selected{
+    border-color:var(--accent);
+    border-width:2px;
+  }
+  #result-panel{
+    display:none;
+  }
+  .result-card{
+    background:var(--surface-card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px 22px;
+  }
+  .type-badge{
+    display:inline-block;
+    font-size:12px;
+    font-weight:600;
+    padding:4px 12px;
+    border-radius:6px;
+    margin-bottom:12px;
+  }
+  .result-card p.label{
+    font-weight:600;
+    font-size:17px;
+    margin:0 0 14px;
+  }
+  .result-card p.tendency{
+    font-size:14px;
+    color:var(--muted);
+    margin:0 0 14px;
+    line-height:1.6;
+  }
+  .result-card .field{
+    border-top:1px solid var(--border);
+    padding-top:12px;
+    margin-bottom:12px;
+  }
+  .result-card .field:last-child{
+    margin-bottom:0;
+  }
+  .result-card .field-label{
+    font-size:12px;
+    color:var(--muted);
+    margin:0 0 4px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .result-card .field-body{
+    font-size:14px;
+    margin:0;
+    line-height:1.6;
+  }
+  .instructions{
+    background:#eef4f9;
+    border-radius:10px;
+    padding:14px 16px;
+    font-size:13px;
+    color:#274a63;
+    margin-bottom:24px;
+  }
+  footer{
+    margin-top:36px;
+    font-size:12px;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    padding-top:16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="course-tag">CRNA 500 &middot; Week 8</div>
+<h1>Leadership style diagnostic</h1>
+<p class="intro">Select the four-letter type from your 16Personalities result to see how it tends to show up in CRNA leadership, and a growth tip tied to this week's reading.</p>
+
+<div class="instructions">
+  <i class="ti ti-info-circle" aria-hidden="true"></i>
+  Haven't taken the assessment yet? Visit <strong>16personalities.com</strong>, complete the free assessment, and come back with your four-letter type.
+</div>
+
+<div id="type-grid"></div>
+
+<div id="result-panel"></div>
+
+<footer>CRNA 500 &middot; Professional Role and Leadership Development &middot; Week 8 personal leadership styles exercise</footer>
+
+<script>
+const TYPES = {
+  INTJ: { group: "purple", label: "The systems thinker", tendency: "Prefers to lead through a clear long-term plan and spots inefficiencies others miss.", strength: "Excellent at spotting systemic problems in OR workflow before they cause harm.", blindspot: "May deprioritize team buy-in in favor of the right plan, moving forward before others feel heard.", tip: "Ch. 4, Innovation &mdash; pair your systems thinking with an explicit invitation for input before finalizing a plan. Sustainable change is built with a team, not delivered to one." },
+  INTP: { group: "purple", label: "The analyst", tendency: "Leads by reasoning through problems out loud and following the most logically sound option, even under pressure.", strength: "Stays clear-headed and unemotional when a case goes sideways, which steadies a room.", blindspot: "May under-communicate the reasoning behind a decision, leaving the team to follow without understanding why.", tip: "Ch. 7, Chaos &mdash; in a true crisis, brief decisive communication protects the clarity that's your strength. Narrate your reasoning in short bursts rather than working it out silently." },
+  ENTJ: { group: "purple", label: "The commander", tendency: "Naturally takes charge in ambiguous or high-stakes moments and organizes people around a clear objective.", strength: "A natural fit for the single clear voice pattern that crisis leadership research consistently favors.", blindspot: "Can move so decisively that quieter team members' concerns get steamrolled rather than surfaced.", tip: "Ch. 10, Engaged leader &mdash; pair your decisiveness with a deliberate pause to ask what you might be missing." },
+  ENTP: { group: "purple", label: "The challenger", tendency: "Leads by questioning assumptions and pushing the team toward better alternatives, even established ones.", strength: "Often the first to spot a flawed protocol or outdated practice worth challenging.", blindspot: "Constant questioning can read as instability to a team that needs consistency during a crisis.", tip: "Ch. 11, Toxic organizations &mdash; channel challenge into structured moments like debriefs and QI meetings, not the middle of active patient care." },
+  INFJ: { group: "teal", label: "The advocate-leader", tendency: "Leads quietly, through relationships, and by anticipating what each team member needs to succeed.", strength: "Exceptional at reading tension in a room before it becomes a problem.", blindspot: "May avoid direct confrontation even when a clear, immediate correction is needed.", tip: "Ch. 7, Chaos &mdash; your instinct to protect relationships is real leadership, but a true crisis calls for brief, clear directives. You can repair rapport afterward." },
+  INFP: { group: "teal", label: "The values-driven leader", tendency: "Leads by modeling integrity and quietly holding the team to a shared set of values.", strength: "Often the person a struggling teammate will actually open up to.", blindspot: "Discomfort with conflict can mean issues go unaddressed until they've grown larger than they needed to.", tip: "Ch. 11, Toxic organizations &mdash; naming a problem early, even gently, prevents the toxic dynamics this chapter describes from taking root." },
+  ENFJ: { group: "teal", label: "The team builder", tendency: "Leads by actively developing people and is often the one others go to for encouragement.", strength: "A natural fit for post-crisis debriefs and rebuilding team morale after a hard case.", blindspot: "May take on too much emotional labor for the team, absorbing stress that should be shared or escalated.", tip: "Ch. 12, Coaching for change &mdash; your gift is coaching others through change. Make sure you have your own outlet, or the energy this role requires runs out first." },
+  ENFP: { group: "teal", label: "The energizer", tendency: "Leads with enthusiasm and is often the one who keeps morale up during a long, difficult stretch.", strength: "Genuinely good at re-engaging a team that's starting to disengage or burn out.", blindspot: "Energy can read as minimizing when a teammate needs someone to sit with a hard moment, not lighten it.", tip: "Ch. 10, Engaged leader &mdash; sustaining relationships sometimes means matching someone's mood before you try to shift it." },
+  ISTJ: { group: "gray", label: "The steady operator", tendency: "Leads by example, through reliability, precision, and doing exactly what was promised.", strength: "The person a team trusts to follow protocol exactly when it matters most.", blindspot: "Strict adherence to how it's always been done can be a liability when a situation calls for a genuinely new response.", tip: "Ch. 4, Innovation &mdash; your reliability builds trust. Use that trust to introduce change carefully rather than avoiding it altogether." },
+  ISFJ: { group: "gray", label: "The quiet anchor", tendency: "Leads by taking care of the practical, unglamorous needs of the team before anyone has to ask.", strength: "Often the reason a chaotic room still runs smoothly, because the details are handled.", blindspot: "May under-advocate for their own needs or opinions in favor of keeping things running for everyone else.", tip: "Ch. 10, Engaged leader &mdash; sustaining relationships includes your own. Voicing your perspective is part of a fully engaged team, not a distraction from it." },
+  ESTJ: { group: "gray", label: "The organizer", tendency: "Leads by establishing clear structure, roles, and expectations, and holding people to them.", strength: "Excellent at the assign-tasks-by-name pattern that crisis leadership research favors.", blindspot: "Can default to control rather than delegation when stressed, which erodes trust over time.", tip: "Ch. 5, Value-based outcomes &mdash; structure should serve outcomes, not just order. Periodically check that your systems still fit the situation." },
+  ESFJ: { group: "gray", label: "The connector", tendency: "Leads by building strong interpersonal ties and keeping the team's morale visibly on their radar.", strength: "Usually the first to notice when a teammate is struggling, even before it affects performance.", blindspot: "May avoid necessary but unpopular decisions to preserve team harmony.", tip: "Ch. 11, Toxic organizations &mdash; harmony built on avoiding hard conversations isn't stable. The warning about toxic dynamics applies to silence as much as conflict." },
+  ISTP: { group: "amber", label: "The troubleshooter", tendency: "Leads through calm, hands-on problem-solving, often preferring to act rather than discuss.", strength: "Genuinely excellent under acute pressure, moving fast without panic.", blindspot: "May under-communicate what they're doing while they're doing it, leaving the team unsure what's happening.", tip: "Ch. 7, Chaos &mdash; narrating your actions out loud, even briefly, turns your solo competence into shared team awareness." },
+  ISFP: { group: "amber", label: "The quiet adapter", tendency: "Leads by adjusting fluidly to what each moment and each person needs, rather than one fixed style.", strength: "Genuinely good at meeting a rattled teammate where they are after a hard case.", blindspot: "Flexibility without a clear anchor can read as inconsistency to a team that needs predictability.", tip: "Ch. 1-2, Personal leadership styles &mdash; naming your non-negotiables clearly helps the team know what stays constant even as your approach flexes." },
+  ESTP: { group: "amber", label: "The responder", tendency: "Leads by diving directly into whatever is happening right now, often the first to physically move toward a problem.", strength: "A natural first responder in the literal sense, comfortable acting immediately under pressure.", blindspot: "May act before fully assessing, missing a beat that would have changed the response.", tip: "Ch. 7, Chaos &mdash; the research-backed pattern is a brief pause before acting, not a long one. Build in that one extra second, even at your pace." },
+  ESFP: { group: "amber", label: "The morale booster", tendency: "Leads by keeping the room's emotional temperature manageable, often through humor or warmth under pressure.", strength: "Can defuse tension in a way that keeps a team functional through a hard stretch.", blindspot: "Lightening the mood at the wrong moment can undercut the seriousness a genuine crisis requires.", tip: "Ch. 10, Engaged leader &mdash; read the room for when levity helps and when it doesn't. Your gift is calibration, not constant use." }
+};
+
+const GROUP_COLORS = {
+  purple: { bg: "#EEEDFE", text: "#26215C" },
+  teal:   { bg: "#E1F5EE", text: "#04342C" },
+  gray:   { bg: "#F1EFE8", text: "#2C2C2A" },
+  amber:  { bg: "#FAEEDA", text: "#412402" }
+};
+
+const grid = document.getElementById('type-grid');
+Object.keys(TYPES).forEach(function(code){
+  const btn = document.createElement('button');
+  btn.textContent = code;
+  btn.onclick = function(){ showType(code); };
+  grid.appendChild(btn);
+});
+
+function showType(code){
+  const t = TYPES[code];
+  const c = GROUP_COLORS[t.group];
+
+  document.querySelectorAll('#type-grid button').forEach(function(b){
+    b.classList.toggle('selected', b.textContent === code);
+  });
+
+  const panel = document.getElementById('result-panel');
+  panel.style.display = 'block';
+  panel.innerHTML =
+    '<div class="result-card">' +
+      '<div class="type-badge" style="background:' + c.bg + '; color:' + c.text + ';">' + code + '</div>' +
+      '<p class="label">' + t.label + '</p>' +
+      '<p class="tendency">' + t.tendency + '</p>' +
+      '<div class="field">' +
+        '<p class="field-label">Strength in the room</p>' +
+        '<p class="field-body">' + t.strength + '</p>' +
+      '</div>' +
+      '<div class="field">' +
+        '<p class="field-label">Watch for</p>' +
+        '<p class="field-body">' + t.blindspot + '</p>' +
+      '</div>' +
+      '<div class="field">' +
+        '<p class="field-label">Growth tip</p>' +
+        '<p class="field-body">' + t.tip + '</p>' +
+      '</div>' +
+    '</div>';
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+</script>
+
+</body>
+</html>

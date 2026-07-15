@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRNA 500 · Week 11 · Crisis Scenario: Leading Through an Airway Fire</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<style>
+  :root{
+    --ink:#1f2937;
+    --muted:#6b7280;
+    --border:#e2e2df;
+    --surface-page:#ffffff;
+    --surface-card:#f7f6f2;
+    --accent:#1f3a52;
+    --accent-light:#e6eef5;
+    --danger:#a32d2d;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--surface-page);
+    color:var(--ink);
+    padding:32px 20px 60px;
+    max-width:740px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.65;
+  }
+  .course-tag{
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  h1{
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 24px;
+    color:var(--ink);
+  }
+  .progress-label{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  .progress-track{
+    height:4px;
+    background:var(--border);
+    border-radius:3px;
+    margin-bottom:28px;
+    overflow:hidden;
+  }
+  .progress-bar{
+    height:100%;
+    width:0%;
+    background:var(--accent);
+    transition:width 0.3s ease;
+  }
+  .scene-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .scene-header i{
+    font-size:24px;
+    color:var(--danger);
+  }
+  .scene-header p{
+    font-weight:600;
+    font-size:17px;
+    margin:0;
+  }
+  .step p.body-text{
+    margin:0 0 20px;
+  }
+  .step p.narrative{
+    margin:0 0 16px;
+    padding:14px 16px;
+    background:var(--surface-card);
+    border-radius:8px;
+    font-style:italic;
+    color:#374151;
+  }
+  .step p.q-lead{
+    color:var(--muted);
+    margin:0 0 16px;
+  }
+  .step p.q-title{
+    font-weight:600;
+    font-size:17px;
+    margin:0 0 14px;
+  }
+  .callout{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    background:#fdf3f3;
+    border-left:3px solid var(--danger);
+    border-radius:6px;
+    padding:12px 14px;
+    margin:0 0 20px;
+    font-size:14px;
+    color:#5c1f1f;
+  }
+  .callout i{
+    font-size:18px;
+    color:var(--danger);
+    margin-top:1px;
+  }
+  button{
+    font-family:inherit;
+    font-size:15px;
+    cursor:pointer;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:#ffffff;
+    color:var(--ink);
+    padding:12px 16px;
+    text-align:left;
+    transition: border-color 0.15s ease, opacity 0.15s ease;
+  }
+  button:hover:not(:disabled){
+    border-color:var(--accent);
+  }
+  button:disabled{
+    cursor:default;
+  }
+  .choices{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .primary-btn{
+    background:var(--accent);
+    color:#ffffff;
+    border-color:var(--accent);
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .primary-btn:hover{
+    opacity:0.92;
+    border-color:var(--accent);
+  }
+  .secondary-btn{
+    font-weight:500;
+  }
+  .feedback{
+    display:none;
+    margin-top:14px;
+    padding:14px 16px;
+    background:var(--surface-card);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    font-size:14px;
+    color:#374151;
+  }
+  .continue-btn{
+    display:none;
+    margin-top:16px;
+  }
+  .button-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+  }
+  .reflect-box{
+    background:var(--accent-light);
+    border-radius:10px;
+    padding:18px 20px;
+    margin:16px 0 16px;
+  }
+  .reflect-box p{
+    margin:0 0 12px;
+  }
+  .reflect-box p:last-child{
+    margin-bottom:0;
+  }
+  footer{
+    margin-top:40px;
+    font-size:12px;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    padding-top:16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="course-tag">CRNA 500 &middot; Week 11</div>
+<h1>Leading Through an Airway Fire</h1>
+
+<div class="progress-label" id="progress-label">Scenario</div>
+<div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+
+<div class="step" data-step="0">
+  <div class="scene-header">
+    <i class="ti ti-flame" aria-hidden="true"></i>
+    <p>The scene</p>
+  </div>
+  <p class="body-text">You are the CRNA providing general anesthesia for a 47-year-old patient undergoing microlaryngoscopy with a CO2 laser to remove a laryngeal papilloma. The patient is intubated with a laser-resistant endotracheal tube. Even with precautions, this is one of the highest fire-risk procedures in anesthesia: an ignition source is being used directly at the airway, inches from the tube delivering oxygen and anesthetic gas. The surgeon is an ENT attending, working through the laryngoscope with a resident assisting. A circulating nurse and scrub tech are also in the room. This scenario unfolds differently from a surface drape fire &mdash; when the fire involves the tube itself, the response has to move even faster, and some of the usual steps happen in a different order.</p>
+  <button class="primary-btn" onclick="goStep(1)">Begin <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="1" style="display:none;">
+  <p class="q-title">Decision 1: before the laser is activated</p>
+  <p class="q-lead">The surgeon is about to begin lasing near the tube. As the CRNA, what do you do?</p>
+  <div class="choices" data-q="1">
+    <button class="choice-btn" data-fb="This is one of the few moments in the case where you have real control over the single biggest modifiable risk factor. Confirming the FiO2 out loud, immediately before laser activation, closes the window where this exact fire most often starts.">Confirm out loud with the surgeon and the team that the FiO2 is turned down to the lowest safe level before laser activation begins</button>
+    <button class="choice-btn" data-fb="A laser-resistant tube meaningfully reduces risk, but it does not eliminate it &mdash; cuff rupture, prolonged laser contact, or a higher-than-necessary FiO2 can still ignite it. Treating the tube as fireproof is a well-documented contributor to airway fires.">Assume the laser-resistant tube makes ignition essentially impossible, so no special communication is needed</button>
+    <button class="choice-btn" data-fb="This is technically correct and worth doing, but it isn't sufficient on its own &mdash; saline in the cuff helps if the cuff is punctured, but it doesn't address the oxygen concentration in the airway, which is the other half of the risk.">Fill the ETT cuff with saline instead of air, then consider the airway protected</button>
+    <button class="choice-btn" data-fb="Deferring entirely to the surgeon on FiO2 hands off a decision that is specifically anesthesia's to control. The surgeon manages the laser; you manage the gas the laser could ignite.">Leave the FiO2 setting to the surgeon's preference, since they're the one using the laser</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(2)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="2" style="display:none;">
+  <p class="narrative">The surgeon activates the laser. A few seconds in, there's a sudden flash and a soft popping sound from the airway. Bright orange flame is visible flickering at the tube, with a thin stream of smoke rising from the surgical field. The surgeon pulls back immediately and says, &quot;It's on fire!&quot;</p>
+  <div class="callout">
+    <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+    <span>This is different from a surface fire. The burning material is the tube itself, currently sitting in the patient's airway and still connected to the breathing circuit.</span>
+  </div>
+  <p class="q-title">Decision 2: the first action</p>
+  <p class="q-lead">What do you do in the first few seconds?</p>
+  <div class="choices" data-q="2">
+    <button class="choice-btn" data-fb="Disconnecting the circuit alone stops new oxygen from flowing, but it leaves a burning tube sitting in the airway. With a surface fire, cutting the oxidizer and waiting a moment is reasonable. With an airway fire, the burning material has to come out immediately &mdash; the two actions happen together, not one after the other.">Disconnect the breathing circuit from the tube, then pause to assess before doing anything else</button>
+    <button class="choice-btn" data-fb="This is the correct immediate double action for an airway fire: stopping gas flow removes the oxidizer, and pulling the tube removes the burning material from the airway in the same motion, rather than leaving it in place even briefly. Calling it out keeps the team moving with you instead of a beat behind.">Immediately disconnect the circuit and extubate the patient in the same motion, calling out &quot;Airway fire, tube is out&quot; as you do it</button>
+    <button class="choice-btn" data-fb="Pouring saline down the tube while it's still connected and still in the airway doesn't stop the oxygen feeding the flame, and it delays the one action that actually matters most in the first seconds: getting the burning material out of the airway.">Pour saline directly down the ETT while it's still in place, without disconnecting or removing it</button>
+    <button class="choice-btn" data-fb="Calling for the surgeon's help is reasonable a few seconds later, but in the immediate moment, you are the one with hands on the airway and the circuit &mdash; waiting for someone else to arrive costs time the airway doesn't have.">Call out for the surgeon to help before taking any action yourself</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(3)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="3" style="display:none;">
+  <p class="narrative">The tube is out. A small amount of residual flame and glowing embers are visible at the tip of the removed tube and faintly within the proximal airway.</p>
+  <p class="q-title">Decision 3: extinguishing what remains</p>
+  <p class="q-lead">What's your next move?</p>
+  <div class="choices" data-q="3">
+    <button class="choice-btn" data-fb="This matches the standard response: saline poured into the airway extinguishes residual embers directly at the source, rather than hoping they burn out on their own in the next several seconds &mdash; seconds the airway tissue doesn't have to spare.">Have saline poured directly into the airway to extinguish any remaining embers</button>
+    <button class="choice-btn" data-fb="Embers can continue to smolder and cause additional thermal injury even after the visible flame is gone. Waiting without actively extinguishing them risks more tissue damage than the extra step of pouring saline would cost.">Wait a few seconds to see if the residual embers burn out on their own</button>
+    <button class="choice-btn" data-fb="A CO2 extinguisher is appropriate for equipment or drape fires away from the patient. Discharging it into the airway risks additional injury from the cold gas and isn't the correct tool this close to delicate airway tissue.">Discharge a CO2 fire extinguisher into the airway to be thorough</button>
+    <button class="choice-btn" data-fb="Setting the burning tube aside without addressing the embers still in the airway itself leaves the actual source of ongoing injury untreated &mdash; the discarded tube is no longer the concern, what's left inside the patient is.">Set the removed tube aside in a metal basin and consider the fire handled</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(4)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="4" style="display:none;">
+  <p class="narrative">The fire is out. The patient is unintubated, apneic, and needs to be oxygenated. You have a bag-mask in hand.</p>
+  <p class="q-title">Decision 4: re-oxygenating safely</p>
+  <p class="q-lead">What do you ventilate with first?</p>
+  <div class="choices" data-q="4">
+    <button class="choice-btn" data-fb="This is the counterintuitive but correct step: any residual embers or hot spots in the airway can reignite in a high-oxygen environment. Ventilating with air first, before confirming everything is fully extinguished and cooled, avoids restarting the exact fire you just put out.">Mask ventilate with room air first, rather than 100% oxygen, until you're confident the fire is fully out</button>
+    <button class="choice-btn" data-fb="Reflexively reaching for 100% oxygen makes sense in almost every other emergency, which is exactly why this is a common mistake here &mdash; in this specific situation, high oxygen concentration risks reigniting any remaining embers in the airway.">Immediately bag the patient with 100% oxygen, since oxygenation is always the top priority</button>
+    <button class="choice-btn" data-fb="A brief pause without ventilating isn't the safer choice either &mdash; the patient still needs oxygen, just not at a concentration that risks reignition. The answer is ventilating carefully with air, not withholding ventilation altogether.">Hold off on ventilating at all until the surgeon confirms the airway is completely clear</button>
+    <button class="choice-btn" data-fb="Reintubating before addressing oxygenation and before assessing what's actually in the airway skips steps that come first &mdash; you don't yet know the extent of injury or debris, and placing a new tube blindly into that environment adds risk rather than reducing it.">Attempt to reintubate immediately with a new tube before ventilating at all</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(5)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="5" style="display:none;">
+  <p class="narrative">The patient is being safely mask-ventilated with air. You now need to reestablish a definitive airway and find out how much damage the fire caused.</p>
+  <p class="q-title">Decision 5: directing the room</p>
+  <p class="q-lead">How do you organize the next steps?</p>
+  <div class="choices" data-q="5">
+    <button class="choice-btn" data-fb="Reintubating alone, without calling for backup equipment or extra hands, assumes this will be a routine intubation. After an airway fire, you can't assume that &mdash; soot, swelling, or a distorted airway can turn a routine intubation into a difficult one with very little warning.">Attempt to reintubate on your own with the same equipment you started with, to keep things moving quickly</button>
+    <button class="choice-btn" data-fb="This is the right call: naming the specific need (difficult airway cart, a surgeon ready for a possible surgical airway) and assigning who gets each thing prepares the room for a worse-than-expected airway, rather than reacting to one after the fact.">Call for the difficult airway cart, ask the surgeon to be ready for a possible surgical airway, and assign specific people to specific tasks</button>
+    <button class="choice-btn" data-fb="Reusing the original tube isn't an option here &mdash; it's the device that was just on fire and is no longer sterile, structurally reliable, or appropriate to place back in the airway.">Ask for the same tube to be cleaned off and reused, since a new one may not be immediately available</button>
+    <button class="choice-btn" data-fb="This decision, and coordinating the room around it, is squarely anesthesia's responsibility. Waiting for someone else to organize the response adds a delay the airway doesn't need.">Wait for the surgeon to decide how they want to proceed before organizing anything</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(6)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="6" style="display:none;">
+  <p class="narrative">The difficult airway cart has arrived. Before placing a new tube, you have a brief window to look at what the fire actually did.</p>
+  <p class="q-title">Decision 6: assessing the damage</p>
+  <p class="q-lead">What do you prioritize before reintubating?</p>
+  <div class="choices" data-q="6">
+    <button class="choice-btn" data-fb="Placing a new tube without first looking at the airway means reintubating blind into tissue that may be burned, swollen, or carrying soot and debris &mdash; exactly the situation where a brief direct look changes what you do next.">Reintubate immediately with the new equipment, and plan to assess for injury afterward</button>
+    <button class="choice-btn" data-fb="This is the right sequence: a brief direct look at the airway, ideally with the surgeon's laryngoscope or a bronchoscope, tells you what you're actually dealing with before you commit to a specific tube size, depth, or reintubation approach.">Have the surgeon or yourself perform a brief direct laryngoscopy or bronchoscopy to look for thermal injury, soot, or swelling before reintubating</button>
+    <button class="choice-btn" data-fb="Judging injury by how the patient looks on the monitor misses the point &mdash; airway swelling from a thermal injury can progress over hours, well after vitals look reassuring in the moment.">Judge the extent of injury by how stable the patient's vital signs currently look</button>
+    <button class="choice-btn" data-fb="Skipping a look at the airway because the fire seemed small underestimates how much thermal injury can occur in seconds, even from a brief flame, in tissue as delicate as the airway.">Skip the direct assessment, since the fire seemed to burn for only a few seconds</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(7)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="7" style="display:none;">
+  <p class="narrative">The airway shows mild soot staining and localized swelling near the glottis, but no full-thickness injury. The patient is successfully reintubated with the difficult airway team's help. The case is aborted. The patient is stable and will be closely monitored for airway swelling. The room is quiet, and several team members are visibly rattled.</p>
+  <p class="q-title">Decision 7: after the airway is secure</p>
+  <p class="q-lead">What do you do next?</p>
+  <div class="choices" data-q="7">
+    <button class="choice-btn" data-fb="Moving on without a debrief or a plan for disclosure and documentation misses two things that matter here: the team's need to process a genuinely frightening event, and the patient's and family's right to know what happened and why.">Move the patient to the ICU for monitoring and let the rest of the team return to their normal schedules</button>
+    <button class="choice-btn" data-fb="This covers what actually needs to happen next: a brief debrief so the team processes the event together, a plan for how the surgeon will disclose what happened to the patient and family, and documentation while the details are still fresh and accurate.">Gather the team for a brief debrief, coordinate with the surgeon on how the event will be disclosed to the patient and family, and document your findings while they're fresh</button>
+    <button class="choice-btn" data-fb="A debrief centered on identifying fault, rather than on what happened and what the team learned, tends to make people defensive and less willing to speak openly &mdash; which is the opposite of what you want after an event like this.">Hold a debrief focused mainly on identifying which specific equipment or person failed</button>
+    <button class="choice-btn" data-fb="Leaving disclosure entirely to the surgeon without any coordination risks an inconsistent or incomplete account reaching the patient and family &mdash; this is a conversation anesthesia should be part of, not absent from.">Leave the disclosure conversation with the patient's family entirely to the surgeon, without discussing it together first</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(8)">See summary <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="8" style="display:none;">
+  <p class="q-title">Reflection</p>
+  <div class="reflect-box">
+    <p>An airway fire is not just a smaller, more urgent version of a surface fire &mdash; it follows a distinct sequence, because the burning material is inside the airway itself. The core response is: stop the gas flow and remove the tube in the same motion, extinguish any residual embers with saline, re-ventilate cautiously with air rather than high oxygen until the fire risk has passed, reintubate with backup equipment ready rather than assuming a routine airway, and directly assess the airway for injury before committing to a plan.</p>
+    <p>Layered on top of that technical sequence is the same leadership pattern that shows up across every high-stakes crisis: naming risk before it becomes a crisis, moving decisively without freezing, delegating specific tasks to specific people, resisting the instinct that feels protective but is actually wrong for this situation, and closing the loop afterward with an honest debrief and clear disclosure rather than letting the moment pass in silence.</p>
+  </div>
+  <p class="body-text">You haven't been in an OR as an anesthesia provider yet, and that's exactly the point of working through this now: this is one of the highest-stakes scenarios in the specialty, and it's far better to have thought through the sequence once, calmly, than to encounter it for the first time under real pressure. Use these patterns as the backbone of your written reflection this week.</p>
+  <div class="button-row">
+    <button class="secondary-btn" onclick="restart()">Try different choices</button>
+  </div>
+  <div class="summary-box" style="margin-top:28px; padding-top:20px; border-top:1px solid var(--border);">
+    <p style="font-weight:600; font-size:15px; margin:0 0 8px;">Export your results</p>
+    <p style="font-size:13px; color:var(--muted); margin:0 0 14px;">Enter your name, then download or copy a summary of your choices to submit with your written reflection.</p>
+    <input type="text" id="student-name" placeholder="Your name" style="width:100%; max-width:280px; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; margin-bottom:14px; font-family:inherit;">
+    <div class="button-row">
+      <button class="primary-btn" onclick="downloadSummary()"><i class="ti ti-download"></i> Download summary</button>
+      <button class="secondary-btn" onclick="copySummary()"><i class="ti ti-copy"></i> Copy to clipboard</button>
+    </div>
+    <p id="copy-confirm" style="display:none; font-size:13px; color:#0f6e56; margin-top:10px;">Copied to clipboard.</p>
+  </div>
+</div>
+
+<footer>CRNA 500 &middot; Professional Role and Leadership Development &middot; Week 11 crisis leadership exercise</footer>
+
+<script>
+let currentStep = 0;
+const totalSteps = 8;
+let selections = {};
+
+function updateProgress(step){
+  const bar = document.getElementById('progress-bar');
+  const label = document.getElementById('progress-label');
+  bar.style.width = (step / totalSteps * 100) + '%';
+  if(step === 0){ label.textContent = 'Scenario'; }
+  else if(step <= 7){ label.textContent = 'Decision ' + step + ' of 7'; }
+  else { label.textContent = 'Complete'; }
+}
+
+function goStep(n){
+  document.querySelectorAll('.step').forEach(function(s){
+    s.style.display = (parseInt(s.getAttribute('data-step')) === n) ? '' : 'none';
+  });
+  currentStep = n;
+  updateProgress(n);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+document.querySelectorAll('.choice-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    const group = btn.closest('.choices');
+    const stepDiv = group.closest('.step');
+    const feedback = stepDiv.querySelector('.feedback');
+    const continueBtn = stepDiv.querySelector('.continue-btn');
+    group.querySelectorAll('.choice-btn').forEach(function(b){
+      b.disabled = true;
+      b.style.opacity = (b === btn) ? '1' : '0.5';
+      if(b === btn){ b.style.borderColor = '#1f3a52'; b.style.borderWidth = '2px'; }
+    });
+    feedback.textContent = btn.getAttribute('data-fb');
+    feedback.style.display = 'block';
+    continueBtn.style.display = 'inline-flex';
+    selections[group.getAttribute('data-q')] = btn.textContent;
+  });
+});
+
+function buildSummaryText(){
+  const nameField = document.getElementById('student-name');
+  const name = (nameField && nameField.value.trim()) || '[Name not entered]';
+  const dateStr = new Date().toLocaleString();
+  const lines = [];
+  lines.push('CRNA 500 -- Professional Role and Leadership Development');
+  lines.push('Week 11 Crisis Scenario: Leading Through an Airway Fire');
+  lines.push('Student: ' + name);
+  lines.push('Completed: ' + dateStr);
+  lines.push('');
+  document.querySelectorAll('.step[data-step]').forEach(function(step){
+    const qDiv = step.querySelector('.choices');
+    if(qDiv){
+      const qNum = qDiv.getAttribute('data-q');
+      const titleEl = step.querySelector('.q-title');
+      const title = titleEl ? titleEl.textContent : ('Decision ' + qNum);
+      const choice = selections[qNum] || '[Not answered]';
+      lines.push(title + ':');
+      lines.push('  ' + choice);
+      lines.push('');
+    }
+  });
+  return lines.join('\n');
+}
+
+function downloadSummary(){
+  const text = buildSummaryText();
+  const nameField = document.getElementById('student-name');
+  const safeName = ((nameField && nameField.value.trim()) || 'student').replace(/[^a-z0-9]/gi, '_');
+  const blob = new Blob([text], {type: 'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'CRNA500_Week11_AirwayFire_' + safeName + '_summary.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function copySummary(){
+  const text = buildSummaryText();
+  navigator.clipboard.writeText(text).then(function(){
+    const confirmMsg = document.getElementById('copy-confirm');
+    confirmMsg.style.display = 'block';
+    setTimeout(function(){ confirmMsg.style.display = 'none'; }, 3000);
+  });
+}
+
+function restart(){
+  document.querySelectorAll('.choice-btn').forEach(function(b){
+    b.disabled = false;
+    b.style.opacity = '1';
+    b.style.borderColor = '';
+    b.style.borderWidth = '';
+  });
+  document.querySelectorAll('.feedback').forEach(function(f){ f.style.display = 'none'; f.textContent = ''; });
+  document.querySelectorAll('.continue-btn').forEach(function(b){ b.style.display = 'none'; });
+  selections = {};
+  goStep(0);
+}
+
+updateProgress(0);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRNA 500 · Week 11 · Crisis Scenario: Leading Through Chaos</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<style>
+  :root{
+    --ink:#1f2937;
+    --muted:#6b7280;
+    --border:#e2e2df;
+    --surface-page:#ffffff;
+    --surface-card:#f7f6f2;
+    --accent:#1f3a52;
+    --accent-light:#e6eef5;
+    --danger:#a32d2d;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--surface-page);
+    color:var(--ink);
+    padding:32px 20px 60px;
+    max-width:720px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.6;
+  }
+  .course-tag{
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  h1{
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 24px;
+    color:var(--ink);
+  }
+  .progress-label{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  .progress-track{
+    height:4px;
+    background:var(--border);
+    border-radius:3px;
+    margin-bottom:28px;
+    overflow:hidden;
+  }
+  .progress-bar{
+    height:100%;
+    width:0%;
+    background:var(--accent);
+    transition:width 0.3s ease;
+  }
+  .step{
+    margin-bottom:8px;
+  }
+  .scene-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .scene-header i{
+    font-size:24px;
+    color:var(--danger);
+  }
+  .scene-header p{
+    font-weight:600;
+    font-size:17px;
+    margin:0;
+  }
+  .step p.body-text{
+    margin:0 0 20px;
+  }
+  .step p.q-lead{
+    color:var(--muted);
+    margin:0 0 16px;
+  }
+  .step p.q-title{
+    font-weight:600;
+    font-size:17px;
+    margin:0 0 14px;
+  }
+  button{
+    font-family:inherit;
+    font-size:15px;
+    cursor:pointer;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:#ffffff;
+    color:var(--ink);
+    padding:12px 16px;
+    text-align:left;
+    transition: border-color 0.15s ease, opacity 0.15s ease;
+  }
+  button:hover:not(:disabled){
+    border-color:var(--accent);
+  }
+  button:disabled{
+    cursor:default;
+  }
+  .choices{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .primary-btn{
+    background:var(--accent);
+    color:#ffffff;
+    border-color:var(--accent);
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .primary-btn:hover{
+    opacity:0.92;
+    border-color:var(--accent);
+  }
+  .secondary-btn{
+    font-weight:500;
+  }
+  .feedback{
+    display:none;
+    margin-top:14px;
+    padding:14px 16px;
+    background:var(--surface-card);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    font-size:14px;
+    color:#374151;
+  }
+  .continue-btn{
+    display:none;
+    margin-top:16px;
+  }
+  .button-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+  }
+  .reflect-box{
+    background:var(--accent-light);
+    border-radius:10px;
+    padding:18px 20px;
+    margin:16px 0 20px;
+  }
+  .reflect-box p{
+    margin:0;
+  }
+  footer{
+    margin-top:40px;
+    font-size:12px;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    padding-top:16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="course-tag">CRNA 500 &middot; Week 11</div>
+<h1>Leading Through Chaos: An OR Fire Scenario</h1>
+
+<div class="progress-label" id="progress-label">Scenario</div>
+<div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+
+<div class="step" data-step="0">
+  <div class="scene-header">
+    <i class="ti ti-flame" aria-hidden="true"></i>
+    <p>The scene</p>
+  </div>
+  <p class="body-text">You are the anesthesia provider on a routine ENT case using high-flow oxygen near the surgical field. Mid-procedure, electrocautery ignites a surgical drape. A small fire breaks out at the field. An alarm sounds, a tech shouts, and the surgeon freezes. You have a few seconds to act.</p>
+  <button class="primary-btn" onclick="goStep(1)">Begin <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="1" style="display:none;">
+  <p class="q-title">Decision 1: your first move</p>
+  <p class="q-lead">The room is losing composure. What do you do first?</p>
+  <div class="choices" data-q="1">
+    <button class="choice-btn" data-fb="Shouting multiple instructions at once tends to fragment the room's attention rather than focus it — in a crisis, people default to whoever sounds calmest and clearest, not loudest.">Shout instructions to everyone at once so the whole room reacts immediately</button>
+    <button class="choice-btn" data-fb="This is the pattern most crisis-leadership research points to: a brief pause to assess, then one clear, calm, singular command. It doesn't cost you time — it buys the room focus.">Take a breath, assess the immediate threat, then give one clear, calm command</button>
+    <button class="choice-btn" data-fb="Waiting for someone else to take charge is a common freeze response, but in a fire, someone has to move the room forward in seconds, not minutes. Deferring isn't neutral — it's a decision with a cost.">Wait for the surgeon to direct the team, since they're the attending</button>
+    <button class="choice-btn" data-fb="Stepping back because 'it's not your job' misreads what crisis leadership actually requires — proximity to the patient's airway makes you one of the people best positioned to act, regardless of formal job titles.">Step back and let the circulating nurse handle it</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(2)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="2" style="display:none;">
+  <p class="q-title">Decision 2: directing the team</p>
+  <p class="q-lead">The oxygen source needs to be shut off and the fire addressed, right now. How do you direct the room?</p>
+  <div class="choices" data-q="2">
+    <button class="choice-btn" data-fb="Trying to do everything yourself feels like control, but it actually slows the response and leaves no one directing the room while you're heads-down on one task.">Handle the oxygen and the extinguisher yourself to be sure it's done right</button>
+    <button class="choice-btn" data-fb="Naming a person and a task removes ambiguity instantly — 'someone' rarely moves, but a named person almost always does. This is one of the most consistently cited behaviors of effective crisis leaders.">Assign specific tasks to specific people by name</button>
+    <button class="choice-btn" data-fb="A general instruction to 'someone' often produces a brief pause while everyone assumes someone else will move — a well-documented failure mode called diffusion of responsibility.">Give a general instruction and trust someone will pick it up</button>
+    <button class="choice-btn" data-fb="Asking for volunteers adds a decision point the room doesn't have time for. In an acute crisis, directing is faster and kinder than asking.">Ask the room who is willing to take each task</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(3)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="3" style="display:none;">
+  <p class="q-title">Decision 3: after the fire is out</p>
+  <p class="q-lead">The fire is extinguished and the patient is stable. What's your next move as the leader in the room?</p>
+  <div class="choices" data-q="3">
+    <button class="choice-btn" data-fb="Rushing straight back to the case skips a step that steadies the team and lowers the chance of a second mistake in the adrenaline aftermath.">Move quickly back into the case, deal with the debrief later</button>
+    <button class="choice-btn" data-fb="A brief stabilizing pause, even 15-20 seconds, resets the room's composure before continuing. Strong crisis leaders treat the moment right after the emergency as part of the emergency response.">Pause briefly, confirm everyone is safe, and reset expectations before continuing</button>
+    <button class="choice-btn" data-fb="Assigning blame in the moment shuts down the psychological safety you need for people to speak up next time something goes wrong. That conversation has a place, but it isn't right now.">Identify what went wrong and who was responsible</button>
+    <button class="choice-btn" data-fb="Letting people privately process on their own misses a chance to model that the team gets through hard moments together, not separately.">Let each team member privately process it on their own</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(4)">See summary <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="4" style="display:none;">
+  <p class="q-title">Reflection</p>
+  <div class="reflect-box">
+    <p>There's no single right path through a crisis, and every choice above reflects a real, defensible instinct. But four patterns show up consistently in strong crisis leadership: a brief pause before acting, one clear voice instead of many, delegation by name instead of by hope, and a stabilizing pause once the danger has passed.</p>
+  </div>
+  <p class="body-text">You haven't been in an OR as an anesthesia provider yet, and that's the point of this exercise — this is a chance to think through the framework before you're under real pressure. Use these four patterns as a starting point for your one-page written reflection this week.</p>
+  <div class="button-row">
+    <button class="secondary-btn" onclick="restart()">Try different choices</button>
+  </div>
+</div>
+
+<footer>CRNA 500 &middot; Professional Role and Leadership Development &middot; Week 11 crisis leadership exercise</footer>
+
+<script>
+let currentStep = 0;
+const totalSteps = 4;
+
+function updateProgress(step){
+  const bar = document.getElementById('progress-bar');
+  const label = document.getElementById('progress-label');
+  bar.style.width = (step / totalSteps * 100) + '%';
+  if(step === 0){ label.textContent = 'Scenario'; }
+  else if(step <= 3){ label.textContent = 'Decision ' + step + ' of 3'; }
+  else { label.textContent = 'Complete'; }
+}
+
+function goStep(n){
+  document.querySelectorAll('.step').forEach(function(s){
+    s.style.display = (parseInt(s.getAttribute('data-step')) === n) ? '' : 'none';
+  });
+  currentStep = n;
+  updateProgress(n);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+document.querySelectorAll('.choice-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    const group = btn.closest('.choices');
+    const stepDiv = group.closest('.step');
+    const feedback = stepDiv.querySelector('.feedback');
+    const continueBtn = stepDiv.querySelector('.continue-btn');
+    group.querySelectorAll('.choice-btn').forEach(function(b){
+      b.disabled = true;
+      b.style.opacity = (b === btn) ? '1' : '0.5';
+      if(b === btn){ b.style.borderColor = '#1f3a52'; b.style.borderWidth = '2px'; }
+    });
+    feedback.textContent = btn.getAttribute('data-fb');
+    feedback.style.display = 'block';
+    continueBtn.style.display = 'inline-flex';
+  });
+});
+
+function restart(){
+  document.querySelectorAll('.choice-btn').forEach(function(b){
+    b.disabled = false;
+    b.style.opacity = '1';
+    b.style.borderColor = '';
+    b.style.borderWidth = '';
+  });
+  document.querySelectorAll('.feedback').forEach(function(f){ f.style.display = 'none'; f.textContent = ''; });
+  document.querySelectorAll('.continue-btn').forEach(function(b){ b.style.display = 'none'; });
+  goStep(0);
+}
+
+updateProgress(0);
+</script>
+
+</body>
+</html>

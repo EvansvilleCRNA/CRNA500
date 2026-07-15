@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRNA 500 · Week 11 · Crisis Scenario: Leading Through an OR Fire</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<style>
+  :root{
+    --ink:#1f2937;
+    --muted:#6b7280;
+    --border:#e2e2df;
+    --surface-page:#ffffff;
+    --surface-card:#f7f6f2;
+    --accent:#1f3a52;
+    --accent-light:#e6eef5;
+    --danger:#a32d2d;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--surface-page);
+    color:var(--ink);
+    padding:32px 20px 60px;
+    max-width:740px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.65;
+  }
+  .course-tag{
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  h1{
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 24px;
+    color:var(--ink);
+  }
+  .progress-label{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  .progress-track{
+    height:4px;
+    background:var(--border);
+    border-radius:3px;
+    margin-bottom:28px;
+    overflow:hidden;
+  }
+  .progress-bar{
+    height:100%;
+    width:0%;
+    background:var(--accent);
+    transition:width 0.3s ease;
+  }
+  .scene-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .scene-header i{
+    font-size:24px;
+    color:var(--danger);
+  }
+  .scene-header p{
+    font-weight:600;
+    font-size:17px;
+    margin:0;
+  }
+  .step p.body-text{
+    margin:0 0 20px;
+  }
+  .step p.narrative{
+    margin:0 0 16px;
+    padding:14px 16px;
+    background:var(--surface-card);
+    border-radius:8px;
+    font-style:italic;
+    color:#374151;
+  }
+  .step p.q-lead{
+    color:var(--muted);
+    margin:0 0 16px;
+  }
+  .step p.q-title{
+    font-weight:600;
+    font-size:17px;
+    margin:0 0 14px;
+  }
+  button{
+    font-family:inherit;
+    font-size:15px;
+    cursor:pointer;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:#ffffff;
+    color:var(--ink);
+    padding:12px 16px;
+    text-align:left;
+    transition: border-color 0.15s ease, opacity 0.15s ease;
+  }
+  button:hover:not(:disabled){
+    border-color:var(--accent);
+  }
+  button:disabled{
+    cursor:default;
+  }
+  .choices{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .primary-btn{
+    background:var(--accent);
+    color:#ffffff;
+    border-color:var(--accent);
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .primary-btn:hover{
+    opacity:0.92;
+    border-color:var(--accent);
+  }
+  .secondary-btn{
+    font-weight:500;
+  }
+  .feedback{
+    display:none;
+    margin-top:14px;
+    padding:14px 16px;
+    background:var(--surface-card);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    font-size:14px;
+    color:#374151;
+  }
+  .continue-btn{
+    display:none;
+    margin-top:16px;
+  }
+  .button-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+  }
+  .reflect-box{
+    background:var(--accent-light);
+    border-radius:10px;
+    padding:18px 20px;
+    margin:16px 0 16px;
+  }
+  .reflect-box p{
+    margin:0 0 12px;
+  }
+  .reflect-box p:last-child{
+    margin-bottom:0;
+  }
+  footer{
+    margin-top:40px;
+    font-size:12px;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    padding-top:16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="course-tag">CRNA 500 &middot; Week 11</div>
+<h1>Leading Through an OR Fire</h1>
+
+<div class="progress-label" id="progress-label">Scenario</div>
+<div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+
+<div class="step" data-step="0">
+  <div class="scene-header">
+    <i class="ti ti-flame" aria-hidden="true"></i>
+    <p>The scene</p>
+  </div>
+  <p class="body-text">You are the CRNA providing anesthesia for a 61-year-old patient undergoing an elective tracheostomy under monitored anesthesia care, with supplemental oxygen delivered by nasal cannula and local anesthesia at the surgical site. This is a classically higher-risk setup for fire: the procedure is on the head and neck, an open oxygen source sits close to the surgical field, and the surgeon will be using monopolar electrocautery to control bleeding throughout the case. The room is fully staffed: a circulating nurse, a scrub tech, a surgical resident, and the attending surgeon. Throughout this scenario, you are the one leading the response.</p>
+  <button class="primary-btn" onclick="goStep(1)">Begin <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="1" style="display:none;">
+  <p class="q-title">Decision 1: before the first incision</p>
+  <p class="q-lead">The team completes the surgical time-out. As the CRNA, what do you do?</p>
+  <div class="choices" data-q="1">
+    <button class="choice-btn" data-fb="Sticking strictly to the checklist misses a real opportunity. Fire risk isn't always built into a standard time-out, but naming it proactively is one of the most effective prevention steps an anesthesia provider can take, precisely because you control one leg of the fire triangle: the oxidizer.">Stay quiet, since fire risk isn't formally part of your hospital's time-out checklist</button>
+    <button class="choice-btn" data-fb="This is exactly the kind of proactive leadership that OR fire prevention consistently points to. Naming the risk out loud, even briefly, primes the whole team to respond faster if ignition actually occurs. Most OR fires happen when this exact conversation never took place.">Explicitly name the fire risk to the team: the oxygen source, the planned cautery use, and the response plan if ignition occurs</button>
+    <button class="choice-btn" data-fb="Experience doesn't guarantee the fire-risk conversation actually happens in the room that day. Assuming someone else has it covered is one of the most common reasons this conversation gets skipped entirely.">Assume the surgeon already knows the risks, since they've done this procedure many times before</button>
+    <button class="choice-btn" data-fb="Delegating the fire-risk conversation to someone else's role diffuses ownership of a topic that's specifically about your equipment. The oxygen you're delivering is one leg of the fire triangle, which makes this a conversation you're well positioned to lead yourself.">Ask the circulating nurse to bring up fire safety instead of doing it yourself</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(2)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="2" style="display:none;">
+  <p class="narrative">Twenty minutes into the case, the surgeon activates the monopolar cautery to control a small bleeder near the incision. A spark ignites a pocket of oxygen-enriched air trapped beneath the surgical drapes. A small flame appears at the surgical field. The scrub tech gasps and steps back. The surgeon's hands freeze mid-air.</p>
+  <p class="q-title">Decision 2: the first three seconds</p>
+  <p class="q-lead">What is your very first action?</p>
+  <div class="choices" data-q="2">
+    <button class="choice-btn" data-fb="Announcing the fire clearly is right, but reaching for an extinguisher before addressing the oxygen source skips the step that starves the fire fastest. In a fire fed by an open oxygen source, cutting that fuel is normally the highest-leverage first move.">Shout &quot;Fire!&quot; loudly and immediately reach for the nearest fire extinguisher</button>
+    <button class="choice-btn" data-fb="This matches the core of the recognized OR fire response: address the oxidizer first, since an oxygen-enriched environment is what turns a small spark into a sustained flame. Narrating the action out loud also keeps the team oriented to what's happening and what comes next.">Immediately stop or reduce the supplemental oxygen while calling out &quot;Fire, stopping O2&quot; so the team knows what's happening</button>
+    <button class="choice-btn" data-fb="A brief moment of shock is a normal human response, but the fire triangle doesn't pause while you process. Every second the oxygen keeps flowing, the fire has more to burn. The goal isn't to never feel startled, it's to move through that instant as fast as possible.">Freeze for a moment to process what just happened before doing anything</button>
+    <button class="choice-btn" data-fb="Self-preservation instincts are real, but a small drape fire at this stage is very survivable to respond to directly, and you are the person best positioned to cut off its fuel source in the next few seconds.">Immediately step away from the patient to avoid personal injury</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(3)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="3" style="display:none;">
+  <p class="narrative">You've cut the oxygen source. The flame is small but still burning on the drape near the incision.</p>
+  <p class="q-title">Decision 3: removing the fuel</p>
+  <p class="q-lead">What's your next move?</p>
+  <div class="choices" data-q="3">
+    <button class="choice-btn" data-fb="Waiting lets a fire that's already shrinking without its oxygen source regain ground once the extinguisher takes even a few extra seconds to arrive. Removing the burning material promptly is part of starving the fire on every front, not just the oxidizer.">Leave the drape in place and wait for the fire extinguisher to arrive</button>
+    <button class="choice-btn" data-fb="Removing the fuel source is the second core piece of the standard fire response, right alongside cutting the oxidizer. Assigning it to the scrub tech by name, rather than doing it yourself or hoping someone jumps in, keeps you free to manage the airway and the rest of the response.">Direct the scrub tech by name to immediately remove the burning drape material from the patient</button>
+    <button class="choice-btn" data-fb="This instinct to act fast is the right impulse, but it risks a burn injury to you without meaningfully speeding up the response. A call for the drape to be pulled away or the extinguisher to be used protects both you and the patient.">Try to smother the flame with your bare hand</button>
+    <button class="choice-btn" data-fb="The surgical site is where the fire is, but that doesn't mean it's the surgeon's response to run. You're the one who just controlled the oxygen source, and continuing to direct the response keeps a single clear voice leading the room instead of splitting authority mid-crisis.">Tell the surgeon to handle it, since it's at the surgical site</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(4)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="4" style="display:none;">
+  <p class="narrative">The tech has pulled the burning drape away from the patient. A small flame is still active on the drape material, now on the floor. The circulating nurse is holding both a basin of saline and a CO2 fire extinguisher, looking to you for direction.</p>
+  <p class="q-title">Decision 4: choosing the right tool</p>
+  <p class="q-lead">Which do you direct her to use, and where?</p>
+  <div class="choices" data-q="4">
+    <button class="choice-btn" data-fb="A CO2 extinguisher is meant for fires on equipment or drapes away from the patient. Discharging it directly onto skin can cause cold injury and isn't necessary once the burning material is off the patient. This is a case where &quot;more thorough&quot; isn't actually safer.">Use the CO2 extinguisher directly on the patient's skin near the former fire site, just to be thorough</button>
+    <button class="choice-btn" data-fb="This matches the standard approach: saline or water for anything on or near the patient, and a CO2 extinguisher reserved for materials and equipment once they're away from the patient. It's a small distinction, but it's exactly the kind of technical detail that matters under pressure.">Use saline on anything smoldering near the patient, and the CO2 extinguisher only on the drape material now on the floor</button>
+    <button class="choice-btn" data-fb="The airway is genuinely the highest-risk area, but a CO2 extinguisher is not the right tool there. Cold gas discharge near the airway risks additional injury. Saline is the safer option anywhere close to the patient, including the airway.">Use the CO2 extinguisher on the patient's airway to be safe, since that's the highest-risk area</button>
+    <button class="choice-btn" data-fb="Under pressure, &quot;whichever is closest&quot; can lead to the wrong tool in the wrong place. A specific instruction, even a two-second one, prevents a well-meaning team member from making a choice that adds risk rather than reducing it.">Tell her to use whichever one she reaches first</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(5)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="5" style="display:none;">
+  <p class="narrative">The fire is out. The room is quiet except for the monitors, beeping steadily. The patient's vitals are stable. Everyone is looking at you.</p>
+  <p class="q-title">Decision 5: reassessing the patient</p>
+  <p class="q-lead">What's your next priority?</p>
+  <div class="choices" data-q="5">
+    <button class="choice-btn" data-fb="Moving straight back into the case skips a genuinely important step. Briefly reassessing the airway and surrounding tissue for thermal injury or smoke exposure takes less than a minute and directly affects whether it's even safe to continue.">Immediately tell the surgeon to resume the procedure so you don't lose more time</button>
+    <button class="choice-btn" data-fb="This is the right sequence: restore appropriate oxygenation, check for injury the fire may have caused, and only then make a joint decision with the surgeon about whether to proceed. It's fast, but it isn't rushed.">Resume oxygen at a safe level, quickly reassess the airway and surrounding tissue for injury, and confirm with the surgeon before continuing</button>
+    <button class="choice-btn" data-fb="Airway and thermal injury assessment in this context is squarely within the anesthesia provider's scope. Delegating it to someone in a different role risks a less complete evaluation of the exact area you're best trained to assess.">Ask the surgical resident to check for injury, since they're closer to the field</button>
+    <button class="choice-btn" data-fb="A small, fast fire is genuinely lower-risk, but &quot;probably fine&quot; isn't the same as a confirmed assessment. A 30-second check costs very little and rules out a problem that would be much more costly to miss.">Assume everything is fine, since the fire was small and quickly extinguished</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(6)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="6" style="display:none;">
+  <p class="narrative">Your assessment shows no visible airway injury, and only minor superficial singeing of the drape near the incision, well away from the patient's skin. The surgeon is asking whether you're comfortable continuing.</p>
+  <p class="q-title">Decision 6: continue or abort</p>
+  <p class="q-lead">How do you handle this decision?</p>
+  <div class="choices" data-q="6">
+    <button class="choice-btn" data-fb="Speed here isn't the same as good judgment. Even with a reassuring exam, a brief explicit conversation about what was found and why it's safe to continue protects both the patient and the team's shared understanding of the decision.">Say yes immediately, since stopping now creates more complications than finishing</button>
+    <button class="choice-btn" data-fb="This keeps the decision collaborative and documented rather than unilateral or assumed. A clear, shared rationale for continuing protects the patient and gives the whole team confidence in the decision, not just the two of you.">Walk the surgeon through exactly what you found, confirm you're both comfortable continuing, and note your findings before resuming</button>
+    <button class="choice-btn" data-fb="The decision to continue after an airway-area fire is anesthesia's call as much as surgery's. Deferring the whole decision hands off a responsibility that's specifically about airway safety, which is your domain.">Defer entirely to the surgeon's judgment, since it's their case</button>
+    <button class="choice-btn" data-fb="An unnecessarily cautious call isn't automatically the safe choice either. If your own assessment found no significant injury, aborting reflexively rather than explaining your reasoning can undermine the team's trust in your judgment going forward.">Insist on aborting the case regardless of what the assessment showed</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(7)">Continue <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="7" style="display:none;">
+  <p class="narrative">The rest of the case finishes without further incident. The patient is stable in recovery. The OR team is still visibly shaken. For several of them, this is the first real fire they've experienced.</p>
+  <p class="q-title">Decision 7: before everyone scatters</p>
+  <p class="q-lead">What do you do before the room turns over for the next case?</p>
+  <div class="choices" data-q="7">
+    <button class="choice-btn" data-fb="Skipping this step is understandable given schedule pressure, but it's also how near-misses stop becoming learning opportunities and start becoming things people just quietly carry with them.">Nothing formal — everyone knows what happened, and another case is starting soon</button>
+    <button class="choice-btn" data-fb="A short, structured debrief immediately after a crisis is one of the most consistently supported practices in crisis leadership and patient safety literature. It doesn't need to be long — a few minutes spent naming what happened and what went well does most of the work.">Gather the team for a brief two-minute debrief: what happened, what went well, and thank people by name for their roles</button>
+    <button class="choice-btn" data-fb="Processing it privately might feel lower-pressure, but it misses the chance to reinforce with the whole team, in the moment, what actually went right. Waiting for it to &quot;come up later&quot; often means it never does.">Privately note it in your own head to bring up later if it comes up</button>
+    <button class="choice-btn" data-fb="Even if that's an accurate observation, raising it privately as blame rather than as a team-facing safety conversation misses the chance to turn this into a shared learning moment, and singling someone out afterward is exactly the kind of dynamic that makes people less likely to speak up next time something goes wrong.">Privately tell the surgeon that the cautery use near the drape was the root cause</button>
+  </div>
+  <div class="feedback"></div>
+  <button class="continue-btn primary-btn" onclick="goStep(8)">See summary <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="step" data-step="8" style="display:none;">
+  <p class="q-title">Reflection</p>
+  <div class="reflect-box">
+    <p>This scenario followed the real structure anesthesia providers are trained to use when an OR fire occurs: stop the oxidizer, remove the fuel, extinguish with the correct method, reassess the patient, and only then decide whether to continue.</p>
+    <p>Layered on top of that technical sequence is a leadership pattern that shows up in nearly every high-performing crisis response: naming risk before it becomes a crisis, moving decisively without freezing, delegating by name, matching your tool to the situation instead of grabbing whatever's closest, and closing the loop afterward with a debrief rather than letting the moment pass in silence.</p>
+  </div>
+  <p class="body-text">You haven't been in an OR as an anesthesia provider yet, and that's exactly the point of working through this now: most of this thinking is easier to do once, calmly, in a scenario like this than for the first time under real pressure. Use these patterns as the backbone of your one-page written reflection this week.</p>
+  <div class="button-row">
+    <button class="secondary-btn" onclick="restart()">Try different choices</button>
+  </div>
+  <div class="summary-box" style="margin-top:28px; padding-top:20px; border-top:1px solid var(--border);">
+    <p style="font-weight:600; font-size:15px; margin:0 0 8px;">Export your results</p>
+    <p style="font-size:13px; color:var(--muted); margin:0 0 14px;">Enter your name, then download or copy a summary of your choices to submit with your written reflection.</p>
+    <input type="text" id="student-name" placeholder="Your name" style="width:100%; max-width:280px; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; margin-bottom:14px; font-family:inherit;">
+    <div class="button-row">
+      <button class="primary-btn" onclick="downloadSummary()"><i class="ti ti-download"></i> Download summary</button>
+      <button class="secondary-btn" onclick="copySummary()"><i class="ti ti-copy"></i> Copy to clipboard</button>
+    </div>
+    <p id="copy-confirm" style="display:none; font-size:13px; color:#0f6e56; margin-top:10px;">Copied to clipboard.</p>
+  </div>
+</div>
+
+<footer>CRNA 500 &middot; Professional Role and Leadership Development &middot; Week 11 crisis leadership exercise</footer>
+
+<script>
+let currentStep = 0;
+const totalSteps = 8;
+let selections = {};
+
+function updateProgress(step){
+  const bar = document.getElementById('progress-bar');
+  const label = document.getElementById('progress-label');
+  bar.style.width = (step / totalSteps * 100) + '%';
+  if(step === 0){ label.textContent = 'Scenario'; }
+  else if(step <= 7){ label.textContent = 'Decision ' + step + ' of 7'; }
+  else { label.textContent = 'Complete'; }
+}
+
+function goStep(n){
+  document.querySelectorAll('.step').forEach(function(s){
+    s.style.display = (parseInt(s.getAttribute('data-step')) === n) ? '' : 'none';
+  });
+  currentStep = n;
+  updateProgress(n);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+document.querySelectorAll('.choice-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    const group = btn.closest('.choices');
+    const stepDiv = group.closest('.step');
+    const feedback = stepDiv.querySelector('.feedback');
+    const continueBtn = stepDiv.querySelector('.continue-btn');
+    group.querySelectorAll('.choice-btn').forEach(function(b){
+      b.disabled = true;
+      b.style.opacity = (b === btn) ? '1' : '0.5';
+      if(b === btn){ b.style.borderColor = '#1f3a52'; b.style.borderWidth = '2px'; }
+    });
+    feedback.textContent = btn.getAttribute('data-fb');
+    feedback.style.display = 'block';
+    continueBtn.style.display = 'inline-flex';
+    selections[group.getAttribute('data-q')] = btn.textContent;
+  });
+});
+
+function buildSummaryText(){
+  const nameField = document.getElementById('student-name');
+  const name = (nameField && nameField.value.trim()) || '[Name not entered]';
+  const dateStr = new Date().toLocaleString();
+  const lines = [];
+  lines.push('CRNA 500 -- Professional Role and Leadership Development');
+  lines.push('Week 11 Crisis Scenario: Leading Through an OR Fire');
+  lines.push('Student: ' + name);
+  lines.push('Completed: ' + dateStr);
+  lines.push('');
+  document.querySelectorAll('.step[data-step]').forEach(function(step){
+    const qDiv = step.querySelector('.choices');
+    if(qDiv){
+      const qNum = qDiv.getAttribute('data-q');
+      const titleEl = step.querySelector('.q-title');
+      const title = titleEl ? titleEl.textContent : ('Decision ' + qNum);
+      const choice = selections[qNum] || '[Not answered]';
+      lines.push(title + ':');
+      lines.push('  ' + choice);
+      lines.push('');
+    }
+  });
+  return lines.join('\n');
+}
+
+function downloadSummary(){
+  const text = buildSummaryText();
+  const nameField = document.getElementById('student-name');
+  const safeName = ((nameField && nameField.value.trim()) || 'student').replace(/[^a-z0-9]/gi, '_');
+  const blob = new Blob([text], {type: 'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'CRNA500_Week11_ORFire_' + safeName + '_summary.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function copySummary(){
+  const text = buildSummaryText();
+  navigator.clipboard.writeText(text).then(function(){
+    const confirmMsg = document.getElementById('copy-confirm');
+    confirmMsg.style.display = 'block';
+    setTimeout(function(){ confirmMsg.style.display = 'none'; }, 3000);
+  });
+}
+
+function restart(){
+  document.querySelectorAll('.choice-btn').forEach(function(b){
+    b.disabled = false;
+    b.style.opacity = '1';
+    b.style.borderColor = '';
+    b.style.borderWidth = '';
+  });
+  document.querySelectorAll('.feedback').forEach(function(f){ f.style.display = 'none'; f.textContent = ''; });
+  document.querySelectorAll('.continue-btn').forEach(function(b){ b.style.display = 'none'; });
+  selections = {};
+  goStep(0);
+}
+
+updateProgress(0);
+</script>
+
+</body>
+</html>
