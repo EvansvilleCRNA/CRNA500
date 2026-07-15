@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRNA 500 · Week 10 · Innovation Pitch Canvas</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<style>
+  :root{
+    --ink:#1f2937;
+    --muted:#6b7280;
+    --border:#e2e2df;
+    --surface-page:#ffffff;
+    --surface-card:#f7f6f2;
+    --accent:#1f3a52;
+    --accent-light:#e6eef5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--surface-page);
+    color:var(--ink);
+    padding:32px 20px 60px;
+    max-width:720px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.6;
+  }
+  .course-tag{
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  h1{
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 10px;
+  }
+  .intro{
+    font-size:14px;
+    color:var(--muted);
+    margin:0 0 24px;
+  }
+  .instructions{
+    background:var(--accent-light);
+    border-radius:10px;
+    padding:14px 16px;
+    font-size:13px;
+    color:#274a63;
+    margin-bottom:28px;
+  }
+  .section-card{
+    background:var(--surface-card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px 22px;
+    margin-bottom:16px;
+  }
+  .section-eyebrow{
+    font-size:12px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin:0 0 4px;
+  }
+  .section-title{
+    font-weight:600;
+    font-size:16px;
+    margin:0 0 6px;
+  }
+  .section-prompt{
+    font-size:14px;
+    color:var(--muted);
+    margin:0 0 12px;
+    line-height:1.5;
+  }
+  .value-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:10px;
+  }
+  .value-box label{
+    font-size:12px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    display:block;
+    margin-bottom:6px;
+  }
+  textarea{
+    width:100%;
+    font-family:inherit;
+    font-size:14px;
+    color:var(--ink);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:10px 12px;
+    resize:vertical;
+    min-height:80px;
+    background:#ffffff;
+  }
+  textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+  }
+  .value-grid textarea{
+    min-height:64px;
+  }
+  .actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:24px;
+  }
+  button{
+    font-family:inherit;
+    font-size:14px;
+    cursor:pointer;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:#ffffff;
+    color:var(--ink);
+    padding:10px 16px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition:border-color 0.15s ease, opacity 0.15s ease;
+  }
+  button:hover{
+    border-color:var(--accent);
+  }
+  .primary-btn{
+    background:var(--accent);
+    color:#ffffff;
+    border-color:var(--accent);
+    font-weight:600;
+  }
+  .primary-btn:hover{
+    opacity:0.92;
+  }
+  #summary-panel{
+    display:none;
+    margin-top:24px;
+  }
+  #summary-panel textarea{
+    min-height:320px;
+    font-size:13px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  #summary-panel p.label{
+    font-weight:600;
+    font-size:15px;
+    margin:0 0 10px;
+  }
+  #copy-status{
+    font-size:13px;
+    color:var(--accent);
+    margin-left:4px;
+    display:none;
+  }
+  footer{
+    margin-top:40px;
+    font-size:12px;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    padding-top:16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="course-tag">CRNA 500 &middot; Week 10</div>
+<h1>Innovation pitch canvas</h1>
+<p class="intro">Work through each section to build your pitch using the value-based outcomes framework from Chapter 5. When you're finished, export your responses into a summary you can submit as your one-page written pitch.</p>
+
+<div class="instructions">
+  <i class="ti ti-info-circle" aria-hidden="true"></i>
+  Fill in every section below. There are no word limits &mdash; write as much or as little as the idea needs. When you're done, use Export summary at the bottom to generate text you can paste into your submission.
+</div>
+
+<div class="section-card">
+  <p class="section-eyebrow">Section 1</p>
+  <p class="section-title">Current state / problem</p>
+  <p class="section-prompt">What's inefficient, unsafe, or outdated in current practice? Be specific about the setting and who it affects.</p>
+  <textarea id="s1" placeholder="Describe the problem..."></textarea>
+</div>
+
+<div class="section-card">
+  <p class="section-eyebrow">Section 2</p>
+  <p class="section-title">Proposed innovation</p>
+  <p class="section-prompt">What's your idea? Describe it clearly enough that someone unfamiliar with the problem could picture it.</p>
+  <textarea id="s2" placeholder="Describe your innovation..."></textarea>
+</div>
+
+<div class="section-card">
+  <p class="section-eyebrow">Section 3</p>
+  <p class="section-title">Stakeholders affected</p>
+  <p class="section-prompt">Who feels this change &mdash; patients, care team, institution, others? Name them specifically.</p>
+  <textarea id="s3" placeholder="List and describe the stakeholders..."></textarea>
+</div>
+
+<div class="section-card">
+  <p class="section-eyebrow">Section 4</p>
+  <p class="section-title">Value triad</p>
+  <p class="section-prompt">How does the innovation improve cost, quality, and experience? This is the core of the Chapter 5 value-based outcomes framework &mdash; address all three.</p>
+  <div class="value-grid">
+    <div class="value-box">
+      <label for="v-cost">Cost</label>
+      <textarea id="v-cost" placeholder="Cost impact..."></textarea>
+    </div>
+    <div class="value-box">
+      <label for="v-quality">Quality</label>
+      <textarea id="v-quality" placeholder="Quality impact..."></textarea>
+    </div>
+    <div class="value-box">
+      <label for="v-experience">Experience</label>
+      <textarea id="v-experience" placeholder="Experience impact..."></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="section-card">
+  <p class="section-eyebrow">Section 5</p>
+  <p class="section-title">Anticipated barriers</p>
+  <p class="section-prompt">What could block adoption &mdash; cost, culture, workflow, regulation? How would you address each one?</p>
+  <textarea id="s5" placeholder="Describe barriers and how you'd address them..."></textarea>
+</div>
+
+<div class="actions">
+  <button class="primary-btn" onclick="buildSummary()"><i class="ti ti-file-text" aria-hidden="true"></i> Export summary</button>
+  <button onclick="clearAll()"><i class="ti ti-refresh" aria-hidden="true"></i> Clear all</button>
+</div>
+
+<div id="summary-panel">
+  <p class="label">Your pitch summary</p>
+  <textarea id="summary-output" readonly></textarea>
+  <div class="actions">
+    <button class="primary-btn" onclick="copySummary()"><i class="ti ti-copy" aria-hidden="true"></i> Copy to clipboard</button>
+    <span id="copy-status">Copied</span>
+  </div>
+</div>
+
+<footer>CRNA 500 &middot; Professional Role and Leadership Development &middot; Week 10 innovation pitch exercise</footer>
+
+<script>
+function val(id){
+  var el = document.getElementById(id);
+  var v = el.value.trim();
+  return v.length ? v : '[not answered]';
+}
+
+function buildSummary(){
+  var lines = [];
+  lines.push('INNOVATION PITCH SUMMARY');
+  lines.push('');
+  lines.push('Current state / problem:');
+  lines.push(val('s1'));
+  lines.push('');
+  lines.push('Proposed innovation:');
+  lines.push(val('s2'));
+  lines.push('');
+  lines.push('Stakeholders affected:');
+  lines.push(val('s3'));
+  lines.push('');
+  lines.push('Value triad:');
+  lines.push('  Cost: ' + val('v-cost'));
+  lines.push('  Quality: ' + val('v-quality'));
+  lines.push('  Experience: ' + val('v-experience'));
+  lines.push('');
+  lines.push('Anticipated barriers:');
+  lines.push(val('s5'));
+
+  document.getElementById('summary-output').value = lines.join('\n');
+  var panel = document.getElementById('summary-panel');
+  panel.style.display = 'block';
+  panel.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function copySummary(){
+  var output = document.getElementById('summary-output');
+  output.select();
+  output.setSelectionRange(0, 999999);
+  navigator.clipboard.writeText(output.value).then(function(){
+    var status = document.getElementById('copy-status');
+    status.style.display = 'inline';
+    setTimeout(function(){ status.style.display = 'none'; }, 2000);
+  }).catch(function(){
+    document.execCommand('copy');
+  });
+}
+
+function clearAll(){
+  ['s1','s2','s3','v-cost','v-quality','v-experience','s5'].forEach(function(id){
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('summary-panel').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
