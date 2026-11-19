@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRNA 500 · Practice Innovation Proposal</title>
+<style>
+:root{--purple:#4b2582;--purple-l:#efe9f7;--orange:#e8762d;--orange-l:#fdf0e6;--ink:#1f1d24;--muted:#5d5866;--line:#d9d4e0;--ok:#1f7a4d;--ok-l:#e5f4ec;--bad:#b3261e;--bad-l:#fbe9e7;--bg:#faf9fc}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+header{background:var(--purple);color:#fff;padding:28px 20px 22px}
+header .wrap{max-width:900px;margin:0 auto}
+.kicker{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+h1{margin:.2em 0 .3em;font-size:1.8rem}
+header p{margin:0;max-width:720px;opacity:.95}
+main{max-width:900px;margin:0 auto;padding:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:18px 0}
+.card h2{margin:0 0 4px;font-size:1.2rem;color:var(--purple)}
+.card h2 .n{display:inline-block;background:var(--orange);color:#fff;border-radius:50%;width:1.6em;height:1.6em;text-align:center;line-height:1.6em;font-size:.85rem;margin-right:8px;vertical-align:2px}
+.hint{color:var(--muted);font-size:.93rem;margin:2px 0 12px}
+label.f{display:block;font-weight:600;margin:14px 0 4px;font-size:.95rem}
+label.f small{font-weight:400;color:var(--muted)}
+textarea,input[type=text],select{width:100%;font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:7px;background:#fff}
+textarea{min-height:90px;resize:vertical}
+textarea:focus,input:focus,select:focus{outline:2px solid var(--purple);border-color:var(--purple)}
+.wc{font-size:.8rem;color:var(--muted);text-align:right;margin-top:2px}
+.wc.low{color:var(--bad)}.wc.good{color:var(--ok)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid4{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:10px}
+@media(max-width:700px){.grid2,.grid4{grid-template-columns:1fr}}
+.opts label{display:block;padding:8px 10px;border:1px solid var(--line);border-radius:7px;margin:6px 0;cursor:pointer;background:#fff}
+.opts label:hover{border-color:var(--purple)}
+.opts .out{border-style:dashed}
+.banner{padding:12px 14px;border-radius:8px;margin:12px 0;font-size:.95rem}
+.banner.bad{background:var(--bad-l);color:var(--bad);border:1px solid #f0bdb8}
+.banner.ok{background:var(--ok-l);color:var(--ok);border:1px solid #b9e0ca}
+.banner.warn{background:var(--orange-l);color:#8a4210;border:1px solid #f4c9a8}
+.hidden{display:none}
+.callout{background:var(--purple-l);border-left:4px solid var(--purple);padding:12px 14px;border-radius:6px;margin:10px 0;font-size:.94rem}
+.callout ul{margin:6px 0 0;padding-left:20px}
+table.stk{width:100%;border-collapse:collapse;font-size:.92rem}
+table.stk th{text-align:left;background:var(--purple-l);padding:7px;border:1px solid var(--line)}
+table.stk td{border:1px solid var(--line);padding:5px;vertical-align:top}
+table.stk input,table.stk select{padding:6px}
+.triad h3{margin:16px 0 4px;color:var(--orange);font-size:1rem}
+button{font:inherit;font-weight:600;border-radius:8px;padding:10px 18px;cursor:pointer;border:1px solid var(--purple);background:#fff;color:var(--purple)}
+button.primary{background:var(--purple);color:#fff}
+button.small{padding:5px 10px;font-size:.85rem}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+#out{white-space:pre-wrap;font-family:Consolas,Menlo,monospace;font-size:.85rem;background:#f5f3f8;border:1px solid var(--line);border-radius:8px;padding:14px;max-height:420px;overflow:auto}
+table.rub{width:100%;border-collapse:collapse;font-size:.9rem}
+table.rub th,table.rub td{border:1px solid var(--line);padding:8px;vertical-align:top}
+table.rub th{background:var(--purple);color:#fff;text-align:left}
+table.rub td.pts{text-align:center;font-weight:700;width:60px}
+details summary{cursor:pointer;font-weight:700;color:var(--purple)}
+.ex{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:.92rem}
+.ex div{padding:10px;border-radius:7px}
+.ex .no{background:var(--bad-l)}.ex .yes{background:var(--ok-l)}
+@media(max-width:700px){.ex{grid-template-columns:1fr}}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:24px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="kicker">CRNA 500 · Professional Role and Leadership Development</div>
+  <h1>Practice Innovation Proposal</h1>
+  <p>You have not started anesthesia clinicals yet, but you bring years of critical care nursing and the perioperative literature. Leaders in anesthesia practice see a problem, prove it is real, and persuade the people who control resources to try a fix. This canvas walks you through building that case for a problem in <strong>clinical anesthesia practice or the health system</strong>, using the value-based outcomes framework from Quantum Leadership, Chapter 5.</p>
+</div></header>
+
+<main>
+
+<div class="card">
+  <h2>Before you start</h2>
+  <div class="callout"><strong>Scope rule:</strong> your problem must live in a clinical or health-system setting where CRNAs practice: the OR or procedural areas, preop, PACU, the anesthesia department, handoffs and care transitions, hospital policy, or anesthesia billing and practice management.
+  <ul>
+    <li><strong>Out of scope:</strong> changes to the DNAP program, its curriculum, simulation lab, schedules, faculty, or policies. Those ideas are welcome; send them to the program director through course evaluations or the student representative, not this assignment.</li>
+    <li>The people who benefit most should be <strong>patients, clinicians, or the organization</strong>, and the person who approves your idea should be someone like a chief CRNA, anesthesia department chair, OR director, nurse manager, or hospital administrator.</li>
+  </ul></div>
+  <details><summary>See what in scope looks like</summary>
+    <div class="ex" style="margin-top:10px">
+      <div class="no"><strong>Out of scope</strong><br>"Students only get two weeks of regional anesthesia and share one ultrasound machine in simulation, so we need smaller sim groups."</div>
+      <div class="yes"><strong>In scope, same interest</strong><br>"At the hospital where I worked as an ICU nurse, patients who could get a nerve block for shoulder surgery often get general anesthesia alone because no block-trained provider is free before first case. A dedicated block-room workflow could cut opioid use and PACU time."</div>
+      <div class="no"><strong>Out of scope</strong><br>"Add a pharmacology review course before clinical starts."</div>
+      <div class="yes"><strong>In scope</strong><br>"Published reports show look-alike vials in anesthesia carts cause syringe-swap errors, and I saw the same look-alike problem with ICU drips. Color-coded, pre-filled syringes from pharmacy could prevent them."</div>
+    </div>
+    <p class="hint" style="margin-top:10px">Other in-scope directions: first-case on-time starts, PONV prevention protocols, intraop handoff tools, sugammadex or other high-cost drug stewardship, preop clinic triage, OR fire risk assessment, malignant hyperthermia cart readiness, waste anesthetic gas and sustainability, CRNA staffing models, billing documentation accuracy, interpreter use during consent.</p>
+  </details>
+  <label class="f">Your name</label>
+  <input type="text" id="name" placeholder="First and last name">
+</div>
+
+<div class="card">
+  <h2><span class="n">1</span>Scope check</h2>
+  <p class="hint">Where does your problem live? Choose one.</p>
+  <div class="opts" id="scopeOpts">
+    <label><input type="radio" name="scope" value="Operating room or procedural area (intraoperative care)"> Operating room or procedural area (intraoperative care)</label>
+    <label><input type="radio" name="scope" value="Preoperative evaluation or PACU / postoperative care"> Preoperative evaluation or PACU / postoperative care</label>
+    <label><input type="radio" name="scope" value="Handoffs and transitions of care"> Handoffs and transitions of care</label>
+    <label><input type="radio" name="scope" value="Anesthesia department operations, staffing, or workflow"> Anesthesia department operations, staffing, or workflow</label>
+    <label><input type="radio" name="scope" value="Hospital or health-system policy, quality, or safety"> Hospital or health-system policy, quality, or safety</label>
+    <label><input type="radio" name="scope" value="Anesthesia billing, documentation, or practice management"> Anesthesia billing, documentation, or practice management</label>
+    <label><input type="radio" name="scope" value="Patient experience, education, or informed consent"> Patient experience, education, or informed consent</label>
+    <label class="out"><input type="radio" name="scope" value="OUT"> The DNAP program, curriculum, simulation, schedules, or student experience</label>
+  </div>
+  <div id="scopeBad" class="banner bad hidden"><strong>This is outside the scope of the assignment.</strong> Program and curriculum ideas matter; please share them through course evaluations or the student representative. For this pitch, take the same interest into a clinical setting. Ask yourself: what does this problem look like for patients or the anesthesia team in a hospital?</div>
+  <label class="f">Specific setting <small>(type of facility and unit, e.g., "community hospital main OR, orthopedic rooms" or "ICU-to-OR handoff at a level I trauma center")</small></label>
+  <input type="text" id="setting">
+  <label class="f">Who has the authority to approve your idea? <small>(a role, not a name)</small></label>
+  <input type="text" id="approver" placeholder="e.g., Chief CRNA, anesthesia department chair, OR director, pharmacy and therapeutics committee">
+</div>
+
+<div class="card">
+  <h2><span class="n">2</span>The problem and the evidence</h2>
+  <p class="hint">Show that the problem is real, how often it happens, and why it matters. A decision-maker will not fund an opinion.</p>
+  <label class="f">Problem statement <small>(who is affected, what happens, how often, and the consequence; 100 to 200 words)</small></label>
+  <textarea id="problem" data-min="100" data-max="200"></textarea><div class="wc" data-for="problem"></div>
+  <label class="f">Practice signal <small>(what you saw in your own nursing practice, or what a hospital could measure: counts, delays, near misses, complaints; no patient identifiers)</small></label>
+  <textarea id="local" data-min="40" data-max="150"></textarea><div class="wc" data-for="local"></div>
+  <label class="f">Published evidence <small>(at least two peer-reviewed or professional sources, AMA style, and what each shows)</small></label>
+  <div class="grid2">
+    <input type="text" id="src1" placeholder="Source 1 citation">
+    <input type="text" id="src1w" placeholder="What it shows">
+    <input type="text" id="src2" placeholder="Source 2 citation">
+    <input type="text" id="src2w" placeholder="What it shows">
+    <input type="text" id="src3" placeholder="Source 3 citation (optional)">
+    <input type="text" id="src3w" placeholder="What it shows">
+  </div>
+</div>
+
+<div class="card">
+  <h2><span class="n">3</span>Root cause</h2>
+  <p class="hint">Ask "why?" until you reach something a leader can change. Good innovations fix causes, not symptoms.</p>
+  <label class="f">Why does the problem happen?</label><input type="text" id="why1">
+  <label class="f">And why is that?</label><input type="text" id="why2">
+  <label class="f">And why is that? <small>(this is usually your root cause)</small></label><input type="text" id="why3">
+</div>
+
+<div class="card">
+  <h2><span class="n">4</span>The innovation</h2>
+  <label class="f">Describe your innovation <small>(clear enough that someone who has never seen the problem could picture it; 100 to 200 words)</small></label>
+  <textarea id="innov" data-min="100" data-max="200"></textarea><div class="wc" data-for="innov"></div>
+  <label class="f">What changes on Monday morning? <small>(who does what differently, step by step)</small></label>
+  <textarea id="monday" data-min="40" data-max="150"></textarea><div class="wc" data-for="monday"></div>
+  <label class="f">Has anyone tried this? <small>(another hospital, a published project, or why yours is new)</small></label>
+  <textarea id="prior" data-min="25" data-max="120"></textarea><div class="wc" data-for="prior"></div>
+</div>
+
+<div class="card">
+  <h2><span class="n">5</span>Stakeholder map</h2>
+  <p class="hint">List at least four. Include the approver, someone who might resist, and the patient.</p>
+  <table class="stk" id="stk">
+    <thead><tr><th style="width:24%">Stakeholder</th><th>What they gain or lose</th><th style="width:15%">Influence</th><th style="width:17%">Likely stance</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <div class="actions"><button class="small" type="button" id="addStk">Add a stakeholder</button></div>
+</div>
+
+<div class="card triad">
+  <h2><span class="n">6</span>Value and measures</h2>
+  <p class="hint">Value-based outcomes require all three: cost, quality, and experience. Each needs a number you could actually track, a baseline, and a target.</p>
+  <div id="triad"></div>
+  <h3>Balancing measure</h3>
+  <label class="f">What could get worse if you make this change, and how would you watch for it?</label>
+  <textarea id="balance" data-min="25" data-max="100"></textarea><div class="wc" data-for="balance"></div>
+</div>
+
+<div class="card">
+  <h2><span class="n">7</span>Pilot plan and barriers</h2>
+  <label class="f">Pilot scope <small>(where, how long, how many cases or patients; start small)</small></label>
+  <input type="text" id="pilot">
+  <label class="f">Owner <small>(the role that leads the pilot)</small></label>
+  <input type="text" id="owner">
+  <label class="f">90-day timeline <small>(plan, do, study, act)</small></label>
+  <textarea id="timeline" data-min="50" data-max="160"></textarea><div class="wc" data-for="timeline"></div>
+  <label class="f">Resources needed and estimated cost</label>
+  <textarea id="resources" data-min="25" data-max="120"></textarea><div class="wc" data-for="resources"></div>
+  <p class="hint" style="margin-top:14px">Barriers: name at least three, and at least one must be regulatory, billing, or scope of practice (for example, CMS medical direction rules, state scope, credentialing, hospital bylaws, or payer policy).</p>
+  <table class="stk" id="bar"><thead><tr><th style="width:22%">Type</th><th>Barrier</th><th>How you would address it</th></tr></thead><tbody></tbody></table>
+</div>
+
+<div class="card">
+  <h2><span class="n">8</span>The 60-second pitch</h2>
+  <p class="hint">Write what you would say to the approver in an elevator: the problem, the evidence, the fix, the value, and your specific ask (a pilot, a meeting, a budget line). About 130 to 170 words is 60 seconds out loud.</p>
+  <label class="f">Your pitch</label>
+  <textarea id="pitch" data-min="120" data-max="180" style="min-height:140px"></textarea><div class="wc" data-for="pitch"></div>
+</div>
+
+<div class="card">
+  <h2>Check and export</h2>
+  <p class="hint">The export checks every required element. Fix anything it flags, then copy or download the summary and submit it in Blackboard.</p>
+  <div class="actions">
+    <button class="primary" type="button" id="exportBtn">Check and export</button>
+    <button type="button" id="clearBtn">Clear all</button>
+  </div>
+  <div id="checks"></div>
+  <div id="outWrap" class="hidden">
+    <div id="out"></div>
+    <div class="actions">
+      <button type="button" id="copyBtn">Copy to clipboard</button>
+      <button type="button" id="dlBtn">Download as text file</button>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Grading rubric (25 points)</h2>
+  <table class="rub">
+    <tr><th>Criterion</th><th>Full credit looks like</th><th>Points</th></tr>
+    <tr><td>Scope and problem significance</td><td>Problem is in a clinical or health-system setting, affects patients, clinicians, or the organization, and its consequence is stated clearly with frequency or scale.</td><td class="pts">5</td></tr>
+    <tr><td>Evidence</td><td>A specific practice signal plus at least two credible, correctly cited sources that each support a stated claim.</td><td class="pts">4</td></tr>
+    <tr><td>Root cause and innovation</td><td>The innovation addresses the identified root cause, is concrete enough to picture, and states what changes in daily practice.</td><td class="pts">4</td></tr>
+    <tr><td>Stakeholders</td><td>At least four stakeholders, including the approver, the patient, and a likely resister, with realistic gains, losses, and stance.</td><td class="pts">3</td></tr>
+    <tr><td>Value and measures</td><td>Cost, quality, and experience each have a measurable metric with baseline and target; a sensible balancing measure is named.</td><td class="pts">5</td></tr>
+    <tr><td>Pilot and barriers</td><td>A small, feasible pilot with an owner and 90-day timeline; at least three barriers, including a regulatory, billing, or scope barrier, each with a credible response.</td><td class="pts">2</td></tr>
+    <tr><td>60-second pitch</td><td>Persuasive, within length, aimed at the named approver, and ends with a specific ask.</td><td class="pts">2</td></tr>
+  </table>
+  <p class="hint" style="margin-top:8px">A pitch about the DNAP program or curriculum earns no credit for scope and problem significance and must be revised.</p>
+</div>
+
+</main>
+<footer>CRNA 500 · Professional Role and Leadership Development · University of Evansville DNAP</footer>
+
+<script>
+(function(){
+const KEY="crna500_innovation_v2";
+const PROGRAM_WORDS=/\b(curriculum|syllab\w*|cohort|classmates?|lectures?|classroom|semester|sim(ulation)? lab|faculty|instructors?|course(work)?|DNAP program|our program|nurse anesthesia program|students?)\b/gi;
+const $=id=>document.getElementById(id);
+const words=s=>(s.trim().match(/\S+/g)||[]).length;
+
+// stakeholder rows
+function stkRow(v={}){
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td><input type="text" class="s-who" value="${esc(v.who||"")}"></td>
+  <td><input type="text" class="s-gain" value="${esc(v.gain||"")}"></td>
+  <td><select class="s-inf"><option value="">Choose</option><option>High</option><option>Medium</option><option>Low</option></select></td>
+  <td><select class="s-st"><option value="">Choose</option><option>Champion</option><option>Supportive</option><option>Neutral</option><option>Skeptical</option><option>Resistant</option></select></td>`;
+  tr.querySelector(".s-inf").value=v.inf||""; tr.querySelector(".s-st").value=v.st||"";
+  $("stk").tBodies[0].appendChild(tr);
+}
+function barRow(v={}){
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td><select class="b-type"><option value="">Choose</option><option>Regulatory</option><option>Billing / reimbursement</option><option>Scope of practice</option><option>Cost</option><option>Culture</option><option>Workflow</option><option>Technology</option></select></td>
+  <td><input type="text" class="b-what" value="${esc(v.what||"")}"></td><td><input type="text" class="b-how" value="${esc(v.how||"")}"></td>`;
+  tr.querySelector(".b-type").value=v.type||"";
+  $("bar").tBodies[0].appendChild(tr);
+}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}
+
+// triad
+const TRI=[["cost","Cost"],["quality","Quality"],["exp","Experience"]];
+$("triad").innerHTML=TRI.map(([k,l])=>`<h3>${l}</h3>
+  <label class="f">How does the innovation improve ${l.toLowerCase()}?</label>
+  <textarea id="${k}" data-min="30" data-max="120" style="min-height:70px"></textarea><div class="wc" data-for="${k}"></div>
+  <div class="grid4"><div><label class="f">Metric</label><input type="text" id="${k}M" placeholder="what you count"></div>
+  <div><label class="f">Baseline</label><input type="text" id="${k}B" placeholder="now"></div>
+  <div><label class="f">Target</label><input type="text" id="${k}T" placeholder="after pilot"></div>
+  <div><label class="f">Data source</label><input type="text" id="${k}D" placeholder="where it comes from"></div></div>`).join("");
+
+// word counters
+function updWC(){document.querySelectorAll(".wc").forEach(el=>{const t=$(el.dataset.for);const n=words(t.value),mn=+t.dataset.min,mx=+t.dataset.max;
+  el.textContent=`${n} words (aim for ${mn} to ${mx})`;el.className="wc "+(n===0?"":n<mn?"low":n>mx?"low":"good");});}
+
+// scope
+function scopeVal(){const r=document.querySelector('input[name=scope]:checked');return r?r.value:"";}
+function updScope(){$("scopeBad").classList.toggle("hidden",scopeVal()!=="OUT");}
+
+// save / load
+const FIELDS=["name","setting","approver","problem","local","src1","src1w","src2","src2w","src3","src3w","why1","why2","why3","innov","monday","prior","balance","pilot","owner","timeline","resources","pitch"].concat(...TRI.map(([k])=>[k,k+"M",k+"B",k+"T",k+"D"]));
+function collect(){const d={};FIELDS.forEach(f=>d[f]=$(f).value);d.scope=scopeVal();
+  d.stk=[...$("stk").tBodies[0].rows].map(r=>({who:r.querySelector(".s-who").value,gain:r.querySelector(".s-gain").value,inf:r.querySelector(".s-inf").value,st:r.querySelector(".s-st").value}));
+  d.bar=[...$("bar").tBodies[0].rows].map(r=>({type:r.querySelector(".b-type").value,what:r.querySelector(".b-what").value,how:r.querySelector(".b-how").value}));return d;}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(collect()))}catch(e){}}
+function load(){let d=null;try{d=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
+  const stk=(d&&d.stk&&d.stk.length)?d.stk:[{},{},{},{}];stk.forEach(stkRow);
+  const bar=(d&&d.bar&&d.bar.length)?d.bar:[{},{},{}];bar.forEach(barRow);
+  if(d){FIELDS.forEach(f=>{if(d[f]!=null)$(f).value=d[f]});if(d.scope){const r=document.querySelector(`input[name=scope][value="${d.scope}"]`);if(r)r.checked=true;}}
+  updWC();updScope();}
+load();
+document.addEventListener("input",()=>{updWC();save();});
+document.addEventListener("change",()=>{updScope();save();});
+$("addStk").onclick=()=>{stkRow();save();};
+
+// checks
+function check(d){
+  const issues=[],warn=[];
+  if(!d.name.trim())issues.push("Enter your name.");
+  if(!d.scope)issues.push("Choose where your problem lives (section 1).");
+  if(d.scope==="OUT")issues.push("Your problem is about the DNAP program. Move it into a clinical or health-system setting (section 1).");
+  if(!d.setting.trim())issues.push("Name the specific clinical setting (section 1).");
+  if(!d.approver.trim())issues.push("Name the role that would approve your idea (section 1).");
+  [["problem","Problem statement"],["local","Practice signal"],["innov","Innovation description"],["monday","What changes on Monday morning"],["prior","Has anyone tried this"],["cost","Cost"],["quality","Quality"],["exp","Experience"],["balance","Balancing measure"],["timeline","90-day timeline"],["resources","Resources"],["pitch","60-second pitch"]].forEach(([k,l])=>{
+    const n=words(d[k]),t=$(k);if(n<+t.dataset.min)issues.push(`${l}: ${n} words; at least ${t.dataset.min} needed.`);else if(n>+t.dataset.max*1.25)warn.push(`${l} is long (${n} words). Tighten it.`);});
+  const srcs=[["src1","src1w"],["src2","src2w"],["src3","src3w"]].filter(([a,b])=>d[a].trim()&&d[b].trim()).length;
+  if(srcs<2)issues.push("Add at least two published sources, each with what it shows (section 2).");
+  if(!d.why1.trim()||!d.why2.trim()||!d.why3.trim())issues.push("Complete all three root-cause questions (section 3).");
+  const st=d.stk.filter(s=>s.who.trim()&&s.gain.trim()&&s.inf&&s.st);
+  if(st.length<4)issues.push(`Complete at least four stakeholder rows (you have ${st.length}).`);
+  if(!st.some(s=>/patient|famil/i.test(s.who)))issues.push("Include the patient (or family) as a stakeholder.");
+  if(!st.some(s=>s.st==="Skeptical"||s.st==="Resistant"))warn.push("No stakeholder is skeptical or resistant. Real change usually has one; who is it?");
+  TRI.forEach(([k,l])=>{if(!d[k+"M"].trim()||!d[k+"B"].trim()||!d[k+"T"].trim())issues.push(`${l}: add a metric, baseline, and target (section 6).`);});
+  if(!d.pilot.trim()||!d.owner.trim())issues.push("Name the pilot scope and owner (section 7).");
+  const b=d.bar.filter(x=>x.type&&x.what.trim()&&x.how.trim());
+  if(b.length<3)issues.push(`Complete at least three barriers (you have ${b.length}).`);
+  if(!b.some(x=>/Regulatory|Billing|Scope/.test(x.type)))issues.push("At least one barrier must be regulatory, billing, or scope of practice.");
+  // program-language scan
+  const all=[d.setting,d.problem,d.local,d.innov,d.monday,d.pitch].join(" ");
+  const hits=(all.match(PROGRAM_WORDS)||[]).length;
+  if(hits>=4)warn.push(`Your writing mentions students, courses, or the program ${hits} times. Make sure the problem and its beneficiaries are in clinical practice, not in school.`);
+  return {issues,warn};
+}
+function summary(d){
+  const L=[];const h=s=>{L.push("");L.push(s.toUpperCase());};
+  L.push("PRACTICE INNOVATION PROPOSAL");L.push("CRNA 500 · "+d.name);
+  h("Scope");L.push("Setting type: "+d.scope);L.push("Specific setting: "+d.setting);L.push("Approver: "+d.approver);
+  h("Problem");L.push(d.problem);L.push("");L.push("Practice signal: "+d.local);
+  L.push("");L.push("Evidence:");[["src1","src1w"],["src2","src2w"],["src3","src3w"]].forEach(([a,b],i)=>{if(d[a].trim())L.push(`  ${i+1}. ${d[a]} | Shows: ${d[b]}`)});
+  h("Root cause");L.push("Why 1: "+d.why1);L.push("Why 2: "+d.why2);L.push("Root cause: "+d.why3);
+  h("Innovation");L.push(d.innov);L.push("");L.push("What changes on Monday: "+d.monday);L.push("");L.push("Prior work: "+d.prior);
+  h("Stakeholders");d.stk.filter(s=>s.who.trim()).forEach(s=>L.push(`  - ${s.who} | ${s.gain} | Influence: ${s.inf} | Stance: ${s.st}`));
+  h("Value and measures");TRI.forEach(([k,l])=>{L.push(`${l}: ${d[k]}`);L.push(`  Metric: ${d[k+"M"]} | Baseline: ${d[k+"B"]} | Target: ${d[k+"T"]} | Source: ${d[k+"D"]}`);L.push("");});
+  L.push("Balancing measure: "+d.balance);
+  h("Pilot");L.push("Scope: "+d.pilot);L.push("Owner: "+d.owner);L.push("90-day timeline: "+d.timeline);L.push("Resources: "+d.resources);
+  h("Barriers");d.bar.filter(x=>x.what.trim()).forEach(x=>L.push(`  - [${x.type}] ${x.what} | Response: ${x.how}`));
+  h("60-second pitch");L.push(d.pitch);
+  return L.join("\n");
+}
+$("exportBtn").onclick=()=>{
+  const d=collect(),{issues,warn}=check(d);let html="";
+  if(issues.length)html+=`<div class="banner bad"><strong>Fix these before submitting:</strong><ul>${issues.map(i=>"<li>"+esc(i)+"</li>").join("")}</ul></div>`;
+  if(warn.length)html+=`<div class="banner warn"><strong>Worth a second look:</strong><ul>${warn.map(i=>"<li>"+esc(i)+"</li>").join("")}</ul></div>`;
+  if(!issues.length){html+=`<div class="banner ok">All required elements are complete. Copy or download your summary and submit it in Blackboard.</div>`;
+    $("out").textContent=summary(d);$("outWrap").classList.remove("hidden");}
+  else $("outWrap").classList.add("hidden");
+  $("checks").innerHTML=html;$("checks").scrollIntoView({behavior:"smooth",block:"start"});
+};
+$("copyBtn").onclick=()=>{const t=$("out").textContent;
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{$("copyBtn").textContent="Copied"},()=>{const r=document.createRange();r.selectNode($("out"));getSelection().removeAllRanges();getSelection().addRange(r);$("copyBtn").textContent="Selected; press Ctrl+C"});};
+$("dlBtn").onclick=()=>{const d=collect();const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([$("out").textContent],{type:"text/plain"}));
+  a.download=("Innovation_Proposal_"+(d.name||"student")).replace(/\s+/g,"_")+".txt";a.click();};
+$("clearBtn").onclick=()=>{if(!confirm("Clear all of your responses? This cannot be undone."))return;
+  try{localStorage.removeItem(KEY)}catch(e){} location.reload();};
+})();
+</script>
+</body>
+</html>

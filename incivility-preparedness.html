@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRNA 500 · Workplace Incivility Preparedness</title>
+<style>
+:root{--purple:#4b2582;--purple-l:#efe9f7;--orange:#e8762d;--orange-l:#fdf0e6;--ink:#1f1d24;--muted:#5d5866;--line:#d9d4e0;--ok:#1f7a4d;--ok-l:#e5f4ec;--bad:#b3261e;--bad-l:#fbe9e7;--mid:#8a5a00;--mid-l:#fff5d6;--bg:#faf9fc}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+header{background:var(--purple);color:#fff;padding:26px 20px 20px}
+.wrap{max-width:960px;margin:0 auto}
+.kicker{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+h1{margin:.2em 0 .3em;font-size:1.75rem}
+main{max-width:960px;margin:0 auto;padding:18px 20px;display:grid;grid-template-columns:1fr 260px;gap:18px;align-items:start}
+@media(max-width:820px){main{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin-bottom:16px}
+.card h2{margin:0 0 6px;color:var(--purple);font-size:1.2rem}
+.act{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--orange);font-weight:700}
+.scene p{margin:.5em 0}
+.q{font-weight:700;margin:14px 0 8px}
+.choice{display:block;width:100%;text-align:left;font:inherit;background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:7px 0;cursor:pointer}
+.choice:hover:not(:disabled){border-color:var(--purple);background:var(--purple-l)}
+.choice:disabled{cursor:default;opacity:.6;color:var(--ink)}
+.choice.picked{border:2px solid var(--purple);opacity:1}
+.fb{border-radius:8px;padding:12px 14px;margin:12px 0}
+.fb.best{background:var(--ok-l);border:1px solid #b9e0ca}
+.fb.part{background:var(--mid-l);border:1px solid #f1d98a}
+.fb.poor{background:var(--bad-l);border:1px solid #f0bdb8}
+.fb h4{margin:0 0 4px}
+.teach{margin-top:8px;font-size:.93rem;border-top:1px dashed #0002;padding-top:8px}
+textarea,input[type=text]{width:100%;font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:7px}
+textarea{min-height:90px}
+.wc{font-size:.8rem;color:var(--muted);text-align:right}
+button.btn{font:inherit;font-weight:600;border-radius:8px;padding:10px 18px;cursor:pointer;border:1px solid var(--purple);background:#fff;color:var(--purple)}
+button.btn.primary{background:var(--purple);color:#fff}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.mon{position:sticky;top:12px;background:#17151c;color:#e8e6ee;border-radius:10px;padding:14px;font-size:.9rem}
+.mon h3{margin:0 0 8px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#b9a8dd}
+.vit{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #ffffff1a;padding:6px 0}
+.vit b{font-size:1.4rem;font-family:Consolas,monospace}
+.g{color:#6fe39c}.y{color:#ffd166}.r{color:#ff6b6b}
+.tag{display:inline-block;font-size:.75rem;padding:2px 7px;border-radius:10px;background:#ffffff1f;margin:2px 2px 0 0}
+.log{margin-top:10px;font-size:.8rem;color:#cfc9da;max-height:220px;overflow:auto}
+.log div{padding:3px 0;border-bottom:1px dotted #ffffff1a}
+.prog{height:6px;background:#ffffff1f;border-radius:4px;margin:8px 0}
+.prog div{height:6px;background:var(--orange);border-radius:4px}
+table.sum{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+table.sum th,table.sum td{border:1px solid var(--line);padding:7px;vertical-align:top;text-align:left}
+table.sum th{background:var(--purple);color:#fff}
+.score{display:flex;gap:12px;flex-wrap:wrap}
+.score div{flex:1;min-width:150px;background:var(--purple-l);border-radius:8px;padding:10px 14px}
+.score b{font-size:1.5rem;color:var(--purple);display:block}
+#out{white-space:pre-wrap;font-family:Consolas,Menlo,monospace;font-size:.82rem;background:#f5f3f8;border:1px solid var(--line);border-radius:8px;padding:14px;max-height:380px;overflow:auto}
+table.rub{width:100%;border-collapse:collapse;font-size:.9rem}
+table.rub th,table.rub td{border:1px solid var(--line);padding:8px;vertical-align:top}
+table.rub th{background:var(--purple);color:#fff;text-align:left}
+.pts{text-align:center;font-weight:700;width:60px}
+.callout{background:var(--purple-l);border-left:4px solid var(--purple);padding:12px 14px;border-radius:6px;margin:10px 0;font-size:.94rem}
+.hidden{display:none}
+.refs{font-size:.85rem;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <div class="kicker">CRNA 500 · Professional Role and Leadership Development · Workplace Incivility</div>
+ <h1>Before You Get There: Preparing for Preceptor Incivility</h1>
+ <p>You start clinical in the spring. Most preceptors are generous teachers, and hard feedback is part of learning anesthesia. Some behavior, though, crosses from teaching into incivility. This exercise lets you practice telling the difference and responding, before it happens for real.</p>
+</div></header>
+<main>
+<div id="stage"></div>
+<aside class="mon" id="mon"></aside>
+</main>
+<footer>CRNA 500 · University of Evansville DNAP · Scenario characters are fictional.</footer>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const words=s=>(s.trim().match(/\S+/g)||[]).length;
+const KEY="crna500_incivility_attempts";
+let attempts=0;try{attempts=+localStorage.getItem(KEY)||0}catch(e){}
+let S;
+function reset(){S={i:-1,comp:70,docs:0,safety:"Safe",status:"Starting rotation",tags:[],log:[],pts:0,max:0,picks:[],writes:{},sort:null,name:""};}
+
+const SORT=[
+ ["\"Your fingers are on soft tissue and the mask is leaking. Move them to the mandible and try again.\"","teach","Specific, immediate, aimed at the skill. This is teaching, even if it is blunt."],
+ ["In front of the surgeon: \"Did they teach you anything in that program?\"","incivil","Public, personal, and not about a skill. Humiliation does not teach."],
+ ["After your second failed laryngoscopy attempt: \"My turn. Watch my blade placement.\"","teach","Taking over after repeated attempts protects the patient, and the preceptor is still teaching."],
+ ["The preceptor sighs, rolls their eyes, and ignores your questions for an entire day.","incivil","Exclusion and dismissiveness are classic incivility, even with no harsh words."],
+ ["\"Read about sugammadex dosing tonight. We'll go over it before our first case tomorrow.\"","teach","Assigning preparation with follow-up is good precepting."],
+ ["The preceptor leaves the room during induction and says, \"Figure it out. You're a doctoral student.\"","unsafe","This is a supervision and patient-safety problem, not just incivility. Speak up in the moment and report it the same day."],
+ ["A comment about your accent, appearance, age, or another personal characteristic.","incivil","Personal comments are incivility at minimum and may be harassment. Document and report."],
+ ["Raising their voice sharply as you are about to push the wrong syringe: \"Stop! That's the wrong drug!\"","teach","A loud, urgent correction to prevent harm is appropriate. Afterward, a good preceptor explains it calmly."]];
+const CAT={teach:"Hard teaching",incivil:"Incivility",unsafe:"Unsafe practice"};
+
+const STEPS=[
+{intro:true},
+{sort:true},
+{act:"Week 3 of your first rotation · 08:40",title:"The first sharp comment",
+ scene:()=>`<p>It's February. Your preceptor, a CRNA known around the department as "tough but fair," has corrected you often during the first two weeks, and most of it has felt like teaching. Today, during induction, your first intubation attempt is slow. In front of the surgeon and the circulating nurse, your preceptor says: "Seriously? A first-semester nursing student could do better than that."</p>`,
+ q:"What do you do in the moment?",
+ opts:[
+  {t:"Say \"Understood,\" stay focused on the patient, follow the preceptor's direction, and decide to address the comment privately later.",g:"best",
+   fx:s=>{s.tags.push("Patient first");},
+   fb:"The case goes smoothly. You are rattled, but the patient never knew.",
+   teach:"The patient comes first. A neutral acknowledgment keeps the room safe and preserves your option to address the behavior at the right time and place."},
+  {t:"Fire back: \"Maybe if you'd actually teach me, I'd be faster.\"",g:"poor",
+   fx:s=>{s.comp-=10;s.status="Conflict in the OR";},
+   fb:"The surgeon looks up. Your preceptor takes over the airway in silence, and the tension lasts the rest of the day.",
+   teach:"Even when the comment is unfair, conflict in front of the team distracts from the patient and weakens your position later."},
+  {t:"Go silent and shut down. You stop asking questions for the rest of the day.",g:"part",
+   fx:s=>{s.comp-=15;},
+   fb:"You get through the day, but you miss a teaching moment on a difficult emergence because you were afraid to ask.",
+   teach:"Withdrawal protects you in the moment but costs your learning. Notice it and plan to address what happened."},
+  {t:"Step out of the room to collect yourself.",g:"poor",
+   fx:s=>{s.comp-=5;s.safety="Concern";},
+   fb:"Your preceptor has to manage the patient alone, and later calls it \"abandoning the case.\"",
+   teach:"Never leave a patient mid-induction. If you are overwhelmed, say so and stay; ask to swap roles."}]},
+{act:"Week 3 · After the case",title:"Processing it",
+ scene:()=>`<p>At the end of the day, the comment is still replaying in your head.</p>`,
+ q:"What do you do with it?",
+ write:{label:"Write your first log entry",prompt:"Write it the way you would want it read by the Clinical Director: date and time, setting, the exact words used, who was present, what you did, and the effect on you or on patient care. Facts, not conclusions.",min:40},
+ opts:[
+  {t:"Write a dated, factual note of exactly what was said, and talk it through with a trusted classmate or your advisor.",g:"best",
+   fx:s=>{s.docs++;s.comp+=5;s.tags.push("Log started");},
+   fb:"Writing it down makes it smaller and clearer. Your classmate says she has heard the same about this preceptor.",
+   teach:"Documenting early, before you know whether a pattern exists, is what makes a later report credible. Naming what happened also protects your wellbeing."},
+  {t:"Vent about the preceptor by name in the cohort group chat.",g:"poor",
+   fx:s=>{s.comp+=2;s.tags.push("Group chat post");},
+   fb:"It feels good for an hour. A week later, a screenshot reaches someone at the clinical site.",
+   teach:"Naming people in a group chat is a professionalism risk and can undermine your own report. Process privately; report through channels."},
+  {t:"Send the preceptor an apology for your slow intubation.",g:"part",
+   fx:s=>{s.comp-=5;},
+   fb:"The preceptor replies, \"Do better tomorrow.\"",
+   teach:"Owning a real skill gap is fine. Apologizing for being publicly insulted teaches you, and the preceptor, that the behavior is acceptable."},
+  {t:"Push it down and move on. It was one comment.",g:"part",
+   fb:"It may have been one comment. If it happens again, you will have no record of when it started.",
+   teach:"Letting one moment go can be reasonable, but write it down anyway. A two-minute note costs little and protects you if a pattern develops."}]},
+{act:"Weeks 4–5",title:"The pattern",
+ scene:()=>`<p>Over the next two weeks there are three more episodes. You are called "the slow one" in the break room. Your preceptor takes every airway and won't explain why. When you ask a question, the answer is "Look it up." The clinical corrections have mostly stopped; the comments have not.</p>`,
+ q:"How do you interpret this?",
+ opts:[
+  {t:"This is a pattern of incivility, distinct from hard teaching. Keep documenting each episode and plan a direct, private conversation.",g:"best",
+   fx:s=>{s.docs+=3;s.tags.push("Pattern recognized");},
+   fb:"Your log now has four dated entries. You can see the shift from correction to personal comments.",
+   teach:"The test is whether the behavior is about your skill and helps you improve. Personal labels, exclusion, and withheld teaching are incivility."},
+  {t:"This is just how anesthesia toughens you up. Everyone goes through it.",g:"poor",
+   fx:s=>{s.comp-=10;},
+   fb:"You start dreading clinical days and lose sleep.",
+   teach:"\"Toughening up\" is the framing that keeps incivility alive. Normalizing it harms learners and, through distraction, patients."},
+  {t:"You must be the problem. Study harder and say nothing.",g:"poor",
+   fx:s=>{s.comp-=15;},
+   fb:"You study until midnight every night. The comments continue.",
+   teach:"Self-blame is one of the most common responses in the research on preceptor incivility, and one of the most harmful. Skill gaps and mistreatment can both be true; only one is yours to fix."},
+  {t:"Ask the OR scheduler you're friendly with to quietly assign you to someone else.",g:"part",
+   fb:"You get one day with a different CRNA, then you are back with the same preceptor, and no one in the program knows why you wanted out.",
+   teach:"Informal workarounds avoid the problem without solving it, and they leave the next student to face it."}]},
+{act:"Week 5 · Friday afternoon",title:"The direct conversation",
+ scene:()=>`<p>You decide to talk to your preceptor. A slow afternoon gives you a chance.</p>`,
+ q:"How do you approach it?",
+ write:{label:"Write your opening words (DESC)",prompt:"Write exactly what you would say. Describe specific behavior with an example; Express its effect on you and your learning; Specify what you are asking for; and state the positive Consequence you hope for. Keep it calm and about behavior, not character.",min:60},
+ opts:[
+  {t:"Ask for a few private minutes at a calm time. Describe specific incidents, their effect on your learning, and what would help.",g:"best",
+   fx:s=>{s.tags.push("Direct conversation");},
+   fb:"Your preceptor agrees to talk in the break room.",
+   teach:"Private, specific, behavior-focused, and with a clear request: this gives the preceptor a fair chance to change."},
+  {t:"Raise it in the OR, in front of the team, so there are witnesses.",g:"poor",
+   fx:s=>{s.comp-=10;},
+   fb:"Your preceptor is embarrassed and furious. The conversation is over before it starts.",
+   teach:"A public conversation turns a concern into a confrontation."},
+  {t:"Say generally, \"I feel like you don't like me.\"",g:"part",
+   fb:"\"I don't have to like you. I have to teach you.\" The conversation goes nowhere.",
+   teach:"Vague feelings invite a vague answer. Specific behaviors and dates are harder to dismiss."},
+  {t:"Send a long text message that evening listing everything.",g:"poor",
+   fx:s=>{s.tags.push("Long text sent");},
+   fb:"The text is forwarded to the department chief with \"Look what this student sent me.\"",
+   teach:"Hard conversations belong in person. Written messages lose tone and can be shared out of context."}]},
+{act:"Week 5 · The break room",title:"When the conversation doesn't land",
+ scene:()=>`<p>You say what you planned. Your preceptor listens, then responds: "If you can't handle feedback, maybe anesthesia isn't for you."</p>`,
+ q:"What now?",
+ opts:[
+  {t:"Stay calm, thank them for listening, and end the conversation professionally. Document it that evening and contact the DNAP Clinical Director.",g:"best",
+   fx:s=>{s.docs++;s.status="Reported to Clinical Director";s.tags.push("Clinical Director contacted");},
+   fb:"You leave with your professionalism intact and a clear next step.",
+   teach:"You tried the direct route first. When it fails, the next step is the program, not a second argument."},
+  {t:"Argue the point until the preceptor admits they were wrong.",g:"poor",
+   fx:s=>{s.comp-=10;s.status="Escalating conflict";},
+   fb:"Voices rise. A charge nurse walks in.",
+   teach:"You cannot win this argument in the break room, and losing your composure becomes the story."},
+  {t:"Talk to the site clinical coordinator, and leave it there.",g:"part",
+   fx:s=>{s.status="Site coordinator aware";},
+   fb:"The site coordinator is sympathetic and offers to \"keep an eye on it.\" The program doesn't know.",
+   teach:"The site clinical coordinator is a legitimate first contact. The DNAP Clinical Director still needs to know, because the program is responsible for your learning environment and for preceptor assignments."},
+  {t:"File a complaint with the hospital's human resources department without telling anyone at the program.",g:"poor",
+   fx:s=>{s.status="Hospital HR complaint"},
+   fb:"HR contacts the program director, who is hearing about it for the first time.",
+   teach:"Students report through the program first. The program can work with the site, protect your placement, and escalate if needed."}]},
+{act:"Week 5 · That evening",title:"Making the report",
+ scene:()=>`<p>You are writing to the DNAP Clinical Director to ask for a meeting. Students can also start with the site clinical coordinator, but concerns about a preceptor come to the Clinical Director, who escalates to the Program Director when needed.</p>`,
+ q:"What do you include?",
+ write:{label:"Write your email to the Clinical Director",prompt:"Keep it brief and factual. Request a meeting, summarize the pattern with dates, state what you have already tried, and say what you are asking for. Attach or offer your log. Leave out labels like \"toxic\" or guesses about motives.",min:70},
+ opts:[
+  {t:"Your dated log, specific examples, the effect on your learning, the direct conversation you tried, and a clear request.",g:"best",
+   fx:s=>{s.tags.push("Factual report");},
+   fb:"The Clinical Director replies within a day and schedules a meeting.",
+   teach:"A credible report is factual, specific, and shows that you tried the direct route. It also asks for something the program can act on."},
+  {t:"A message saying the preceptor \"clearly hates students\" and should be removed.",g:"poor",
+   fb:"The Clinical Director asks for specifics you didn't include.",
+   teach:"Conclusions without evidence are easy to dismiss. Let the facts make the case."},
+  {t:"Screenshots of the cohort group chat, where classmates agree the preceptor is awful.",g:"poor",
+   fb:"The screenshots raise questions about professionalism, including yours.",
+   teach:"Group-chat agreement is not evidence of behavior. Your own dated observations are."},
+  {t:"Nothing in writing. You'll explain it in person.",g:"part",
+   fb:"The meeting happens, but without a written record, details blur.",
+   teach:"Talking is good; having the written log is better."}]},
+{act:"Week 6",title:"While the program reviews",
+ scene:()=>`<p>The Clinical Director is working with the site, but you have three more days with the same preceptor. Before your first case, the preceptor says: "Let's see if you can manage not to hurt anyone today."</p>`,
+ q:"How do you handle the next three days?",
+ opts:[
+  {t:"Stay professional and patient-focused, add each episode to your log, and update the Clinical Director the same day.",g:"best",
+   fx:s=>{s.docs+=2;},
+   fb:"Your same-day updates show what looks like retaliation. The Clinical Director moves your remaining days.",
+   teach:"Possible retaliation after a report is serious and must be reported promptly. Your professionalism in the meantime strengthens your position."},
+  {t:"Call in sick for the three days.",g:"poor",
+   fx:s=>{s.status="Attendance issue";},
+   fb:"You now have an attendance problem to explain alongside your report.",
+   teach:"Avoidance creates a second problem. Ask the program for an interim change instead."},
+  {t:"Answer back each time so the preceptor knows you won't be pushed around.",g:"poor",
+   fx:s=>{s.comp-=10;},
+   fb:"The site now has two complaints: one about the preceptor and one about you.",
+   teach:"Matching incivility makes the situation look mutual."},
+  {t:"Grit your teeth and wait for the program to act, without telling anyone about the new comments.",g:"part",
+   fx:s=>{s.comp-=10;},
+   fb:"The program assumes things have settled down.",
+   teach:"The program can only act on what it knows. Keep updating."}]},
+{act:"Throughout",title:"Taking care of yourself",
+ scene:()=>`<p>The last few weeks have taken a toll. You are sleeping badly and questioning whether you belong in anesthesia.</p>`,
+ q:"What do you do?",
+ opts:[
+  {t:"Use university counseling services, stay connected with classmates and your advisor, and protect sleep and exercise.",g:"best",
+   fx:s=>{s.comp+=15;s.tags.push("Support used");},
+   fb:"Things improve within a couple of weeks.",
+   teach:"Incivility has real effects on wellbeing. Using support early is a sign of professional maturity, not weakness."},
+  {t:"Isolate and study more. Prove them wrong.",g:"part",
+   fx:s=>{s.comp-=5;},
+   fb:"Your knowledge improves; your sleep and mood do not.",
+   teach:"Studying has its place, but isolation deepens the harm."},
+  {t:"Start looking into how to withdraw from the program.",g:"poor",
+   fx:s=>{s.comp-=10;},
+   fb:"Before you decide anything, your advisor asks to talk.",
+   teach:"One preceptor's behavior is not a verdict on your future. Talk with your advisor and the program before making a decision driven by mistreatment."},
+  {t:"A few drinks every night to unwind.",g:"poor",
+   fx:s=>{s.comp-=15;},
+   fb:"It helps you sleep at first. Then it doesn't.",
+   teach:"Using alcohol or other substances to cope is a known risk path in anesthesia (Week 5). Reach out for support instead."}]},
+{written:true},
+{summary:true}
+];
+const DEC=STEPS.filter(s=>s.q).length+1;
+
+function mon(){
+  const c=S.comp>=60?"g":S.comp>=40?"y":"r";S.comp=Math.max(0,Math.min(100,S.comp));
+  const n=STEPS.slice(0,Math.max(S.i,0)+1).filter(s=>s.q||s.sort).length;
+  $("mon").innerHTML=`<h3>Your status</h3>
+  <div class="vit"><span>Composure</span><b class="${c}">${S.comp}</b></div>
+  <div class="vit"><span>Log entries</span><b class="${S.docs>=4?"g":S.docs>=1?"y":"r"}">${S.docs}</b></div>
+  <div class="vit"><span>Patient safety</span><span class="${S.safety==="Safe"?"g":"r"}">${S.safety}</span></div>
+  <div class="vit"><span>Status</span><span style="text-align:right">${esc(S.status)}</span></div>
+  <div style="margin-top:8px;font-size:.8rem;color:#b9a8dd">Step ${Math.min(n,DEC)} of ${DEC}</div>
+  <div class="prog"><div style="width:${Math.round(100*Math.min(n,DEC)/DEC)}%"></div></div>
+  ${S.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}
+  <div class="log">${S.log.map(l=>`<div>${l}</div>`).join("")}</div>
+  <div style="margin-top:12px;font-size:.78rem;color:#cfc9da;border-top:1px solid #ffffff1a;padding-top:8px"><strong style="color:#b9a8dd">Reporting path</strong><br>Direct, private conversation (when safe)<br>↓<br>Site clinical coordinator (optional first contact)<br>↓<br>DNAP Clinical Director<br>↓<br>Program Director (escalation)<br><br><em>Immediate patient-safety concerns: speak up in the moment and report the same day.</em></div>`;
+}
+function next(){S.i++;draw();window.scrollTo({top:0,behavior:"smooth"});}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function strip(h){const d=document.createElement("div");d.innerHTML=h;return d.textContent;}
+function draw(){
+  const st=STEPS[S.i];mon();
+  if(st.intro)return intro();if(st.sort)return sorter();if(st.written)return written();if(st.summary)return summary();
+  const order=st._order||(st._order=shuffle(st.opts.map((_,k)=>k)));
+  $("stage").innerHTML=`<div class="card scene"><div class="act">${st.act}</div><h2>${st.title}</h2>${st.scene(S)}
+   <div class="q">${st.q}</div>${st.write?`<p style="font-size:.9rem;color:var(--muted);margin:0 0 6px">After choosing, you will write: ${st.write.label.toLowerCase()}.</p>`:""}
+   <div>${order.map(k=>`<button class="choice" data-k="${k}">${st.opts[k].t}</button>`).join("")}</div><div id="after"></div></div>`;
+  document.querySelectorAll(".choice").forEach(b=>b.onclick=()=>pick(st,+b.dataset.k,b));
+}
+function pick(st,k,btn){
+  document.querySelectorAll(".choice").forEach(b=>b.disabled=true);btn.classList.add("picked");
+  const o=st.opts[k];if(o.fx)o.fx(S);
+  S.pts+=o.g==="best"?3:o.g==="part"?1:0;S.max+=3;
+  const best=st.opts.find(x=>x.g==="best");
+  S.picks.push({title:st.title,choice:strip(o.t),grade:o.g,best:strip(best.t)});
+  S.log.unshift(`${st.title}: ${o.g==="best"?"✔":o.g==="part"?"◐":"✖"}`);
+  const head={best:"Strong choice",part:"Partly effective",poor:"This made things harder"}[o.g];
+  let h=`<div class="fb ${o.g}"><h4>${head}</h4>${o.fb}<div class="teach"><strong>Why it matters:</strong> ${o.teach}</div></div>`;
+  if(st.write)h+=`<label style="font-weight:700">${st.write.label}</label><p style="margin:2px 0 6px;color:var(--muted);font-size:.92rem">${st.write.prompt}</p><textarea id="wr" style="min-height:130px"></textarea><div class="wc" id="wrc">0 words (at least ${st.write.min})</div>`;
+  h+=`<div class="actions"><button class="btn primary" id="go" ${st.write?"disabled":""}>Continue</button></div>`;
+  $("after").innerHTML=h;mon();
+  if(st.write){const t=$("wr");t.oninput=()=>{const n=words(t.value);$("wrc").textContent=`${n} words (at least ${st.write.min})`;$("go").disabled=n<st.write.min;};}
+  $("go").onclick=()=>{if(st.write)S.writes[st.write.label]=$("wr").value.trim();next();};
+}
+function intro(){
+  $("stage").innerHTML=`<div class="card"><h2>Before you begin</h2>
+  <p>In your critical care nursing career you have probably seen incivility between colleagues. As a student in clinical training, you will be in a different position: someone with more power controls your learning, your evaluations, and your progress. That makes incivility harder to name and harder to address.</p>
+  <div class="callout"><strong>How it works</strong><ul>
+  <li>First, you will sort eight preceptor behaviors: hard teaching, incivility, or unsafe practice.</li>
+  <li>Then you will follow one student through a rotation (${DEC-1} decisions). Your choices change your composure, your documentation, and how the situation unfolds.</li>
+  <li>At three points you will write something you could actually use: a log entry, your opening words for a hard conversation, and an email to the Clinical Director.</li>
+  <li>At the end you will write your own in-the-moment script and export everything for Blackboard. Your <strong>first attempt</strong> is graded.</li></ul></div>
+  <p><strong>Prepare with:</strong> Chapter 11 of Quantum Leadership (toxic organizations and people) and the Eisenhauer et al. (2026) article on preceptor incivility posted in Blackboard.</p>
+  <label style="font-weight:600">Your name</label><input type="text" id="nm">
+  <div class="actions"><button class="btn primary" id="begin">Begin</button></div></div>${rubric()}`;
+  $("begin").onclick=()=>{S.name=$("nm").value.trim();if(!S.name){$("nm").focus();$("nm").style.borderColor="var(--bad)";return;}
+    attempts++;try{localStorage.setItem(KEY,attempts)}catch(e){};S.attempt=attempts;next();};
+}
+function sorter(){
+  $("stage").innerHTML=`<div class="card"><div class="act">Part 1</div><h2>Teaching, incivility, or unsafe?</h2>
+  <p>Label each behavior. A preceptor can be blunt, even loud, and still be teaching. The question is whether the behavior is aimed at your skill and the patient's safety, or at you.</p>
+  ${SORT.map(([t],i)=>`<div style="border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0" id="it${i}"><div>${t}</div>
+   <div style="margin-top:6px">${Object.entries(CAT).map(([k,l])=>`<label style="margin-right:14px;font-size:.92rem"><input type="radio" name="s${i}" value="${k}"> ${l}</label>`).join("")}</div><div class="sfb"></div></div>`).join("")}
+  <div class="actions"><button class="btn primary" id="chk" disabled>Check my answers</button></div></div>`;
+  const all=()=>SORT.every((_,i)=>document.querySelector(`input[name=s${i}]:checked`));
+  document.querySelectorAll("input[type=radio]").forEach(r=>r.onchange=()=>$("chk").disabled=!all());
+  $("chk").onclick=()=>{let c=0;SORT.forEach(([t,a,why],i)=>{const v=document.querySelector(`input[name=s${i}]:checked`).value;const ok=v===a;if(ok)c++;
+    document.querySelectorAll(`input[name=s${i}]`).forEach(r=>r.disabled=true);
+    $("it"+i).querySelector(".sfb").innerHTML=`<div class="fb ${ok?"best":"poor"}" style="margin:8px 0 0;padding:8px 10px;font-size:.92rem"><strong>${ok?"Correct":"This is "+CAT[a].toLowerCase()}.</strong> ${why}</div>`;});
+    S.sort=c;S.pts+=c;S.max+=SORT.length;S.log.unshift(`Sorting: ${c}/${SORT.length}`);mon();
+    $("chk").outerHTML=`<button class="btn primary" id="go">Continue to the scenario</button>`;$("go").onclick=next;};
+}
+const WR=[["script","My in-the-moment script","Write three short sentences you could say calmly in the OR when a comment crosses the line, without escalating and without leaving the patient. Then one sentence you would use to ask for a private conversation later.",40,120]];
+function written(){
+  $("stage").innerHTML=`<div class="card"><div class="act">Wrap-up</div><h2>Make it yours</h2>
+  ${WR.map(([k,l,p,mn,mx])=>`<label style="display:block;font-weight:700;margin-top:10px">${l}</label><p style="margin:2px 0 6px;color:var(--muted);font-size:.92rem">${p}</p><textarea id="w_${k}" style="min-height:130px"></textarea><div class="wc" id="wc_${k}">0 words (${mn} to ${mx})</div>`).join("")}
+  <div class="actions"><button class="btn primary" id="go" disabled>See my results</button></div></div>`;
+  const ok=()=>WR.every(([k,,,mn])=>words($("w_"+k).value)>=mn);
+  WR.forEach(([k,,,mn,mx])=>{$("w_"+k).oninput=()=>{$("wc_"+k).textContent=words($("w_"+k).value)+` words (${mn} to ${mx})`;$("go").disabled=!ok();};});
+  $("go").onclick=()=>{WR.forEach(([k,l])=>S.writes[l]=$("w_"+k).value.trim());next();};
+}
+function outcome(){
+  const strong=S.docs>=6&&S.picks.filter(p=>p.grade==="best").length>=6;
+  const mid=S.docs>=3;
+  if(strong)return "The Clinical Director meets with the site clinical coordinator and reviews your log. You are reassigned for the rest of the rotation, the preceptor is referred for preceptor development, and the Program Director follows up with the site. Your evaluations reflect your clinical work, not the conflict.";
+  if(mid)return "The program acts, but gaps in your record and some of your own responses slow things down. You are eventually reassigned, and the Clinical Director coaches you on documenting and reporting earlier next time.";
+  return "With little documentation and a conflict that looks mutual, the program has a hard time separating what happened. The situation is resolved slowly, and you finish the rotation exhausted.";
+}
+function summary(){
+  const txt=exportText();
+  $("stage").innerHTML=`<div class="card"><h2>Your results</h2>
+  <p><strong>How it ended:</strong> ${outcome()}</p>
+  <div class="score"><div>Sorting<b>${S.sort}/${SORT.length}</b></div><div>Decisions<b>${Math.round(100*(S.pts-S.sort)/(S.max-SORT.length))}%</b></div><div>Log entries<b>${S.docs}</b></div><div>Attempt<b>#${S.attempt}</b></div></div>
+  <table class="sum"><tr><th>Decision</th><th>Your choice</th><th>Strongest option</th></tr>
+  ${S.picks.map(p=>`<tr><td><strong>${esc(p.title)}</strong></td><td>${p.grade==="best"?"✔":p.grade==="part"?"◐":"✖"} ${esc(p.choice)}</td><td>${p.grade==="best"?"(your choice)":esc(p.best)}</td></tr>`).join("")}</table>
+  <div class="callout" style="margin-top:14px"><strong>The patterns that matter</strong><ul>
+  <li>Protect the patient first, even when you are the target.</li>
+  <li>Tell hard teaching apart from incivility: is it about your skill, or about you?</li>
+  <li>Name it early and document from the first episode, factually and with dates.</li>
+  <li>Try a direct, private, specific conversation when it is safe to do so.</li>
+  <li>When that fails, report through the program: the site clinical coordinator if you choose, then the DNAP Clinical Director, who escalates to the Program Director when needed.</li>
+  <li>Report possible retaliation promptly, and use support for your own wellbeing.</li></ul></div>
+  <h2 style="margin-top:16px">Export for Blackboard</h2><div id="out">${esc(txt)}</div>
+  <div class="actions"><button class="btn" id="cp">Copy to clipboard</button><button class="btn" id="dl">Download as text file</button><button class="btn" id="again">Replay with different choices</button></div>
+  <div class="callout"><strong>Written reflection (submit with your export, about one page)</strong><ol style="margin:6px 0 0;padding-left:20px">
+  <li>Which item in the sorting exercise did you find hardest to classify, and why?</li>
+  <li>Think back to incivility you saw or experienced as an ICU nurse. What did you do then, and what would you do differently now?</li>
+  <li>Using Eisenhauer et al. (2026), describe one finding about preceptor incivility that surprised you and how it changes how you will prepare for clinical.</li>
+  <li>Using Chapter 11 of Quantum Leadership, what responsibility will you carry as a future preceptor for the learning environment you create?</li></ol></div></div>${rubric()}`;
+  $("cp").onclick=()=>{(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>$("cp").textContent="Copied",()=>{const r=document.createRange();r.selectNode($("out"));getSelection().removeAllRanges();getSelection().addRange(r);$("cp").textContent="Selected; press Ctrl+C";});};
+  $("dl").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"text/plain"}));a.download=("Incivility_Preparedness_"+S.name).replace(/\s+/g,"_")+".txt";a.click();};
+  $("again").onclick=()=>{STEPS.forEach(s=>delete s._order);const n=S.name;reset();S.name=n;S.i=1;draw();};
+}
+function exportText(){
+  const L=["CRNA 500 · WORKPLACE INCIVILITY PREPAREDNESS",`Student: ${S.name}`,`Attempt: #${S.attempt}`,`Sorting: ${S.sort}/${SORT.length}   Decisions: ${S.pts-S.sort}/${S.max-SORT.length}   Log entries: ${S.docs}`,`Outcome: ${outcome()}`,"","DECISIONS"];
+  S.picks.forEach((p,i)=>{L.push(`${i+1}. ${p.title} [${p.grade==="best"?"strongest":p.grade==="part"?"partly effective":"less effective"}]`);L.push(`   Chose: ${p.choice}`);});
+  Object.entries(S.writes).forEach(([k,v])=>{L.push("",k.toUpperCase(),v);});
+  return L.join("\n");
+}
+function rubric(){return `<div class="card"><h2>Grading rubric (25 points)</h2><table class="rub">
+ <tr><th>Criterion</th><th>Full credit looks like</th><th class="pts">Points</th></tr>
+ <tr><td>Sorting and decisions</td><td>First-attempt export submitted. Points scale with the combined score (90% or higher = 4; 75–89% = 3; 60–74% = 2; below 60% = 1).</td><td class="pts">4</td></tr>
+ <tr><td>Log entry</td><td>Objective and dated; exact words, setting, witnesses, actions, and effect; no labels or speculation about motives.</td><td class="pts">4</td></tr>
+ <tr><td>DESC opening</td><td>All four DESC elements; specific behavior with an example; calm, respectful, and about behavior, not character.</td><td class="pts">5</td></tr>
+ <tr><td>Email to the Clinical Director</td><td>Brief, factual, and professional; dates, what was tried, and a clear request.</td><td class="pts">4</td></tr>
+ <tr><td>In-the-moment script</td><td>Realistic, de-escalating sentences that keep the patient first and set up a later private conversation.</td><td class="pts">2</td></tr>
+ <tr><td>Written reflection</td><td>Answers all four prompts with insight and cites the Eisenhauer et al. (2026) article and Quantum Leadership.</td><td class="pts">6</td></tr></table>
+ <p class="refs" style="margin-top:10px"><strong>References:</strong> Eisenhauer M, et al. Preceptor incivility in nurse anesthesiology residents. 2026. [Full citation in Blackboard.] · Agency for Healthcare Research and Quality. TeamSTEPPS: DESC script. · Porter-O'Grady T, Malloch K. <em>Quantum Leadership: Creating Sustainable Value in Health Care.</em> Ch. 11.</p></div>`;}
+reset();S.i=0;draw();
+})();
+</script>
+</body>
+</html>

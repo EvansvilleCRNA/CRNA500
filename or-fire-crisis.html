@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRNA 500 · Crisis Scenario: One Day, Two Fires</title>
+<style>
+:root{--purple:#4b2582;--purple-l:#efe9f7;--orange:#e8762d;--orange-l:#fdf0e6;--ink:#1f1d24;--muted:#5d5866;--line:#d9d4e0;--ok:#1f7a4d;--ok-l:#e5f4ec;--bad:#b3261e;--bad-l:#fbe9e7;--mid:#8a5a00;--mid-l:#fff5d6;--bg:#faf9fc}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+header{background:var(--purple);color:#fff;padding:26px 20px 20px}
+.wrap{max-width:960px;margin:0 auto}
+.kicker{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+h1{margin:.2em 0 .3em;font-size:1.75rem}
+main{max-width:960px;margin:0 auto;padding:18px 20px;display:grid;grid-template-columns:1fr 260px;gap:18px;align-items:start}
+@media(max-width:820px){main{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin-bottom:16px}
+.card h2{margin:0 0 6px;color:var(--purple);font-size:1.2rem}
+.act{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--orange);font-weight:700}
+.scene p{margin:.5em 0}
+.q{font-weight:700;margin:14px 0 8px}
+.choice{display:block;width:100%;text-align:left;font:inherit;background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:7px 0;cursor:pointer}
+.choice:hover:not(:disabled){border-color:var(--purple);background:var(--purple-l)}
+.choice:disabled{cursor:default;opacity:.6;color:var(--ink)}
+.choice.picked{border:2px solid var(--purple);opacity:1}
+.fb{border-radius:8px;padding:12px 14px;margin:12px 0}
+.fb.best{background:var(--ok-l);border:1px solid #b9e0ca}
+.fb.part{background:var(--mid-l);border:1px solid #f1d98a}
+.fb.poor{background:var(--bad-l);border:1px solid #f0bdb8}
+.fb h4{margin:0 0 4px}
+.teach{margin-top:8px;font-size:.93rem;border-top:1px dashed #0002;padding-top:8px}
+textarea,input[type=text]{width:100%;font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:7px}
+textarea{min-height:90px}
+.wc{font-size:.8rem;color:var(--muted);text-align:right}
+button.btn{font:inherit;font-weight:600;border-radius:8px;padding:10px 18px;cursor:pointer;border:1px solid var(--purple);background:#fff;color:var(--purple)}
+button.btn.primary{background:var(--purple);color:#fff}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.mon{position:sticky;top:12px;background:#17151c;color:#e8e6ee;border-radius:10px;padding:14px;font-size:.9rem}
+.mon h3{margin:0 0 8px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#b9a8dd}
+.vit{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #ffffff1a;padding:6px 0}
+.vit b{font-size:1.4rem;font-family:Consolas,monospace}
+.g{color:#6fe39c}.y{color:#ffd166}.r{color:#ff6b6b}
+.tag{display:inline-block;font-size:.75rem;padding:2px 7px;border-radius:10px;background:#ffffff1f;margin:2px 2px 0 0}
+.log{margin-top:10px;font-size:.8rem;color:#cfc9da;max-height:220px;overflow:auto}
+.log div{padding:3px 0;border-bottom:1px dotted #ffffff1a}
+.prog{height:6px;background:#ffffff1f;border-radius:4px;margin:8px 0}
+.prog div{height:6px;background:var(--orange);border-radius:4px}
+table.sum{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+table.sum th,table.sum td{border:1px solid var(--line);padding:7px;vertical-align:top;text-align:left}
+table.sum th{background:var(--purple);color:#fff}
+.score{display:flex;gap:12px;flex-wrap:wrap}
+.score div{flex:1;min-width:150px;background:var(--purple-l);border-radius:8px;padding:10px 14px}
+.score b{font-size:1.5rem;color:var(--purple);display:block}
+#out{white-space:pre-wrap;font-family:Consolas,Menlo,monospace;font-size:.82rem;background:#f5f3f8;border:1px solid var(--line);border-radius:8px;padding:14px;max-height:380px;overflow:auto}
+table.rub{width:100%;border-collapse:collapse;font-size:.9rem}
+table.rub th,table.rub td{border:1px solid var(--line);padding:8px;vertical-align:top}
+table.rub th{background:var(--purple);color:#fff;text-align:left}
+.pts{text-align:center;font-weight:700;width:60px}
+.callout{background:var(--purple-l);border-left:4px solid var(--purple);padding:12px 14px;border-radius:6px;margin:10px 0;font-size:.94rem}
+.hidden{display:none}
+.refs{font-size:.85rem;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <div class="kicker">CRNA 500 · Professional Role and Leadership Development · Crisis Leadership</div>
+ <h1>One Day, Two Fires: Leading Through an Operating Room Crisis</h1>
+ <p>Two years from now, you are the CRNA in an ENT room for the day. Both cases on your schedule carry high fire risk. Your choices change what happens to your patients, your team, and the conversations that follow.</p>
+</div></header>
+<main>
+<div id="stage"></div>
+<aside class="mon" id="mon"></aside>
+</main>
+<footer>CRNA 500 · University of Evansville DNAP · Scenario characters are fictional.</footer>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const words=s=>(s.trim().match(/\S+/g)||[]).length;
+const KEY="crna500_fire_attempts";
+let attempts=0;try{attempts=+localStorage.getItem(KEY)||0}catch(e){}
+
+// ---------- state
+let S;
+function reset(){S={i:-1,spo2:96,hr:78,fire:"None",o2:"Nasal cannula 2 L/min",harm1:0,harm2:0,o2rich:false,quietPlan:false,tags:[],log:[],clin:0,lead:0,clinMax:0,leadMax:0,picks:[],rats:{},written:{},name:""};}
+
+// ---------- scenario content
+// grade: best=3, part=1, poor=0 (per domain listed in d)
+const STEPS=[
+{intro:true},
+// ACT 1
+{act:"Act 1 · 07:30 · Case 1",title:"The time-out",
+ scene:()=>`<p>Mrs. Ruth Alvarez, 72, has COPD (home O<sub>2</sub> at night) and is having a skin cancer excised from her left temple with a local flap under monitored anesthesia care. She is on a nasal cannula at 2 L/min. The surgeon, Dr. Hale, plans monopolar cautery. The skin was prepped with an alcohol-based solution four minutes ago, and the drapes tent over her face.</p><p>The circulating nurse, Jordan, starts the time-out. The fire risk assessment is read as "low" from the template without discussion. Every part of the fire triad is present: an oxidizer (open oxygen), an ignition source (monopolar cautery), and fuel (drapes, prep, hair) above the xiphoid.</p>`,
+ q:"What do you do during the time-out?",d:["clin","lead"],rationale:true,
+ opts:[
+  {t:"Stop the time-out and correct the score out loud: \"This is a high fire-risk case.\" State your oxygen plan, ask Dr. Hale to announce before each cautery use and use bipolar where possible, confirm the prep is dry, and ask that saline be on the field.",g:"best",
+   fx:s=>{s.tags.push("Fire risk named at time-out");},
+   fb:"Jordan corrects the score. Dr. Hale is mildly impatient but agrees to announce cautery. The team now shares one plan.",
+   teach:"Naming risk before incision is the single most important leadership act in fire prevention. A plan only works if the whole team knows it; announcing cautery gives you time to lower oxygen."},
+  {t:"Say nothing at the time-out, but quietly turn the oxygen down yourself so the case is safer.",g:"part",
+   fx:s=>{s.quietPlan=true;s.o2="Nasal cannula 1 L/min";},
+   fb:"The oxygen is lower, but no one else knows the plan. Dr. Hale will not announce cautery, and Jordan has no saline on the field.",
+   teach:"Quiet competence protects the patient only partly. Fire prevention is a team behavior; a plan in your head cannot coordinate anyone else's hands."},
+  {t:"Lean over and ask Jordan to bring up fire safety, since the circulating nurse runs the time-out.",g:"poor",
+   fb:"Jordan hesitates, the surgeon says \"Let's go,\" and the moment passes.",
+   teach:"Delegating a safety concern you own is diffusion of responsibility. The anesthesia professional controls the oxidizer, so fire risk is squarely yours to raise."},
+  {t:"Increase her nasal cannula to 4 L/min. With COPD, you want a buffer before sedation deepens.",g:"poor",
+   fx:s=>{s.o2rich=true;s.o2="Nasal cannula 4 L/min";},
+   fb:"Her saturation rises to 99%, and oxygen begins pooling under the tented drapes.",
+   teach:"Supplemental oxygen under drapes near the surgical site creates an oxygen-enriched pocket. Use the lowest oxygen that keeps saturation acceptable; if she needs more than about 30% oxygen, secure the airway instead."}]},
+{act:"Act 1 · 08:05",title:"The resident's request",
+ scene:s=>{s.spo2=s.o2rich?92:88;return `<p>Forty minutes in, Mrs. Alvarez is more sedated than you planned. Her SpO<sub>2</sub> drifts to ${s.spo2}%. Dr. Patel, the surgical resident, glances at the monitor: "She's desatting. Can you crank the oxygen up to 6 liters? We're about to start cauterizing."</p>`},
+ q:"How do you respond?",d:["clin","lead"],
+ opts:[
+  {t:"\"Hold the cautery for a moment.\" Lighten sedation, stimulate her, and use a chin lift. Tell the team that if she needs more oxygen than a low-flow cannula, you will secure her airway before cautery resumes.",g:"best",
+   fx:s=>{s.spo2=93;},
+   fb:"Dr. Hale pauses. Mrs. Alvarez takes deeper breaths and her SpO<sub>2</sub> recovers to 93% on low flow. Cautery resumes with an announcement.",
+   teach:"Treat the cause of desaturation (oversedation, obstruction), not just the number. The ignition source and the oxidizer must never peak together."},
+  {t:"Turn the cannula to 6 L/min as asked. Hypoxemia is the more immediate danger.",g:"poor",
+   fx:s=>{s.o2rich=true;s.o2="Nasal cannula 6 L/min";s.spo2=97;},
+   fb:"Her saturation recovers to 97%. Under the drapes, the oxygen concentration climbs.",
+   teach:"High-flow oxygen plus cautery near the face is the classic surgical fire setup. If oxygen needs are high, the answer is a secured airway, not more open oxygen."},
+  {t:"Switch to a non-rebreather mask at 10 L/min to fix the saturation quickly.",g:"poor",
+   fx:s=>{s.o2rich=true;s.o2="Face mask 10 L/min";s.spo2=98;},
+   fb:"Saturation is 98%. The mask and drapes now trap a large oxygen-rich zone beside the incision.",
+   teach:"A face mask makes the oxidizer problem worse, not better, in a head and neck case under drapes."},
+  {t:"Tell Dr. Patel that oxygen is anesthesia's decision and continue without changes.",g:"part",
+   fx:s=>{s.spo2=89;},
+   fb:"Dr. Patel goes quiet. The desaturation persists, and you have spent the moment defending your role instead of fixing the problem.",
+   teach:"You may own the decision, but a dismissive reply shuts down a team member who noticed something real. Acknowledge, act, and explain your plan."}]},
+{act:"Act 1 · 08:12",title:"Fire",
+ scene:s=>{s.fire="Drape fire";s.hr=112;return `<p>Dr. Patel, focused on bleeding, fires the monopolar cautery without announcing it. There is a pop and a ${s.o2rich?"bright, fast-spreading flame":"small flash of flame"} under the drapes near Mrs. Alvarez's face. She cries out. Jordan freezes. The scrub tech, Sam, steps back.</p>`},
+ q:"What are your first three seconds?",d:["clin","lead"],
+ opts:[
+  {t:"Shout \"Fire!\" and stop the oxygen flow immediately, saying aloud what you are doing.",g:"best",
+   fx:s=>{s.o2="Off";},
+   fb:"The flow stops and every head in the room turns. The flame is still burning on the drape, but it is no longer being fed.",
+   teach:"Announce and remove the oxidizer at once. Saying \"Fire!\" converts a frozen room into a responding team."},
+  {t:"Run for the CO<sub>2</sub> extinguisher on the wall.",g:"poor",
+   fx:s=>{s.harmBump=1;},
+   fb:"By the time you return, the oxygen is still flowing and the flame has spread across the drape.",
+   teach:"Leaving the head of the bed abandons the one thing only you control: the oxidizer. Extinguishers come later, if at all."},
+  {t:"Pour the saline on the field over the flame, leaving the oxygen running.",g:"part",
+   fb:"The flame dims but reignites at the edge of the drape, still fed by oxygen.",
+   teach:"Water and saline help, but fire burns as long as oxygen feeds it. Stop the flow first, or at the same moment."},
+  {t:"Step back from the bed and call for help.",g:"poor",
+   fx:s=>{s.harmBump=1;},
+   fb:"Seconds pass with no one acting. The flame grows.",
+   teach:"Calling for help matters, but not instead of the immediate actions only you can take."}]},
+{act:"Act 1 · 08:12 + 5 seconds",title:"Fuel and flame",
+ scene:()=>`<p>The drape is still burning. Jordan is holding a basin of saline; the CO<sub>2</sub> extinguisher is on the wall six feet away.</p>`,
+ q:"How do you direct the team?",d:["clin","lead"],
+ opts:[
+  {t:"\"Sam, pull the drapes off and throw them on the floor. Jordan, saline on her face and anything smoldering. If the drape keeps burning on the floor, use the CO<sub>2</sub> on it.\" Confirm each task back.",g:"best",
+   fx:s=>{s.fire="Out";},
+   fb:"Sam strips the drapes; Jordan douses the field. The drape smolders on the floor until Jordan uses the extinguisher. The fire is out in under 30 seconds.",
+   teach:"Delegate by name, with a specific task, and close the loop. Remove the fuel from the patient, extinguish what remains, and use the CO<sub>2</sub> extinguisher if the fire persists."},
+  {t:"Smother the flame on her face with your gloved hands.",g:"poor",
+   fx:s=>{s.fire="Out";s.harmBump=1;},
+   fb:"You put it out, but the drape keeps smoldering against her skin while you work, and your gloves melt.",
+   teach:"Removing the burning drape from the patient is faster and safer than smothering it in place."},
+  {t:"\"Someone get the extinguisher!\" and wait for it.",g:"poor",
+   fx:s=>{s.fire="Out";s.harmBump=1;},
+   fb:"Two people go for it at once and no one removes the drape. The burn continues until the extinguisher arrives.",
+   teach:"\"Someone\" is no one. Unassigned tasks either go undone or get done twice."},
+  {t:"Tell Dr. Hale to handle it; the field is the surgeon's.",g:"poor",
+   fx:s=>{s.fire="Out";s.harmBump=1;},
+   fb:"Dr. Hale is managing the bleeding and does not respond for several seconds.",
+   teach:"Fire management is a shared team response. Whoever sees what is needed directs it."}]},
+{act:"Act 1 · 08:15",title:"Assess before deciding",
+ scene:s=>{s.harm1=(s.o2rich?2:1)+(s.harmBump||0);s.fire="Out";s.hr=98;s.spo2=94;s.o2="Room air";
+  const sev=s.harm1>=3?"a partial-thickness burn about 3 cm across her cheek, singed eyebrow and hair":s.harm1==2?"a superficial burn on her cheek and a singed eyebrow":"a reddened patch near her eyebrow and singed eyebrow hairs";
+  return `<p>The fire is out. Mrs. Alvarez is awake, frightened, and asking what happened. You see ${sev}. Her airway is clear and she is breathing comfortably.</p><p>Dr. Hale: "The flap is almost done. Let's close; she's fine."</p>`},
+ q:"What do you do now?",d:["clin","lead"],
+ opts:[
+  {t:"Reassure Mrs. Alvarez, fully assess her airway, face, and eyes, and keep the burned materials. Then agree on a plan with Dr. Hale before anyone resumes: room air or a secured airway, bipolar only, cautery announced. Notify the anesthesia lead.",g:"best",
+   fb:"Dr. Hale agrees once he sees you have a plan. The flap is closed safely under the new conditions.",
+   teach:"Assess, then decide, together. Continuing is reasonable when the patient is stable and the risk has been changed. Keep the burned items for review."},
+  {t:"Agree to close right away. She looks stable, and a quick finish limits her time under sedation.",g:"poor",
+   fb:"The case resumes with the same setup that caused the fire.",
+   teach:"Nothing that caused the fire has changed. Resuming without a new plan invites a second fire."},
+  {t:"Insist on stopping the case and transferring her to the emergency department for burn evaluation.",g:"part",
+   fb:"Dr. Hale argues that leaving an open wound is worse. The standoff costs ten minutes.",
+   teach:"Stopping is not automatically safer. The goal is a shared decision based on the patient's findings, not a reflex in either direction."},
+  {t:"Let Dr. Hale decide. It is his case.",g:"poor",
+   fb:"The team follows the surgeon, and no one reassesses the patient or the plan.",
+   teach:"The decision to continue belongs to the team. You hold half the fire triad and must be part of it."}]},
+{act:"Act 1 · 09:00",title:"\"No need to write this up\"",
+ scene:()=>`<p>As the case ends, Dr. Hale pulls you aside: "Look, she's fine. These things happen. No need to write this up and make a big deal of it. Agreed?"</p>`,
+ q:"How do you answer?",d:["lead"],rationale:true,
+ opts:[
+  {t:"\"I understand, but a surgical fire has to go into the safety reporting system, and it will be factual, not about blame. I'd like us to talk with Mrs. Alvarez together.\"",g:"best",
+   fx:s=>{s.tags.push("Committed to reporting");},
+   fb:"Dr. Hale sighs: \"Fine. Let's talk to her together after PACU.\"",
+   teach:"Reporting is a professional duty, not an accusation. Framing it as a system issue keeps the working relationship intact."},
+  {t:"Agree, to keep the peace for the rest of the day.",g:"poor",
+   fb:"The rest of the day is pleasant. The fire, and its causes, disappear from the record.",
+   teach:"Unreported events cannot be learned from, and staying silent can create legal and licensure exposure for you."},
+  {t:"Say nothing now and file an anonymous report later.",g:"part",
+   fb:"A report exists, but Dr. Hale believes you agreed with him.",
+   teach:"Reporting is right; avoiding the conversation is not. Transparency with colleagues is part of a safety culture."},
+  {t:"Tell him that if he tries to bury this, you will go to the chief of surgery.",g:"part",
+   fb:"Dr. Hale stiffens. The afternoon case together is now tense.",
+   teach:"Your position is correct, but threats damage trust you will need in your next case. Lead with the duty, not the threat."}]},
+// ACT 2
+{act:"Act 2 · 13:00 · Case 2",title:"Laser airway preparation",
+ scene:s=>{s.fire="None";s.o2="FiO₂ 0.50 (default)";s.hr=82;s.spo2=99;return `<p>Your afternoon case, with the same team, is Mr. Daniel Brooks, 47, for CO<sub>2</sub> laser excision of laryngeal papillomas. He is intubated under general anesthesia with a laser-resistant endotracheal tube. Your ventilator defaults to FiO<sub>2</sub> 0.50, and the cuff is inflated with air. His wife, Karen, is in the waiting room.</p>`},
+ q:"How do you prepare before the laser is first activated?",d:["clin","lead"],
+ opts:[
+  {t:"Lower FiO<sub>2</sub> to 0.30 or less with no nitrous oxide, fill the cuff with saline tinted with methylene blue, and ask for wet pledgets around the tube. Agree aloud with Dr. Hale on \"laser on / laser off\" callouts and have a syringe of saline ready.",g:"best",
+   fx:s=>{s.o2="FiO₂ 0.28, air/O₂";s.tags.push("Laser plan agreed");},
+   fb:"Dr. Hale, remembering the morning, agrees without argument.",
+   teach:"Laser-resistant tubes are resistant, not fireproof. Reduce the oxidizer, protect the cuff, and build callouts into the workflow."},
+  {t:"Leave the settings. The laser-resistant tube means an airway fire is essentially impossible.",g:"poor",
+   fx:s=>{s.o2rich2=true;},
+   fb:"The tube is protected along the shaft, but the cuff and tip are not.",
+   teach:"Fire-resistant does not mean fireproof. High FiO<sub>2</sub> makes any ignition far more intense."},
+  {t:"Lower FiO<sub>2</sub> to 0.30, but leave the cuff inflated with air and don't discuss it with the surgeon.",g:"part",
+   fx:s=>{s.o2="FiO₂ 0.30";s.quiet2=true;},
+   fb:"The oxidizer is lower, but a laser strike on the cuff would go unnoticed, and the surgeon has no callout plan.",
+   teach:"Saline with dye in the cuff both absorbs laser energy and signals a cuff puncture. Callouts let you adjust oxygen in time."},
+  {t:"Ask Dr. Hale what FiO<sub>2</sub> he would like.",g:"poor",
+   fx:s=>{s.o2rich2=true;},
+   fb:"\"Whatever you think, I just need a still field.\" The setting stays at 0.50.",
+   teach:"The oxidizer is the anesthesia professional's responsibility. Deferring it is abdication, not teamwork."}]},
+{act:"Act 2 · 13:40",title:"\"Turn it up, I'm almost done\"",
+ scene:s=>{s.spo2=91;return `<p>Mr. Brooks has a large body habitus, and his SpO<sub>2</sub> slowly falls to 91%. Dr. Hale is firing the laser in bursts: "Just turn your oxygen up. I'm almost done."</p>`},
+ q:"What do you do?",d:["clin","lead"],rationale:true,
+ opts:[
+  {t:"\"Laser off, please.\" Once it is off, increase FiO<sub>2</sub> and recruit his lungs, then bring FiO<sub>2</sub> back to 0.30 or less and wait before saying \"Ready for laser.\"",g:"best",
+   fx:s=>{s.spo2=96;},
+   fb:"Dr. Hale grumbles but stops. SpO<sub>2</sub> recovers to 96%, and the laser resumes at low FiO<sub>2</sub>.",
+   teach:"Never raise oxygen while an ignition source is active in the airway. Pause, fix, return to low FiO<sub>2</sub>, then resume. Speaking up to a senior surgeon in real time is what this moment demands."},
+  {t:"Increase FiO<sub>2</sub> to 0.60 while he finishes; it will only be a minute.",g:"poor",
+   fx:s=>{s.o2rich2=true;s.o2="FiO₂ 0.60";s.spo2=97;},
+   fb:"Saturation improves. The laser fires again into an oxygen-rich airway.",
+   teach:"This is exactly how airway fires start: the oxidizer and the ignition source peak at the same moment."},
+  {t:"Say nothing and tolerate a saturation in the low 90s until he finishes.",g:"part",
+   fx:s=>{s.spo2=89;},
+   fb:"Mr. Brooks drifts to 89% before the laser pauses on its own.",
+   teach:"Permissive hypoxemia is sometimes reasonable, but silence is not a plan. State the trade-off and agree on it."},
+  {t:"Tell Dr. Hale you are not comfortable continuing and ask the circulator to call your anesthesia lead.",g:"part",
+   fb:"Help is on the way, but the laser is still active while you wait.",
+   teach:"Calling for support is a good instinct, but the immediate safe action, stopping the laser, has to happen first."}]},
+{act:"Act 2 · 13:52",title:"Airway fire",
+ scene:s=>{s.fire="Airway fire";s.hr=128;return `<p>A burst of laser hits the tube near the cuff. ${s.o2rich2?"A blowtorch-like flame shoots from the tube and the mouth.":"A bright flash appears in the airway and smoke rises from the tube."} Dr. Hale shouts, "Fire!"</p>`},
+ q:"What is your immediate action?",d:["clin"],
+ opts:[
+  {t:"Stop the gas flow and remove the endotracheal tube together, with Dr. Hale.",g:"best",
+   fx:s=>{s.o2="Off";},
+   fb:"Within seconds the circuit is disconnected and the tube is out. A few embers glow in the pharynx.",
+   teach:"For an airway fire, removing the tube and stopping gas flow happen simultaneously. The burning tube is both fuel and a torch."},
+  {t:"Disconnect the circuit, then assess before deciding whether to remove the tube.",g:"part",
+   fx:s=>{s.harm2b=1;},
+   fb:"The flame shrinks, but the tube keeps smoldering in the trachea while you assess.",
+   teach:"Stopping the oxidizer is right, but a burning tube left in place continues to injure the airway."},
+  {t:"Pour saline down the tube while it stays in place.",g:"poor",
+   fx:s=>{s.harm2b=2;},
+   fb:"Some flame is quenched, but gas is still flowing and the tube is still burning.",
+   teach:"Saline is the next step after the tube is out and gas has stopped, not instead of those actions."},
+  {t:"Wait for Dr. Hale to decide; he called the fire.",g:"poor",
+   fx:s=>{s.harm2b=2;},
+   fb:"Several seconds pass with oxygen flowing through a burning tube.",
+   teach:"The airway and the gas are yours. Act at once."}]},
+{act:"Act 2 · 13:52 + 10 seconds",title:"Remnants and breathing",
+ scene:s=>{s.fire="Out";s.spo2=86;return `<p>The tube is out. Mr. Brooks is apneic, his SpO<sub>2</sub> is falling, and you have a bag-mask in hand. There may be tube fragments or burning debris in the airway.</p>`},
+ q:"What is your sequence?",d:["clin"],
+ opts:[
+  {t:"Pour saline into the airway to extinguish any embers and remove debris. Inspect the tube for missing pieces. Then mask-ventilate, avoiding supplemental oxygen and nitrous oxide until you are sure nothing is still burning.",g:"best",
+   fx:s=>{s.spo2=92;},
+   fb:"No embers remain; a small piece of the tube tip is missing. SpO<sub>2</sub> climbs to 92% on mask ventilation.",
+   teach:"Extinguish, look for fragments, then re-establish ventilation, adding oxygen only after the fire is confirmed out."},
+  {t:"Bag with 100% oxygen immediately; he is apneic and desaturating.",g:"poor",
+   fx:s=>{s.harm2b=(s.harm2b||0)+1;s.spo2=95;},
+   fb:"A smoldering ember in the pharynx flares briefly before it goes out.",
+   teach:"High-flow oxygen into a possibly burning airway can reignite it. Confirm the fire is out first."},
+  {t:"Reintubate immediately before ventilating.",g:"part",
+   fx:s=>{s.spo2=83;},
+   fb:"Intubating an airway full of soot and debris is difficult. SpO<sub>2</sub> drops to 83% during the attempt.",
+   teach:"Mask ventilation and direct inspection come first. Reintubation is planned, not reflexive."},
+  {t:"Hold ventilation until Dr. Hale confirms the airway is clear.",g:"poor",
+   fx:s=>{s.spo2=80;},
+   fb:"SpO<sub>2</sub> falls to 80% while you wait.",
+   teach:"Ventilation cannot wait for permission once the fire is out."}]},
+{act:"Act 2 · 13:54",title:"Directing the room",
+ scene:()=>`<p>Mr. Brooks needs to be reintubated, and the airway may be swollen. Dr. Patel is standing motionless at the foot of the bed. Jordan asks, "Should I call someone?"</p>`,
+ q:"How do you lead the next minute?",d:["lead","clin"],
+ opts:[
+  {t:"\"Jordan, call for my anesthesia lead and bring the difficult airway cart. Dr. Patel, I need you on suction. Dr. Hale, please be ready for a surgical airway.\" Have each person confirm.",g:"best",
+   fb:"Everyone has a job. Dr. Patel snaps back into action. Help arrives in under two minutes.",
+   teach:"A frozen team member often needs a specific task, not criticism. Closed-loop communication makes sure every task is heard and owned."},
+  {t:"Reintubate alone with the equipment you have, so you don't lose time.",g:"poor",
+   fb:"The first attempt fails because of swelling and there is no backup ready.",
+   teach:"A crisis is not a solo performance. Call for help early and prepare for the next step before you need it."},
+  {t:"\"Somebody call for help!\" and prepare to intubate.",g:"part",
+   fb:"Jordan and Dr. Patel both start to move and then stop, each assuming the other is going.",
+   teach:"Name the person, name the task, and ask for confirmation."},
+  {t:"Tell Dr. Patel he needs to get it together, then direct Jordan.",g:"part",
+   fb:"Dr. Patel is now embarrassed and still unassigned.",
+   teach:"In a crisis, a task is more effective than a reprimand. Debrief the behavior later."}]},
+{act:"Act 2 · 14:00",title:"Assess before committing",
+ scene:s=>{s.harm2=(s.o2rich2?2:1)+Math.min(s.harm2b||0,2);s.hr=104;
+  const f=s.harm2>=3?"heavy soot in the trachea, mucosal burns extending below the cords, and a small tube fragment":s.harm2==2?"soot and moderate glottic swelling with a small tube fragment on the vocal cord":"light soot and localized glottic swelling, with a small tube fragment on the vocal cord";
+  return `<p>With help in the room and the patient oxygenating on mask, you and Dr. Hale perform direct laryngoscopy and bronchoscopy. You find ${f}. You retrieve the fragment and reintubate with a smaller tube. The case is stopped.</p>`},
+ q:"What is the disposition plan?",d:["clin"],
+ opts:[
+  {t:"Keep him intubated, transfer to the ICU with a clear handoff, plan repeat airway evaluation, and consult as needed for an airway burn.",g:"best",
+   fb:"The ICU team receives a complete handoff, including the extent of the injury and the retrieved fragment.",
+   teach:"Airway burns swell over the following hours. A controlled airway and planned reassessment prevent a second crisis."},
+  {t:"Extubate in the OR once he is awake, since the injury looks localized.",g:"poor",
+   fb:"Two hours later in PACU, the swelling worsens and he needs an emergency reintubation.",
+   teach:"Airway edema after a burn peaks hours later. Early extubation is dangerous."},
+  {t:"Send him to PACU intubated and let the PACU team decide.",g:"part",
+   fb:"PACU is not staffed for prolonged airway management after a burn.",
+   teach:"Disposition should match the expected course of the injury."},
+  {t:"Continue the procedure now that he is reintubated; the papillomas still need to come out.",g:"poor",
+   fb:"Dr. Hale refuses. The airway is injured and the laser cannot be used safely.",
+   teach:"After an airway fire, the case stops."}]},
+// ACT 3
+{act:"Act 3 · 14:45",title:"The debrief",
+ scene:s=>{s.fire="None";return `<p>Mr. Brooks is on his way to the ICU. The room has to be turned over for the next case, and everyone is shaken. Dr. Patel looks like he might be sick.</p>`},
+ q:"What happens before the team scatters?",d:["lead"],
+ opts:[
+  {t:"Call a five-minute debrief: check on everyone, name what went well and what failed in the system, and secure the tube, fragment, drapes, and laser settings for review. Ask for the room to be held.",g:"best",
+   fx:s=>{s.tags.push("Hot debrief held");},
+   fb:"Dr. Patel admits he fired the cautery this morning without announcing it. Jordan says the fire-risk template is always read as \"low.\" Those are the real system problems.",
+   teach:"A hot debrief captures facts while they are fresh and protects the team's wellbeing. Blame-free questions surface system problems."},
+  {t:"Let everyone go; a debrief can happen later when emotions are calmer.",g:"poor",
+   fb:"By next week, memories differ and the equipment has been discarded.",
+   teach:"Evidence and recall fade quickly. A short debrief now does not prevent a fuller review later."},
+  {t:"Hold a debrief focused on finding who caused each fire.",g:"poor",
+   fb:"The room goes defensive. No one mentions the fire-risk template.",
+   teach:"Blame-focused debriefs hide the system issues you most need to find. This is the difference between just culture and blame culture."},
+  {t:"Debrief privately with Dr. Hale only.",g:"part",
+   fb:"Two perspectives are captured; Jordan's and Dr. Patel's are lost.",
+   teach:"Everyone in the room saw something different. Include the whole team."}]},
+{act:"Act 3 · 15:30",title:"Disclosure",
+ scene:()=>`<p>Mrs. Alvarez is in PACU asking about the burning smell and her eyebrow. Karen Brooks is in the waiting room, told only that "there was a complication." Dr. Hale asks you to come with him.</p>`,
+ q:"How should disclosure happen?",d:["lead"],rationale:true,
+ opts:[
+  {t:"Disclose promptly with Dr. Hale to each family together: what happened, what is known so far, what is being done, and a sincere \"I'm sorry this happened.\" Avoid speculating or blaming, offer a contact person, and follow the facility's disclosure process with risk management.",g:"best",
+   fb:"Mrs. Alvarez is upset but thanks you for telling her directly. Karen Brooks asks hard questions, and you answer the ones you can.",
+   teach:"Prompt, honest disclosure with an expression of regret is the standard (AHRQ CANDOR). Facts known now, follow-up promised, no guessing about cause or fault."},
+  {t:"Let Dr. Hale handle both conversations. Disclosure is the surgeon's role.",g:"poor",
+   fb:"Mrs. Alvarez later asks why the anesthesia provider never spoke to her.",
+   teach:"Both providers involved should be part of disclosure. Absence reads as avoidance."},
+  {t:"Wait until risk management finishes its review before saying anything.",g:"poor",
+   fb:"Karen Brooks hears a vague explanation, and trust erodes.",
+   teach:"Delay damages trust and often increases the likelihood of litigation. Disclose known facts now and update later."},
+  {t:"Tell both patients a \"minor complication\" occurred and that everything is fine.",g:"poor",
+   fb:"The ICU nurse later tells the Brooks family about the airway burn.",
+   teach:"Minimizing is a form of dishonesty. When the truth surfaces, trust is lost for good."}]},
+{act:"Act 3 · 16:00",title:"Documentation and reporting",
+ scene:()=>`<p>You sit down to chart and to file the event report.</p>`,
+ q:"Which approach is correct?",d:["clin","lead"],
+ opts:[
+  {t:"Chart objective facts with times: the events, your actions, the findings, and the patient's response. File a separate, factual event report in the safety system, and don't mention that report in the medical record.",g:"best",
+   fb:"Your record is clear, timed, and defensible.",
+   teach:"The chart describes care; the event report supports quality improvement and is usually protected. Keep them separate and keep both factual."},
+  {t:"Chart that \"the surgeon fired cautery without announcement, causing the fire.\"",g:"poor",
+   fb:"Risk management flags the note for assigning blame in the medical record.",
+   teach:"The chart is not the place for blame or conclusions about cause. Record what happened, not who is at fault."},
+  {t:"Write a brief chart note (\"flash fire, extinguished, patient stable\") to avoid liability.",g:"poor",
+   fb:"The note is too thin to show the standard of care was met.",
+   teach:"Incomplete documentation is a liability. Thorough, objective notes protect the patient and you."},
+  {t:"Chart everything in detail, including \"incident report filed.\"",g:"part",
+   fb:"Mostly right, but referencing the event report in the chart can weaken its protection.",
+   teach:"Chart the facts; file the report; do not cross-reference."}]},
+{act:"Act 3 · Next week",title:"Fixing the system",
+ scene:()=>`<p>Your anesthesia department asks for your input before the safety committee meets.</p>`,
+ q:"What do you recommend?",d:["lead"],
+ opts:[
+  {t:"Propose that fire risk become a spoken item in every time-out with a standard oxygen plan, mandatory cautery and laser callouts, and fire drills for the ENT team. Offer to help lead it.",g:"best",
+   fb:"The committee adopts the changes and asks you to co-lead the drills.",
+   teach:"Just culture looks at systems: the template, the callouts, and the training. Leaders turn a bad day into a better process."},
+  {t:"Recommend that the resident be disciplined for not announcing the cautery.",g:"poor",
+   fb:"Residents begin to hide near misses.",
+   teach:"Human error inside a weak system calls for coaching and system redesign, not punishment."},
+  {t:"Say nothing further. The event report has been filed.",g:"part",
+   fb:"The template still says \"low.\"",
+   teach:"Reporting is the start, not the end. Leaders follow the event through to a change."},
+  {t:"Recommend a policy banning supplemental oxygen in head and neck cases.",g:"part",
+   fb:"Anesthesia colleagues push back: some patients genuinely need oxygen.",
+   teach:"Absolute bans fail on edge cases. Better: a standard plan with a clear threshold for securing the airway."}]},
+{written:true},
+{summary:true}
+];
+const DEC=STEPS.filter(s=>s.q).length;
+
+// ---------- render
+function mon(){
+  const c=v=>v>=94?"g":v>=90?"y":"r";
+  const n=STEPS.slice(0,Math.max(S.i,0)+1).filter(s=>s.q).length;
+  $("mon").innerHTML=`<h3>Monitor</h3>
+  <div class="vit"><span>SpO₂</span><b class="${c(S.spo2)}">${S.spo2}%</b></div>
+  <div class="vit"><span>HR</span><b class="${S.hr>110?"r":S.hr>95?"y":"g"}">${S.hr}</b></div>
+  <div class="vit"><span>Oxygen</span><span>${esc(S.o2)}</span></div>
+  <div class="vit"><span>Fire</span><span class="${S.fire==="None"||S.fire==="Out"?"g":"r"}">${S.fire}</span></div>
+  <div style="margin-top:8px;font-size:.8rem;color:#b9a8dd">Decision ${Math.min(n,DEC)} of ${DEC}</div>
+  <div class="prog"><div style="width:${Math.round(100*Math.min(n,DEC)/DEC)}%"></div></div>
+  ${S.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}
+  <div class="log">${S.log.map(l=>`<div>${l}</div>`).join("")}</div>`;
+}
+function next(){S.i++;draw();window.scrollTo({top:0,behavior:"smooth"});}
+function draw(){
+  const st=STEPS[S.i];mon();
+  if(st.intro)return intro();
+  if(st.written)return written();
+  if(st.summary)return summary();
+  const sceneHTML=typeof st.scene==="function"?st.scene(S):st.scene;mon();
+  const order=st._order||(st._order=shuffle(st.opts.map((_,k)=>k)));
+  $("stage").innerHTML=`<div class="card scene"><div class="act">${st.act}</div><h2>${st.title}</h2>${sceneHTML}
+   <div class="q">${st.q}</div>
+   ${st.rationale?`<p style="font-size:.9rem;color:var(--muted);margin:0 0 6px">After choosing, you will explain your reasoning before continuing.</p>`:""}
+   <div id="opts">${order.map(k=>`<button class="choice" data-k="${k}">${st.opts[k].t}</button>`).join("")}</div>
+   <div id="after"></div></div>`;
+  document.querySelectorAll(".choice").forEach(b=>b.onclick=()=>pick(st,+b.dataset.k,b));
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pick(st,k,btn){
+  document.querySelectorAll(".choice").forEach(b=>b.disabled=true);btn.classList.add("picked");
+  const o=st.opts[k];if(o.fx)o.fx(S);
+  const pts=o.g==="best"?3:o.g==="part"?1:0;
+  st.d.forEach(dm=>{S[dm]+=pts;S[dm+"Max"]+=3;});
+  const best=st.opts.find(x=>x.g==="best");
+  S.picks.push({title:st.title,choice:strip(o.t),grade:o.g,best:strip(best.t),teach:strip(o.teach),domains:st.d.map(x=>x==="clin"?"Clinical":"Leadership").join(" + ")});
+  S.log.unshift(`${st.title}: ${o.g==="best"?"✔":o.g==="part"?"◐":"✖"}`);
+  const cls={best:"best",part:"part",poor:"poor"}[o.g],head={best:"Strong choice",part:"Partly effective",poor:"This made things harder"}[o.g];
+  let h=`<div class="fb ${cls}"><h4>${head}</h4>${o.fb}<div class="teach"><strong>Why it matters:</strong> ${o.teach}</div></div>`;
+  if(st.rationale){h+=`<label style="font-weight:600">In two to four sentences, explain why you chose this, and what you would say out loud in the room.</label>
+   <textarea id="rat"></textarea><div class="wc" id="ratwc">0 words (at least 30)</div>`;}
+  h+=`<div class="actions"><button class="btn primary" id="go" ${st.rationale?"disabled":""}>Continue</button></div>`;
+  $("after").innerHTML=h;mon();
+  if(st.rationale){const t=$("rat");t.oninput=()=>{const n=words(t.value);$("ratwc").textContent=n+" words (at least 30)";$("go").disabled=n<30;};}
+  $("go").onclick=()=>{if(st.rationale)S.rats[st.title]=$("rat").value.trim();next();};
+}
+function strip(h){const d=document.createElement("div");d.innerHTML=h;return d.textContent;}
+
+function intro(){
+  $("stage").innerHTML=`<div class="card"><h2>Before you begin</h2>
+  <p>This scenario has three acts: a drape fire during a monitored anesthesia care case in the morning, an airway fire during a laser case in the afternoon, and the leadership work that follows: debriefing, disclosure, documentation, and fixing the system.</p>
+  <div class="callout"><strong>How it works</strong><ul>
+  <li>There are ${DEC} decisions. Each choice changes what happens next and shows you why it mattered.</li>
+  <li>At four key moments you will write your reasoning and what you would say. Write the words you would actually use.</li>
+  <li>At the end you will write a disclosure script and a debrief summary, then export everything for Blackboard.</li>
+  <li>Your <strong>first attempt</strong> is the one graded. You may replay to learn, and the export records your attempt number.</li></ul></div>
+  <p><strong>Prepare with:</strong> your Week 4 and Week 9 readings on disclosure, the Week 10 patient safety materials, and Chapter 7 of Quantum Leadership (leading through chaos and crisis).</p>
+  <label style="font-weight:600">Your name</label><input type="text" id="nm">
+  <div class="actions"><button class="btn primary" id="begin">Begin</button></div></div>
+  ${rubric()}`;
+  $("begin").onclick=()=>{S.name=$("nm").value.trim();if(!S.name){$("nm").focus();$("nm").style.borderColor="var(--bad)";return;}
+    attempts++;try{localStorage.setItem(KEY,attempts)}catch(e){};S.attempt=attempts;next();};
+}
+const WR=[["disc","Disclosure script","Write what you would say to Karen Brooks, alongside Dr. Hale, in the first conversation. Use first person and plain language. Include what happened, what is known, what is being done, an expression of regret, and next steps. Do not speculate about cause or fault.",120,250],
+ ["debrief","Debrief summary","List what went well, what failed in the system, and at least two specific changes you would bring to the safety committee.",80,200]];
+function written(){
+  $("stage").innerHTML=`<div class="card"><div class="act">Act 3 · Written work</div><h2>Put it in your own words</h2>
+  ${WR.map(([k,l,p,mn,mx])=>`<label style="display:block;font-weight:700;margin-top:14px">${l}</label><p style="margin:2px 0 6px;color:var(--muted);font-size:.92rem">${p}</p>
+   <textarea id="w_${k}" style="min-height:150px"></textarea><div class="wc" id="wc_${k}">0 words (${mn} to ${mx})</div>`).join("")}
+  <div class="actions"><button class="btn primary" id="go" disabled>See my results</button></div></div>`;
+  const ok=()=>WR.every(([k,,,mn])=>words($("w_"+k).value)>=mn);
+  WR.forEach(([k,,,mn,mx])=>{$("w_"+k).oninput=()=>{$("wc_"+k).textContent=words($("w_"+k).value)+` words (${mn} to ${mx})`;$("go").disabled=!ok();};});
+  $("go").onclick=()=>{WR.forEach(([k])=>S.written[k]=$("w_"+k).value.trim());next();};
+}
+function outcome(){
+  const a=S.harm1>=3?"a partial-thickness facial burn needing plastic surgery follow-up":S.harm1==2?"a superficial facial burn that heals in two weeks":"singed eyebrow hairs and redness that resolve in days";
+  const b=S.harm2>=3?"a significant airway burn, five days on the ventilator, and a long recovery":S.harm2==2?"moderate airway swelling and two days on the ventilator":"mild airway swelling and extubation the next morning";
+  return `Mrs. Alvarez: ${a}. Mr. Brooks: ${b}.`;
+}
+function summary(){
+  const pct=(a,b)=>b?Math.round(100*a/b):0;
+  const txt=exportText();
+  $("stage").innerHTML=`<div class="card"><h2>Your results</h2>
+  <p><strong>Patient outcomes:</strong> ${outcome()}</p>
+  <div class="score"><div>Clinical decisions<b>${pct(S.clin,S.clinMax)}%</b></div><div>Leadership and communication<b>${pct(S.lead,S.leadMax)}%</b></div><div>Attempt<b>#${S.attempt}</b></div></div>
+  <table class="sum"><tr><th>Decision</th><th>Your choice</th><th>Strongest option</th></tr>
+  ${S.picks.map(p=>`<tr><td><strong>${esc(p.title)}</strong><br><small>${esc(p.domains)}</small></td><td>${p.grade==="best"?"✔":p.grade==="part"?"◐":"✖"} ${esc(p.choice)}</td><td>${p.grade==="best"?"(your choice)":esc(p.best)}</td></tr>`).join("")}</table>
+  <div class="callout" style="margin-top:14px"><strong>The patterns that matter</strong><ul>
+  <li>Name the risk before incision, and own the oxidizer.</li>
+  <li>In the first seconds: announce the fire, stop the oxygen, remove the fuel. In the airway: remove the tube and stop the gas flow together.</li>
+  <li>Delegate by name, close the loop, and give a frozen colleague a task.</li>
+  <li>Assess before you decide, and decide as a team.</li>
+  <li>Speak up in real time, even to a senior surgeon, when the ignition source and oxygen are about to meet.</li>
+  <li>Debrief, disclose, document, report, and then fix the system.</li></ul></div>
+  <h2 style="margin-top:16px">Export for Blackboard</h2>
+  <div id="out">${esc(txt)}</div>
+  <div class="actions"><button class="btn" id="cp">Copy to clipboard</button><button class="btn" id="dl">Download as text file</button><button class="btn" id="again">Replay with different choices</button></div>
+  <div class="callout"><strong>Written reflection (submit with your export, about one page)</strong><ol style="margin:6px 0 0;padding-left:20px">
+  <li>Which decision was hardest for you, and why? What did you choose on your first attempt?</li>
+  <li>Describe one moment where speaking up to a more senior team member was required. What makes that difficult, and what words will you use?</li>
+  <li>Connect one event in the scenario to the legal or ethical content from Weeks 8 and 9 (for example, duty, disclosure, or documentation).</li>
+  <li>Using Chapter 7 of Quantum Leadership, what does leading through chaos require of you personally?</li></ol></div></div>${rubric()}`;
+  $("cp").onclick=()=>{(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>$("cp").textContent="Copied",()=>{const r=document.createRange();r.selectNode($("out"));getSelection().removeAllRanges();getSelection().addRange(r);$("cp").textContent="Selected; press Ctrl+C";});};
+  $("dl").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"text/plain"}));a.download=("OR_Fire_Scenario_"+S.name).replace(/\s+/g,"_")+".txt";a.click();};
+  $("again").onclick=()=>{STEPS.forEach(s=>delete s._order);const n=S.name;reset();S.name=n;S.i=0;draw();};
+}
+function exportText(){
+  const L=["CRNA 500 · CRISIS SCENARIO: ONE DAY, TWO FIRES",`Student: ${S.name}`,`Attempt: #${S.attempt}`,`Clinical decisions: ${S.clin}/${S.clinMax}   Leadership and communication: ${S.lead}/${S.leadMax}`,`Outcomes: ${outcome()}`,"","DECISIONS"];
+  S.picks.forEach((p,i)=>{L.push(`${i+1}. ${p.title} [${p.grade==="best"?"strongest":p.grade==="part"?"partly effective":"less effective"}]`);L.push(`   Chose: ${p.choice}`);if(S.rats[p.title])L.push(`   Reasoning: ${S.rats[p.title]}`);});
+  L.push("","DISCLOSURE SCRIPT",S.written.disc||"","","DEBRIEF SUMMARY",S.written.debrief||"");
+  return L.join("\n");
+}
+function rubric(){return `<div class="card"><h2>Grading rubric (25 points)</h2><table class="rub">
+ <tr><th>Criterion</th><th>Full credit looks like</th><th class="pts">Points</th></tr>
+ <tr><td>Scenario decisions</td><td>First-attempt export submitted. Points scale with the combined clinical and leadership score (90% or higher = 5; 75–89% = 4; 60–74% = 3; below 60% = 2).</td><td class="pts">5</td></tr>
+ <tr><td>Reasoning entries</td><td>All four entries explain the why and include the actual words the student would say, specific to the moment.</td><td class="pts">4</td></tr>
+ <tr><td>Disclosure script</td><td>Plain language; states what happened, what is known, and what is being done; sincere regret; next steps and a contact; no speculation or blame.</td><td class="pts">5</td></tr>
+ <tr><td>Debrief summary</td><td>Identifies system failures (not individuals) and proposes at least two specific, realistic changes.</td><td class="pts">3</td></tr>
+ <tr><td>Written reflection</td><td>Answers all four prompts with insight, connects to course readings with citations, about one page.</td><td class="pts">8</td></tr>
+ </table>
+ <p class="refs" style="margin-top:10px"><strong>References:</strong> American Society of Anesthesiologists Task Force on Operating Room Fires. Practice advisory for the prevention and management of operating room fires: an updated report. <em>Anesthesiology.</em> 2013;118(2):271-290. · Anesthesia Patient Safety Foundation. OR Fire Prevention Algorithm. · Agency for Healthcare Research and Quality. Communication and Optimal Resolution (CANDOR) Toolkit. · Porter-O'Grady T, Malloch K. <em>Quantum Leadership: Creating Sustainable Value in Health Care.</em> Ch. 7.</p></div>`;}
+
+reset();S.i=0;draw();
+})();
+</script>
+</body>
+</html>
